@@ -10,16 +10,16 @@ Requirements:
 
 import argparse
 import sys
+import json
 
 from logic import command_go
-
 
 
 def ExecuteCommand(config, exec_func):
   """"""
   result = exec_func(config)
 
-  print(f'Result: {result}')
+  print(json.dumps(result))
 
 
 def Main(config):
