@@ -1,4 +1,4 @@
-#!/usr/bin/python3.12
+#!/usr/bin/env python3
 
 """
 OpsLand Example: A basic program that has different commands to output different JSON and other values to test a OpsLand bundle
@@ -13,6 +13,9 @@ import sys
 import json
 
 from logic import command_go
+
+from logic import log
+from logic.log import LOG
 
 
 def ExecuteCommand(config, exec_func):
