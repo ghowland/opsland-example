@@ -6,6 +6,24 @@ from logic import utility
 #NOTE: On MacOS do these instructions for 0.95 or latest brew version: https://blog.dave-bell.co.uk/2020/01/06/using-mtr-on-os-x-without-sudo/
 MTR_PATH = '/usr/local/bin/mtr'
 
+def Deep(config):
+	""""""
+	data = {
+		'more': {
+			'less': [5, 10, 15, 20]
+		},
+		'other': {
+			'deeper': {
+				'test': [5, 10, 99]
+			},
+			'again': {
+				'test': [35, 50, 199]
+			},
+		}
+	}
+
+	return data
+
 
 def Go(config):
 	""""""

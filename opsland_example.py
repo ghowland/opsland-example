@@ -31,6 +31,7 @@ def Main(config):
     LOG.debug('Log level: Debug')
 
   if config.command == 'go': ExecuteCommand(config, command_go.Go)
+  if config.command == 'deep': ExecuteCommand(config, command_go.Deep)
 
 
 if __name__ == '__main__':
