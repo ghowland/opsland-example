@@ -3,6 +3,9 @@
 from logic import utility
 
 
+MTR_PATH = 'sudo /usr/local/opt/mtr/sbin/mtr'
+
+
 def Go(config):
 	""""""
 	data_dict = {
@@ -17,7 +20,7 @@ def Go(config):
 
 	target = '8.8.8.8'
 
-	cmd = f'mtr -r -c1 {target}'
+	cmd = f'{MTR_PATH} -r -c1 {target}'
 	(status, output, error) = utility.ExecuteCommand(cmd)
 
 	mtr = ParseMTR(output, target)
@@ -25,7 +28,7 @@ def Go(config):
 	last_hop = mtr[-1]
 
 	data = {
-		'result': 'Gogogog!', 'data_dict':data_dict, 'data_list':data_list, 'mtr': mtr, 'mtr_last': last_hop, 'hop_count': len(mtr),
+		'result': 'Gogogo!', 'data_dict':data_dict, 'data_list':data_list, 'mtr': mtr, 'mtr_last': last_hop, 'hop_count': len(mtr),
 	}
 	return data
 
