@@ -3,7 +3,8 @@
 from logic import utility
 
 
-MTR_PATH = 'sudo /usr/local/opt/mtr/sbin/mtr'
+#NOTE: On MacOS do these instructions for 0.95 or latest brew version: https://blog.dave-bell.co.uk/2020/01/06/using-mtr-on-os-x-without-sudo/
+MTR_PATH = '/usr/local/bin/mtr'
 
 
 def Go(config):
