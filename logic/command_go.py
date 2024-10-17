@@ -12,9 +12,10 @@ def Transform2x(config):
 	if config.input:
 		result = {}
 
-		for key, value in config.input.items():
+		for key, value in config.input['mtr'][-1].items():
 			try:
-				result[key] = value * 2
+				if type(value) in (float, int):
+					result[key] = value * 2
 			except Exception as e:
 				pass
 
