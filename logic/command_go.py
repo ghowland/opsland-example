@@ -6,6 +6,24 @@ from logic import utility
 #NOTE: On MacOS do these instructions for 0.95 or latest brew version: https://blog.dave-bell.co.uk/2020/01/06/using-mtr-on-os-x-without-sudo/
 MTR_PATH = '/usr/local/bin/mtr'
 
+
+def Transform2x(config):
+	""""""
+	if config.input:
+		result = {}
+
+		for key, value in config.input.items():
+			try:
+				result[key] = value * 2
+			except Exception as e:
+				pass
+
+		return result
+	
+	else:
+		return None
+
+
 def Deep(config):
 	""""""
 	data = {
