@@ -2,9 +2,25 @@
 
 from logic import utility
 
+from logic.log import LOG
+
 
 #NOTE: On MacOS do these instructions for 0.95 or latest brew version: https://blog.dave-bell.co.uk/2020/01/06/using-mtr-on-os-x-without-sudo/
 MTR_PATH = '/usr/local/bin/mtr'
+
+
+
+def CrudTest(config):
+	""""""
+	if config.input:
+		result = {}
+
+		LOG.debug(f'Crud Test: {config.input}')
+
+		return config.input['request']['data']
+	
+	else:
+		return None
 
 
 def Transform2x(config):
