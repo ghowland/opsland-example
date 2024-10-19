@@ -45,7 +45,8 @@ def Main(config):
   if config.command == 'go': ExecuteCommand(config, command_go.Go)
   elif config.command == 'deep': ExecuteCommand(config, command_go.Deep)
   elif config.command == '2x': ExecuteCommand(config, command_go.Transform2x)
-  elif config.command == 'crud_test': ExecuteCommand(config, command_go.CrudTest)
+  elif config.command == 'crud_user': ExecuteCommand(config, command_go.Crud_User)
+  else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')
 
 
 if __name__ == '__main__':

@@ -10,17 +10,22 @@ MTR_PATH = '/usr/local/bin/mtr'
 
 
 
-def CrudTest(config):
-	""""""
-	if config.input:
-		result = {}
+def Crud_User(config):
+  """"""
+  if config.input:
+    result = {}
 
-		LOG.debug(f'Crud Test: {config.input}')
+    LOG.debug(f'Crud Test: {config.input}')
 
-		return config.input['request']['data']
-	
-	else:
-		return None
+    output = dict(config.input['request']['data'])
+    output['_valid'] = True
+    output['_error'] = None
+    output['_errors'] = {}
+
+    return output
+
+  else:
+    return None
 
 
 def Transform2x(config):
