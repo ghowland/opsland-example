@@ -42,10 +42,15 @@ def Main(config):
     else:
       LOG.debug(f'Loaded Input: {input_path}  Input: {config.input}')
 
+  # Testing
   if config.command == 'go': ExecuteCommand(config, command_go.Go)
   elif config.command == 'deep': ExecuteCommand(config, command_go.Deep)
   elif config.command == '2x': ExecuteCommand(config, command_go.Transform2x)
   elif config.command == 'crud_user': ExecuteCommand(config, command_go.Crud_User)
+
+  # Site Fundamentals
+  elif config.command == 'site_login': ExecuteCommand(config, command_go.Site_Login)
+
   else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')
 
 
