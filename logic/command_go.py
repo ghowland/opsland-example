@@ -9,12 +9,10 @@ from logic.log import LOG
 MTR_PATH = '/usr/local/bin/mtr'
 
 
-
-
 def Site_Login(config):
   """"""
   if config.input:
-    result = {}
+    result = {'username': 'fakenamehere'}
 
     # LOG.debug(f'Crud Test: {config.input}')
 
