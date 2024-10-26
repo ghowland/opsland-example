@@ -33,20 +33,20 @@ def Site_Login(config):
   return failed_result
 
 
-def Site_VerifyAuth(config):
-  """"""
-  if config.input:
-    # We should have our Auth information from the Site_Login(), so now we just verify the user and token information
+# def Site_VerifyAuth(config):
+#   """"""
+#   if config.input:
+#     # We should have our Auth information from the Site_Login(), so now we just verify the user and token information
 
-    result = {'authed': False}
+#     result = {'authed': False}
 
-    LOG.debug(f'Crud Test: {config.input}')
-    LOG.debug(f'Result: {result}')
+#     LOG.debug(f'Crud Test: {config.input}')
+#     LOG.debug(f'Result: {result}')
 
-    return result
+#     return result
 
-  else:
-    return None
+#   else:
+#     return None
 
 
 def Crud_User(config):
