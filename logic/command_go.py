@@ -56,7 +56,7 @@ def Crud_User(config):
 
     LOG.debug(f'Crud Test: {config.input}')
 
-    output = dict(config.input['request']['data'])
+    output = dict(config.input['request'])
     output['_valid'] = True
     output['_error'] = None
     output['_errors'] = {}
