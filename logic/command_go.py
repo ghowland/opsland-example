@@ -28,11 +28,10 @@ def LoadWidgetData(base_name):
 
   for (field, field_info) in data.items():
     if 'import' in field_info:
-      field_info['data'] = LoadWidgetData(field_info['import'])
+      field_info['import_data'] = LoadWidgetData(field_info['import'])
 
     elif 'list' in field_info:
       field_info['list_data'] = LoadWidgetData(field_info['list'])
-
 
   return data
 

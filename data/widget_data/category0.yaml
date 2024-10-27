@@ -6,4 +6,5 @@ button:
 
 content:
   list: link_button0
+  min: 1
 
