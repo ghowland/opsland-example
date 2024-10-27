@@ -16,32 +16,35 @@ COLOR_VALUE_OPTIONS = ['50', '100', '200', '300', '400', '500', '600', '700', '8
 
 ROUNDED_OPTIONS = ['rounded-none', 'rounded-sm', 'rounded', 'rounded-md', 'rounded-lg', 'rounded-xl', 'rounded-2xl', 'rounded-full']
 
-
-def Clamp(value, clamp_min, clamp_max):
-  """Clamp value between min and max values"""
-  return min(clamp_max, max(clamp_min, value))
+# Path to load different widget data type
+PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
 
 
-def GetOptions(name, options, value_0_100):
-  """"""
-  try:
-    percent = value_0_100 / 100.0
+def LoadWidgetData(base_name):
+  """Load our base data"""
+  path = PATH_WIDGET_DATA_FORMAT.replace('{name}', base_name)
 
-    index = int(len(options) * percent)
-    index = Clamp(index, 0, len(options) - 1)
+  data = utility.LoadYaml(path)
 
-    return options[index]
-  except ValueError as e:
-    LOG.error(f'''Site Editor: {name} input is not an integer: {value_0_100}''')
-    return None
+  for (field, field_info) in data.items():
+    if 'import' in field_info:
+      field_info['data'] = LoadWidgetData(field_info['import'])
+
+    elif 'list' in field_info:
+      field_info['list_data'] = LoadWidgetData(field_info['list'])
+
+
+  return data
 
 
 def Site_Editor_Dynamic(config):
   result = {
     'widget_id': config.input['request']['widget_id'], 
     'widget_type': config.input['request']['widget_type'], 
-    'input': dict(config.input['request'])
+    # 'input': dict(config.input['request']),
   }
+
+  result['widget_data'] = LoadWidgetData(result['widget_type'])
 
   if config.input:
     pass
@@ -54,7 +57,7 @@ def Site_Editor(config):
   result = {
     'widget_id': config.input['request']['widget_id'], 
     'widget_type': config.input['request']['widget_type'], 
-    'input': dict(config.input['request'])
+    'input': dict(config.input['request']),
   }
 
   if config.input:
@@ -257,3 +260,21 @@ def ParseMTR(output, target):
   return hops
 
 
+
+def Clamp(value, clamp_min, clamp_max):
+  """Clamp value between min and max values"""
+  return min(clamp_max, max(clamp_min, value))
+
+
+def GetOptions(name, options, value_0_100):
+  """"""
+  try:
+    percent = value_0_100 / 100.0
+
+    index = int(len(options) * percent)
+    index = Clamp(index, 0, len(options) - 1)
+
+    return options[index]
+  except ValueError as e:
+    LOG.error(f'''Site Editor: {name} input is not an integer: {value_0_100}''')
+    return None
