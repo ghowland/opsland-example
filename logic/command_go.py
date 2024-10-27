@@ -9,6 +9,31 @@ from logic.log import LOG
 MTR_PATH = '/usr/local/bin/mtr'
 
 
+
+def Site_Editor(config):
+  """User performs login action on login page"""
+  result = {}
+
+  if config.input:
+    # We get the user request input, and the user record, which has the password
+    # Verify the password is correct, and give them a token, which we will use to verify auth
+
+    # widget-width
+    if config.input.get('widget-width', None):
+      try:
+        value = int(config.input['widget-width'])
+
+        options = ['w-min', 'w-12', 'w-64', 'w-128', 'w-full']
+
+        result['widget-widget'] = result
+
+      except ValueError as e:
+        LOG.error('''Site Editor: widget-width input is not an integer: {config.input['widget-width']}''')
+        result['widget-widget'] = None
+
+  return result
+
+
 def Site_Login(config):
   """User performs login action on login page"""
   username = ''
