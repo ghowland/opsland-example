@@ -9,27 +9,51 @@ from logic.log import LOG
 MTR_PATH = '/usr/local/bin/mtr'
 
 
+def Clamp(value, clamp_min, clamp_max):
+  """Clamp value between min and max values"""
+  return min(clamp_max, max(clamp_min, value))
+
+
+def GetOptions(options, value_0_100):
+  """"""
+  percent = value_0_100 / 100.0
+
+  index = int(len(options) * percent)
+  index = Clamp(index, 0, len(options) - 1)
+
+  return options[index]
+
 
 def Site_Editor(config):
   """User performs login action on login page"""
-  result = {}
+  result = {'widget_id': config.input['request']['widget_id'], 'input': dict(config.input['request'])}
 
   if config.input:
     # We get the user request input, and the user record, which has the password
     # Verify the password is correct, and give them a token, which we will use to verify auth
 
-    # widget-width
-    if config.input.get('widget-width', None):
+    # widget_width
+    if config.input['request'].get('widget_width', None):
       try:
-        value = int(config.input['widget-width'])
+        options = ['w-min', 'w-24', 'w-32', 'w-40', 'w-48', 'w-64', 'w-80', 'w-full']
 
-        options = ['w-min', 'w-12', 'w-64', 'w-128', 'w-full']
-
-        result['widget-widget'] = result
+        result['widget_width'] = GetOptions(options, int(config.input['request']['widget_width']))
 
       except ValueError as e:
-        LOG.error('''Site Editor: widget-width input is not an integer: {config.input['widget-width']}''')
-        result['widget-widget'] = None
+        LOG.error('''Site Editor: widget_width input is not an integer: {config.input['widget_width']}''')
+        result['widget_width'] = None
+
+    # widget_text_title
+    if config.input['request'].get('widget_text_title', None):
+      result['widget_text_title'] = config.input['request']['widget_text_title']
+
+    # widget_text_content
+    if config.input['request'].get('widget_text_content', None):
+      result['widget_text_content'] = config.input['request']['widget_text_content']
+
+    # widget_text_button
+    if config.input['request'].get('widget_text_button', None):
+      result['widget_text_button'] = config.input['request']['widget_text_button']
 
   return result
 
