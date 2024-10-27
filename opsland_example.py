@@ -51,6 +51,7 @@ def Main(config):
   # Site Fundamentals
   elif config.command == 'site_login': ExecuteCommand(config, command_go.Site_Login)
   elif config.command == 'site_editor': ExecuteCommand(config, command_go.Site_Editor)
+  elif config.command == 'site_editor_dynamic': ExecuteCommand(config, command_go.Site_Editor_Dynamic)
 
   else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')
 
