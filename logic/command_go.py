@@ -38,7 +38,11 @@ def GetOptions(name, options, value_0_100):
 
 def Site_Editor(config):
   """User performs login action on login page"""
-  result = {'widget_id': config.input['request']['widget_id'], 'input': dict(config.input['request'])}
+  result = {
+    'widget_id': config.input['request']['widget_id'], 
+    'widget_type': config.input['request']['widget_type'], 
+    'input': dict(config.input['request'])
+  }
 
   if config.input:
     # We get the user request input, and the user record, which has the password
