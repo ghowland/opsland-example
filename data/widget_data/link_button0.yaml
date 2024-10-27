@@ -1,0 +1,9 @@
+title:
+  type: string
+
+icon:
+  type: icon
+
+url:
+  type: url
+

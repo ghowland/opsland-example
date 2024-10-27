@@ -1,0 +1,12 @@
+title:
+  type: string
+
+body:
+  type: string
+
+button:
+  import: button0
+
+content:
+  list: card_icon0
+

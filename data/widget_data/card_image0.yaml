@@ -1,9 +1,6 @@
 title:
   type: string
 
-subtitle:
-  type: string
-
 body:
   type: string
 

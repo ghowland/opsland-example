@@ -1,0 +1,9 @@
+title:
+  type: string
+
+body:
+  type: string
+
+button:
+  list: link_box0
+

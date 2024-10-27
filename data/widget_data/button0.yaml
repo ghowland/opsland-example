@@ -1,6 +1,6 @@
 title:
   type: string
 
-body:
-  type: string
+icon:
+  type: icon
 

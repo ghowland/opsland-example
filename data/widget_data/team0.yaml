@@ -1,0 +1,9 @@
+title:
+  type: string
+
+body:
+  type: string
+
+content:
+  import: card_image0
+

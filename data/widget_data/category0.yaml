@@ -1,0 +1,9 @@
+title:
+  type: string
+
+button:
+  import: button0
+
+content:
+  list: link_button0
+

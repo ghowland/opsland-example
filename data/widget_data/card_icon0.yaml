@@ -1,11 +1,11 @@
 title:
   type: string
 
-subtitle:
-  type: string
-
 body:
   type: string
+
+icon:
+  type: icon
 
 button:
   import: button0
