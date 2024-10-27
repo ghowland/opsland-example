@@ -8,20 +8,32 @@ from logic.log import LOG
 #NOTE: On MacOS do these instructions for 0.95 or latest brew version: https://blog.dave-bell.co.uk/2020/01/06/using-mtr-on-os-x-without-sudo/
 MTR_PATH = '/usr/local/bin/mtr'
 
+WIDGET_WIDTH_OPTIONS = ['w-min', 'w-24', 'w-32', 'w-40', 'w-48', 'w-64', 'w-72', 'w-90', 'w-96', 'w-full']
+
+HEIGHT_WIDTH_OPTIONS = ['h-min', 'h-24', 'h-32', 'h-40', 'h-48', 'h-64', 'h-72', 'h-90', 'h-96', 'h-full']
+
+COLOR_VALUE_OPTIONS = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900']
+
+ROUNDED_OPTIONS = ['rounded-none', 'rounded-sm', 'rounded', 'rounded-md', 'rounded-lg', 'rounded-xl', 'rounded-2xl', 'rounded-full']
+
 
 def Clamp(value, clamp_min, clamp_max):
   """Clamp value between min and max values"""
   return min(clamp_max, max(clamp_min, value))
 
 
-def GetOptions(options, value_0_100):
+def GetOptions(name, options, value_0_100):
   """"""
-  percent = value_0_100 / 100.0
+  try:
+    percent = value_0_100 / 100.0
 
-  index = int(len(options) * percent)
-  index = Clamp(index, 0, len(options) - 1)
+    index = int(len(options) * percent)
+    index = Clamp(index, 0, len(options) - 1)
 
-  return options[index]
+    return options[index]
+  except ValueError as e:
+    LOG.error(f'''Site Editor: {name} input is not an integer: {value_0_100}''')
+    return None
 
 
 def Site_Editor(config):
@@ -33,27 +45,44 @@ def Site_Editor(config):
     # Verify the password is correct, and give them a token, which we will use to verify auth
 
     # widget_width
-    if config.input['request'].get('widget_width', None):
-      try:
-        options = ['w-min', 'w-24', 'w-32', 'w-40', 'w-48', 'w-64', 'w-80', 'w-full']
+    var = 'widget_width'
+    if config.input['request'].get(var, None): result[var] = GetOptions(var, WIDGET_WIDTH_OPTIONS, int(config.input['request'][var]))
 
-        result['widget_width'] = GetOptions(options, int(config.input['request']['widget_width']))
+    # widget_rounded
+    var = 'widget_rounded'
+    if config.input['request'].get(var, None): result[var] = GetOptions(var, ROUNDED_OPTIONS, int(config.input['request'][var]))
 
-      except ValueError as e:
-        LOG.error('''Site Editor: widget_width input is not an integer: {config.input['widget_width']}''')
-        result['widget_width'] = None
+    # Color: Title: Background
+    color_title_bg_value = GetOptions(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_title_background_value']))
+    result['color_title_background'] = f'''bg-{config.input['request']['color_title_background']}-{color_title_bg_value}'''
+
+    # Color: Title: Text
+    color_title_text_value = GetOptions(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_title_text_value']))
+    result['color_title_text'] = f'''text-{config.input['request']['color_title_text']}-{color_title_text_value}'''
 
     # widget_text_title
-    if config.input['request'].get('widget_text_title', None):
-      result['widget_text_title'] = config.input['request']['widget_text_title']
+    var = 'widget_text_title'
+    if config.input['request'].get(var, None): result[var] = config.input['request'][var]
 
     # widget_text_content
-    if config.input['request'].get('widget_text_content', None):
-      result['widget_text_content'] = config.input['request']['widget_text_content']
+    var = 'widget_text_content'
+    if config.input['request'].get(var, None): result[var] = config.input['request'][var]
 
     # widget_text_button
-    if config.input['request'].get('widget_text_button', None):
-      result['widget_text_button'] = config.input['request']['widget_text_button']
+    var = 'widget_text_button'
+    if config.input['request'].get(var, None): result[var] = config.input['request'][var]
+
+    # widget_use_height
+    var = 'widget_use_height'
+    if config.input['request'][var] == 'true': result[var] = True
+    else: result[var] = False
+
+    # widget_height
+    var = 'widget_height'
+    if result['widget_use_height']:
+      if config.input['request'].get(var, None): result[var] = GetOptions(var, HEIGHT_WIDTH_OPTIONS, int(config.input['request'][var]))
+    else:
+      result[var] = ''
 
   return result
 
