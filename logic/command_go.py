@@ -59,6 +59,15 @@ def Site_Editor(config):
     'input': dict(config.input['request']),
   }
 
+
+
+
+  pass  #
+  uuid = '' # TDB...
+  pass  ###
+
+
+
   if config.input:
     # We get the user request input, and the user record, which has the password
     # Verify the password is correct, and give them a token, which we will use to verify auth
@@ -72,15 +81,15 @@ def Site_Editor(config):
     if config.input['request'].get(var, None): result[var] = GetOptions(var, ROUNDED_OPTIONS, int(config.input['request'][var]))
 
     # Color: Title: Background
-    color_title_bg_value = GetOptions(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_title_background_value']))
-    result['color_title_background'] = f'''bg-{config.input['request']['color_title_background']}-{color_title_bg_value}'''
+    color_title_bg_value = GetOptions(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_background_value']))
+    result['color_background'] = f'''bg-{config.input['request']['color_background']}-{color_title_bg_value}'''
 
     # Color: Title: Text
-    color_title_text_value = GetOptions(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_title_text_value']))
-    result['color_title_text'] = f'''text-{config.input['request']['color_title_text']}-{color_title_text_value}'''
+    color_title_text_value = GetOptions(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_title_value']))
+    result['color_title'] = f'''text-{config.input['request']['color_title']}-{color_title_text_value}'''
 
     # widget_text_title
-    var = 'widget_text_title'
+    var = 'widget_title'
     if config.input['request'].get(var, None): result[var] = config.input['request'][var]
 
     # widget_text_content
@@ -95,6 +104,7 @@ def Site_Editor(config):
     var = 'widget_use_height'
     if config.input['request'][var] == 'true': result[var] = True
     else: result[var] = False
+
 
     # widget_height
     var = 'widget_height'
