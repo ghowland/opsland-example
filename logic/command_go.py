@@ -58,7 +58,7 @@ def Site_Editor_Dynamic(config):
   result = {
     'widget_id': config.input['request']['widget_id'], 
     'widget_type': config.input['request']['widget_type'], 
-    # 'input': dict(config.input['request']),
+    'input': dict(config.input['request']),
   }
 
   result['widget_data'] = LoadWidgetData(result['widget_type'])
