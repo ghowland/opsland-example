@@ -53,6 +53,9 @@ def Main(config):
   elif config.command == 'site_editor': ExecuteCommand(config, command_go.Site_Editor)
   elif config.command == 'site_editor_dynamic': ExecuteCommand(config, command_go.Site_Editor_Dynamic)
 
+  # Dynamic Widgets
+  elif config.command == 'something': ExecuteCommand(config, command_go.Site_Editor_Dynamic)
+
   else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')
 
 

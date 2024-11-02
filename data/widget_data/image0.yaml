@@ -1,0 +1,15 @@
+image:
+  type: image
+
+rounded:
+  type: int
+  lookup: rounded
+
+width:
+  type: int
+  lookup: width
+
+height:
+  type: int
+  lookup: height
+

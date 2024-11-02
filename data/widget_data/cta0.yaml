@@ -1,8 +1,8 @@
 title:
-  type: string
+  import: string
 
 body:
-  type: string
+  import: string
 
 button:
   list: link_box0

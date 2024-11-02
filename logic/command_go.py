@@ -1,3 +1,6 @@
+"""
+Commands: Go
+"""
 
 
 from logic import utility
@@ -20,18 +23,33 @@ ROUNDED_OPTIONS = ['rounded-none', 'rounded-sm', 'rounded', 'rounded-md', 'round
 PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
 
 
-def LoadWidgetData(base_name):
+def LoadWidgetData(base_name, base_key=''):
   """Load our base data"""
   path = PATH_WIDGET_DATA_FORMAT.replace('{name}', base_name)
 
   data = utility.LoadYaml(path)
 
   for (field, field_info) in data.items():
+    if base_key:
+      new_key = f'{base_key}.{field}'
+    else:
+      new_key = field
+
     if 'import' in field_info:
-      field_info['import_data'] = LoadWidgetData(field_info['import'])
+      field_info['import_data'] = LoadWidgetData(field_info['import'], base_key=new_key)
+      field_info['key'] = new_key
+
+      # Give keys to all the data items, so it's easy to get their field names
+      for item_key, item_data in field_info['import_data'].items():
+        item_data['key'] = f'{new_key}.{item_key}'
 
     elif 'list' in field_info:
-      field_info['list_data'] = LoadWidgetData(field_info['list'])
+      field_info['list_data'] = LoadWidgetData(field_info['list'], base_key=new_key)
+      field_info['key'] = new_key
+
+      # Give keys to all the data items, so it's easy to get their field names
+      for item_key, item_data in field_info['list_data'].items():
+        item_data['key'] = f'{new_key}.{item_key}'
 
   return data
 

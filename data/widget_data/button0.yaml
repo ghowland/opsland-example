@@ -1,6 +1,8 @@
 title:
-  type: string
+  import: string
 
 icon:
   type: icon
 
+color_background:
+  type: color

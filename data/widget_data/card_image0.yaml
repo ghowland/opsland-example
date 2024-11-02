@@ -1,9 +1,11 @@
 title:
-  type: string
+  import: string
 
 body:
-  type: string
+  import: string
 
 button:
   import: button0
 
+image:
+  import: image0
