@@ -1,3 +1,7 @@
 color_text:
   type: color
 
+margin:
+  type: int
+  default: 0
+
