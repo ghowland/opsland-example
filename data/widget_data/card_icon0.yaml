@@ -1,16 +1,16 @@
-title:
+- key: title
   label: Title
   import: string
 
-body:
+- key: body
   label: Body
   import: string
 
-icon:
+- key: icon
   label: Icon
   type: icon
 
-button:
+- key: button
   label: Button
   import: button0
 

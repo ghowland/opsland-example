@@ -1,12 +1,12 @@
-title:
+- key: title
   label: Title
   import: string
 
-body:
+- key: body
   label: Body
   import: string
 
-content:
+- key: content
   label: Content
   list: card_image0
   min: 1

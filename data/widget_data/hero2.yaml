@@ -1,16 +1,16 @@
-title:
+- key: title
   label: Title
   import: string
 
-body:
+- key: body
   label: Body
   import: string
 
-button:
+- key: button
   label: Button
   import: button0
 
-content:
+- key: content
   label: Content
   list: card_icon0
 

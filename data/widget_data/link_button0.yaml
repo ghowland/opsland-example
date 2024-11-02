@@ -1,12 +1,12 @@
-title:
+- key: title
   label: Title
   import: string
 
-icon:
+- key: icon
   label: Icon
   type: icon
 
-url:
+- key: url
   label: URL
   type: url
 

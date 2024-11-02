@@ -1,12 +1,12 @@
-title:
+- key: title
   label: Title
   import: string
 
-button:
+- key: button
   label: Button
   import: button0
 
-content:
+- key: content
   label: Content
   list: link_button0
   min: 1

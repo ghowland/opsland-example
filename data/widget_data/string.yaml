@@ -1,8 +1,8 @@
-color_text:
+- key: color_text
   label: Text Color
   type: color
 
-margin:
+- key: margin
   label: Margin
   type: int
   default: 0

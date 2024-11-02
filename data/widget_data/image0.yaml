@@ -1,18 +1,18 @@
-image:
+- key: image
   label: Image
   type: image
 
-rounded:
+- key: rounded
   label: Rounded
   type: int
   lookup: rounded
 
-width:
+- key: width
   label: Width
   type: int
   lookup: width
 
-height:
+- key: height
   label: Height
   type: int
   lookup: height

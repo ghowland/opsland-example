@@ -1,11 +1,12 @@
-title:
+
+- key: title
   label: Text
   import: string
 
-icon:
+- key: icon
   label: Icon
   type: icon
 
-color_background:
+- key: color_background
   label: Background Color
   type: color

@@ -1,15 +1,15 @@
-title:
+- key: title
   label: Title
   import: string
 
-body:
+- key: body
   label: Body
   import: string
 
-button:
+- key: button
   label: Button
   import: button0
 
-image:
+- key: image
   label: Image
   import: image0

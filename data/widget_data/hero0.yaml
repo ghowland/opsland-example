@@ -1,8 +1,8 @@
-title:
+- key: title
   label: Title
   import: string
 
-body:
+- key: body
   label: Body
   import: string
 

@@ -1,4 +1,4 @@
-content:
+- key: content
   label: Content
   import: card_icon0
 
