@@ -1,7 +1,9 @@
 color_text:
+  label: Text Color
   type: color
 
 margin:
+  label: Margin
   type: int
   default: 0
 

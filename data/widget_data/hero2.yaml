@@ -1,12 +1,16 @@
 title:
+  label: Title
   import: string
 
 body:
+  label: Body
   import: string
 
 button:
+  label: Button
   import: button0
 
 content:
+  label: Content
   list: card_icon0
 

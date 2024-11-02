@@ -1,9 +1,12 @@
 title:
+  label: Title
   import: string
 
 body:
+  label: Body
   import: string
 
 button:
+  label: Button
   list: link_box0
 

@@ -1,12 +1,16 @@
 title:
+  label: Title
   import: string
 
 subtitle:
+  label: Subtitle
   import: string
 
 body:
+  label: Body
   import: string
 
 button:
+  label: Button
   import: button0
 

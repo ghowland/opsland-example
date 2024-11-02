@@ -1,9 +1,12 @@
 title:
+  label: Title
   import: string
 
 icon:
+  label: Icon
   type: icon
 
 url:
+  label: URL
   type: url
 

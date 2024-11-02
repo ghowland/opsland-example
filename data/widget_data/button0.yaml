@@ -1,8 +1,11 @@
 title:
+  label: Text
   import: string
 
 icon:
+  label: Icon
   type: icon
 
 color_background:
+  label: Background Color
   type: color

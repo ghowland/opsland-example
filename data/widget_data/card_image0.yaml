@@ -1,11 +1,15 @@
 title:
+  label: Title
   import: string
 
 body:
+  label: Body
   import: string
 
 button:
+  label: Button
   import: button0
 
 image:
+  label: Image
   import: image0

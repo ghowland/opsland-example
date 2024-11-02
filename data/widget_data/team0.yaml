@@ -1,10 +1,13 @@
 title:
+  label: Title
   import: string
 
 body:
+  label: Body
   import: string
 
 content:
+  label: Content
   list: card_image0
   min: 1
 

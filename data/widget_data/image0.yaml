@@ -1,15 +1,19 @@
 image:
+  label: Image
   type: image
 
 rounded:
+  label: Rounded
   type: int
   lookup: rounded
 
 width:
+  label: Width
   type: int
   lookup: width
 
 height:
+  label: Height
   type: int
   lookup: height
 

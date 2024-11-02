@@ -1,10 +1,13 @@
 title:
+  label: Title
   import: string
 
 button:
+  label: Button
   import: button0
 
 content:
+  label: Content
   list: link_button0
   min: 1
 
