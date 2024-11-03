@@ -22,6 +22,9 @@ ROUNDED_OPTIONS = ['rounded-none', 'rounded-sm', 'rounded', 'rounded-md', 'round
 
 WIDGET_MARGIN_OPTIONS = ['m-0', 'm-2', 'm-4', 'm-6', 'm-8', 'm-12', 'm-16', 'm-24', 'm-32']
 
+# Default value for missing color_value
+DEFAULT_COLOR_VALUE = 50
+
 
 # Path to load different widget data type
 PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
@@ -63,39 +66,43 @@ def LoadWidgetData(base_name, base_key=''):
   return data
 
 
-def ProcessSpecificType(config, input, spec_item, target_dict, depth=0):
+def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=0):
   """`input_type_record` is a single spec item, with no children, that results in a single value set by `key_full` into `target_dict`"""
   # key = widget_spec_key
 
-  LOG.debug(f'Spec Item: {spec_item}')
+  LOG.info(f'Input: {input}')
+  LOG.debug(f'For Widget: {widget_id}  Spec Item: {spec_item}')
 
-  widget_spec_key = f'''{input['widget_id']}.{spec_item['key_full']}'''
+  widget_spec_key = f'''{widget_id}.{spec_item['key_full']}'''
+
+  # Set the raw input value in 1 place, because we need to set the default too
+  raw_input_value = input.get(widget_spec_key, spec_item.get('default', ''))
 
   # Text
   if spec_item['type'] == 'text':
-    target_dict[widget_spec_key] = input[widget_spec_key]
+    target_dict[widget_spec_key] = raw_input_value
 
   # Int
   elif spec_item['type'] == 'int':
     # Lookup: Width
     if 'lookup' in spec_item and spec_item['lookup'] == 'width':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_WIDTH_OPTIONS, int(input[widget_spec_key]))
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_WIDTH_OPTIONS, int(raw_input_value))
     # Lookup: Height
     elif 'lookup' in spec_item and spec_item['lookup'] == 'height':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_HEIGHT_OPTIONS, int(input[widget_spec_key]))
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_HEIGHT_OPTIONS, int(raw_input_value))
     # Lookup: Rounded
     elif 'lookup' in spec_item and spec_item['lookup'] == 'rounded':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, ROUNDED_OPTIONS, int(input[widget_spec_key]))
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, ROUNDED_OPTIONS, int(raw_input_value))
     # Lookup: Margin
     elif 'lookup' in spec_item and spec_item['lookup'] == 'margin':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_MARGIN_OPTIONS, int(input[widget_spec_key]))
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_MARGIN_OPTIONS, int(raw_input_value))
     # Else, just direct assignment
     else:
-      target_dict[widget_spec_key] = input[widget_spec_key]
+      target_dict[widget_spec_key] = int(raw_input_value)
 
   # Checkbox
   elif spec_item['type'] == 'checkbox':
-    if input[widget_spec_key] == 'true':
+    if raw_input_value == 'true':
       target_dict[widget_spec_key] = True
     else:
       target_dict[widget_spec_key] = False
@@ -104,19 +111,22 @@ def ProcessSpecificType(config, input, spec_item, target_dict, depth=0):
   elif spec_item['type'] == 'color':
     value_key = f'''{widget_spec_key}_value'''
 
-    color_title_bg_value = GetOptions(value_key, COLOR_VALUE_OPTIONS, int(input[value_key]))
-    target_dict[widget_spec_key] = f'''bg-{input[widget_spec_key]}-{color_title_bg_value}'''
+    # Get the raw value color value, or default back to 50
+    raw_color_value = input.get(value_key, DEFAULT_COLOR_VALUE)
+
+    color_value = GetOptions(value_key, COLOR_VALUE_OPTIONS, int(raw_color_value))
+    target_dict[widget_spec_key] = f'''bg-{raw_input_value}-{color_value}'''
 
   # Icon
   elif spec_item['type'] == 'icon':
-    target_dict[widget_spec_key] = input[widget_spec_key]
+    target_dict[widget_spec_key] = raw_input_value
 
   # Unknown: Error
   else:
     LOG.error(f'''ProcessSpecificType: Unknown type: {spec_item['type']}  Spec Item: {spec_item}''')
 
 
-def ProcessInputFromSpec(config, input, spec, depth=0):
+def ProcessInputFromSpec(config, input, widget_id, spec, depth=0):
   """We are given input, and we match it to the spec, so we can organize it into output"""
   result = {}
 
@@ -125,16 +135,16 @@ def ProcessInputFromSpec(config, input, spec, depth=0):
   for spec_item in spec:
     # If this is an include of some type, then we recurse with this data as the new root item
     if 'import_data' in spec_item:
-      sub_result = ProcessInputFromSpec(config, input, spec_item['import_data'], depth+1)
+      sub_result = ProcessInputFromSpec(config, input, widget_id, spec_item['import_data'], depth+1)
 
       result.update(sub_result)
     elif 'list_data' in spec_item:
-      sub_result = ProcessInputFromSpec(config, input, spec_item['list_data'], depth+1)
+      sub_result = ProcessInputFromSpec(config, input, widget_id, spec_item['list_data'], depth+1)
       result.update(sub_result)
 
     # Else, this is a specific type, we process it here
     else:
-      ProcessSpecificType(config, input, spec_item, result)
+      ProcessSpecificType(config, input, widget_id, spec_item, result)
 
   return result
 
@@ -149,8 +159,9 @@ def Site_Editor_Dynamic(config):
 
   result['widget_data'] = LoadWidgetData(result['widget_type'])
 
-  result['output'] = ProcessInputFromSpec(config, result['input'], result['widget_data'])
+  result['output'] = ProcessInputFromSpec(config, result['input'], config.input['request']['widget_id'], result['widget_data'])
   
+  # Always update the widget_type
   widget_type_key = f'''{config.input['request']['widget_id']}.widget_type'''
   result['output'][widget_type_key] = config.input['request']['widget_type']
 
