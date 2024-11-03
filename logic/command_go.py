@@ -22,6 +22,8 @@ ROUNDED_OPTIONS = ['rounded-none', 'rounded-sm', 'rounded', 'rounded-md', 'round
 
 WIDGET_MARGIN_OPTIONS = ['m-0', 'm-2', 'm-4', 'm-6', 'm-8', 'm-12', 'm-16', 'm-24', 'm-32']
 
+BOLD_OPTIONS = ['', 'font-thin', 'font-normal', 'font-medium', 'font-semibold', 'font-bold', 'font-extrabold', 'font-black']
+
 # Default value for missing color_value
 DEFAULT_COLOR_VALUE = 50
 
@@ -87,15 +89,23 @@ def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=
     # Lookup: Width
     if 'lookup' in spec_item and spec_item['lookup'] == 'width':
       target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_WIDTH_OPTIONS, int(raw_input_value))
+    
     # Lookup: Height
     elif 'lookup' in spec_item and spec_item['lookup'] == 'height':
       target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_HEIGHT_OPTIONS, int(raw_input_value))
+    
     # Lookup: Rounded
     elif 'lookup' in spec_item and spec_item['lookup'] == 'rounded':
       target_dict[widget_spec_key] = GetOptions(widget_spec_key, ROUNDED_OPTIONS, int(raw_input_value))
+    
     # Lookup: Margin
     elif 'lookup' in spec_item and spec_item['lookup'] == 'margin':
       target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_MARGIN_OPTIONS, int(raw_input_value))
+
+    # Lookup: Bold
+    elif 'lookup' in spec_item and spec_item['lookup'] == 'bold':
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, BOLD_OPTIONS, int(raw_input_value))
+
     # Else, just direct assignment
     else:
       target_dict[widget_spec_key] = int(raw_input_value)

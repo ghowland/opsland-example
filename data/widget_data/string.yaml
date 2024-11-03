@@ -13,10 +13,11 @@
   default: 0
   lookup: margin
 
-- key: option_bold
+- key: bold
   label: Bold
-  type: checkbox
-  default: False
+  type: int
+  default: 0
+  lookup: bold
 
 - key: option_uppercase
   label: Uppercase
