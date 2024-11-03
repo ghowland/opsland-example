@@ -1,3 +1,26 @@
+
+- key: color_background
+  label: Card Background Color
+  type: color_background
+
+- key: rounded
+  label: Rounded
+  type: int
+  lookup: rounded
+  default: 50
+
+- key: width
+  label: Width
+  type: int
+  lookup: width
+  default: 50
+
+- key: height
+  label: Height
+  type: int
+  lookup: height
+  default: 50
+
 - key: title
   label: Title
   import: string
