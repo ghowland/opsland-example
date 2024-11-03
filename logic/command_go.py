@@ -115,6 +115,16 @@ def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=
     raw_color_value = input.get(value_key, DEFAULT_COLOR_VALUE)
 
     color_value = GetOptions(value_key, COLOR_VALUE_OPTIONS, int(raw_color_value))
+    target_dict[widget_spec_key] = f'''text-{raw_input_value}-{color_value}'''
+
+  # Color Background
+  elif spec_item['type'] == 'color_background':
+    value_key = f'''{widget_spec_key}_value'''
+
+    # Get the raw value color value, or default back to 50
+    raw_color_value = input.get(value_key, DEFAULT_COLOR_VALUE)
+
+    color_value = GetOptions(value_key, COLOR_VALUE_OPTIONS, int(raw_color_value))
     target_dict[widget_spec_key] = f'''bg-{raw_input_value}-{color_value}'''
 
   # Icon

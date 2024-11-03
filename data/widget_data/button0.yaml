@@ -9,4 +9,4 @@
 
 - key: color_background
   label: Background Color
-  type: color
+  type: color_background
