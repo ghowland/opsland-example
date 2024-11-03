@@ -19,13 +19,21 @@
   default: 0
   lookup: bold
 
+- key: text_align
+  label: Alignment
+  type: int
+  default: 0
+  lookup: text_align
+
+- key: text_size
+  label: Text Size
+  type: int
+  default: 0
+  lookup: text_size
+
 - key: option_uppercase
   label: Uppercase
   type: checkbox
   default: False
-
-- key: option_full_width
-  label: Full Width
-  type: checkbox
-  default: False
-
+  value_if_true: uppercase
+  value_if_false: ""

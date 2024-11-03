@@ -24,9 +24,12 @@ WIDGET_MARGIN_OPTIONS = ['m-0', 'm-2', 'm-4', 'm-6', 'm-8', 'm-12', 'm-16', 'm-2
 
 BOLD_OPTIONS = ['', 'font-thin', 'font-normal', 'font-medium', 'font-semibold', 'font-bold', 'font-extrabold', 'font-black']
 
+TEXT_ALIGNMENT_OPTIONS = ['text-left', 'text-left', 'text-center', 'text-justify', 'text-right']
+
+TEXT_SIZE_OPTIONS = ['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl', 'text-3xl', 'text-4xl', 'text-5xl', 'text-6xl', 'text-7xl', 'text-8xl', 'text-9xl']
+
 # Default value for missing color_value
 DEFAULT_COLOR_VALUE = 50
-
 
 # Path to load different widget data type
 PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
@@ -72,8 +75,8 @@ def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=
   """`input_type_record` is a single spec item, with no children, that results in a single value set by `key_full` into `target_dict`"""
   # key = widget_spec_key
 
-  LOG.info(f'Input: {input}')
-  LOG.debug(f'For Widget: {widget_id}  Spec Item: {spec_item}')
+  # LOG.info(f'Input: {input}')
+  # LOG.debug(f'For Widget: {widget_id}  Spec Item: {spec_item}')
 
   widget_spec_key = f'''{widget_id}.{spec_item['key_full']}'''
 
@@ -106,16 +109,32 @@ def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=
     elif 'lookup' in spec_item and spec_item['lookup'] == 'bold':
       target_dict[widget_spec_key] = GetOptions(widget_spec_key, BOLD_OPTIONS, int(raw_input_value))
 
+    # Lookup: Align
+    elif 'lookup' in spec_item and spec_item['lookup'] == 'text_align':
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, TEXT_ALIGNMENT_OPTIONS, int(raw_input_value))
+
+    # Lookup: Align
+    elif 'lookup' in spec_item and spec_item['lookup'] == 'text_size':
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, TEXT_SIZE_OPTIONS, int(raw_input_value))
+
     # Else, just direct assignment
     else:
       target_dict[widget_spec_key] = int(raw_input_value)
 
   # Checkbox
   elif spec_item['type'] == 'checkbox':
+    LOG.info(f'For Widget Checkbox: {widget_id}  Spec Item: {spec_item}')
+
     if raw_input_value == 'true':
-      target_dict[widget_spec_key] = True
+      if 'value_if_true' in spec_item:
+        target_dict[widget_spec_key] = spec_item['value_if_true']
+      else:
+        target_dict[widget_spec_key] = True
     else:
-      target_dict[widget_spec_key] = False
+      if 'value_if_false' in spec_item:
+        target_dict[widget_spec_key] = spec_item['value_if_false']
+      else:
+        target_dict[widget_spec_key] = False
 
   # Color
   elif spec_item['type'] == 'color':
