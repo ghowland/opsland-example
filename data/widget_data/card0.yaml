@@ -14,3 +14,18 @@
   label: Button
   import: button0
 
+- key: rounded
+  label: Rounded
+  type: int
+  lookup: rounded
+
+- key: width
+  label: Width
+  type: int
+  lookup: width
+
+- key: height
+  label: Height
+  type: int
+  lookup: height
+

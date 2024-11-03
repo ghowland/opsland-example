@@ -1,3 +1,7 @@
+- key: text
+  label: Text
+  type: text
+
 - key: color_text
   label: Text Color
   type: color
@@ -6,4 +10,19 @@
   label: Margin
   type: int
   default: 0
+
+- key: option_bold
+  label: Bold
+  type: checkbox
+  default: False
+
+- key: option_uppercase
+  label: Uppercase
+  type: checkbox
+  default: False
+
+- key: option_full_width
+  label: Full Width
+  type: checkbox
+  default: False
 
