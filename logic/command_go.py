@@ -65,49 +65,51 @@ def LoadWidgetData(base_name, base_key=''):
 
 def ProcessSpecificType(config, input, spec_item, target_dict, depth=0):
   """`input_type_record` is a single spec item, with no children, that results in a single value set by `key_full` into `target_dict`"""
-  # key = spec_item['key_full']
+  # key = widget_spec_key
 
   LOG.debug(f'Spec Item: {spec_item}')
 
+  widget_spec_key = f'''{input['widget_id']}.{spec_item['key_full']}'''
+
   # Text
   if spec_item['type'] == 'text':
-    target_dict[spec_item['key_full']] = input[spec_item['key_full']]
-  
+    target_dict[widget_spec_key] = input[widget_spec_key]
+
   # Int
   elif spec_item['type'] == 'int':
     # Lookup: Width
     if 'lookup' in spec_item and spec_item['lookup'] == 'width':
-      target_dict[spec_item['key_full']] = GetOptions(spec_item['key_full'], WIDGET_WIDTH_OPTIONS, int(input[spec_item['key_full']]))
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_WIDTH_OPTIONS, int(input[widget_spec_key]))
     # Lookup: Height
     elif 'lookup' in spec_item and spec_item['lookup'] == 'height':
-      target_dict[spec_item['key_full']] = GetOptions(spec_item['key_full'], WIDGET_HEIGHT_OPTIONS, int(input[spec_item['key_full']]))
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_HEIGHT_OPTIONS, int(input[widget_spec_key]))
     # Lookup: Rounded
     elif 'lookup' in spec_item and spec_item['lookup'] == 'rounded':
-      target_dict[spec_item['key_full']] = GetOptions(spec_item['key_full'], ROUNDED_OPTIONS, int(input[spec_item['key_full']]))
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, ROUNDED_OPTIONS, int(input[widget_spec_key]))
     # Lookup: Margin
     elif 'lookup' in spec_item and spec_item['lookup'] == 'margin':
-      target_dict[spec_item['key_full']] = GetOptions(spec_item['key_full'], WIDGET_MARGIN_OPTIONS, int(input[spec_item['key_full']]))
+      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_MARGIN_OPTIONS, int(input[widget_spec_key]))
     # Else, just direct assignment
     else:
-      target_dict[spec_item['key_full']] = input[spec_item['key_full']]
-  
+      target_dict[widget_spec_key] = input[widget_spec_key]
+
   # Checkbox
   elif spec_item['type'] == 'checkbox':
-    if input[spec_item['key_full']] == 'true':
-      target_dict[spec_item['key_full']] = True
+    if input[widget_spec_key] == 'true':
+      target_dict[widget_spec_key] = True
     else:
-      target_dict[spec_item['key_full']] = False
-  
+      target_dict[widget_spec_key] = False
+
   # Color
   elif spec_item['type'] == 'color':
-    value_key = f'''{spec_item['key_full']}_value'''
+    value_key = f'''{widget_spec_key}_value'''
 
     color_title_bg_value = GetOptions(value_key, COLOR_VALUE_OPTIONS, int(input[value_key]))
-    target_dict[spec_item['key_full']] = f'''bg-{input[spec_item['key_full']]}-{color_title_bg_value}'''
-  
+    target_dict[widget_spec_key] = f'''bg-{input[widget_spec_key]}-{color_title_bg_value}'''
+
   # Icon
   elif spec_item['type'] == 'icon':
-    target_dict[spec_item['key_full']] = input[spec_item['key_full']]
+    target_dict[widget_spec_key] = input[widget_spec_key]
 
   # Unknown: Error
   else:
@@ -148,6 +150,9 @@ def Site_Editor_Dynamic(config):
   result['widget_data'] = LoadWidgetData(result['widget_type'])
 
   result['output'] = ProcessInputFromSpec(config, result['input'], result['widget_data'])
+  
+  widget_type_key = f'''{config.input['request']['widget_id']}.widget_type'''
+  result['output'][widget_type_key] = config.input['request']['widget_type']
 
   if config.input:
     pass
