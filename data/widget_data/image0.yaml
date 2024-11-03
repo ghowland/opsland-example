@@ -6,14 +6,17 @@
   label: Rounded
   type: int
   lookup: rounded
+  default: 0
 
 - key: width
   label: Width
   type: int
   lookup: width
+  default: 50
 
 - key: height
   label: Height
   type: int
   lookup: height
+  default: 50
 

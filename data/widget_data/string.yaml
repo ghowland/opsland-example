@@ -5,11 +5,13 @@
 - key: color_text
   label: Text Color
   type: color
+  default: ['blue', 50]
 
 - key: margin
   label: Margin
   type: int
   default: 0
+  lookup: margin
 
 - key: option_bold
   label: Bold
