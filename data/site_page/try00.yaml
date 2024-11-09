@@ -1,6 +1,9 @@
 widgets:
-  - a
-  - b
-  - c
-  - d
-
+  - returns/api_site_editor_widget_page_image_header.html.j2
+  - returns/api_site_editor_widget_page_header_links.html.j2
+  - returns/api_site_editor_widget_page_image_bar.html.j2
+  - returns/api_site_editor_widget_page_features.html.j2
+  - returns/api_site_editor_widget_page_title_separator.html.j2
+  - returns/api_site_editor_widget_page_title_article_lead.html.j2
+  - returns/api_site_editor_widget_page_cta.html.j2
+  - returns/api_site_editor_widget_page_footer_contact_links.html.j2
