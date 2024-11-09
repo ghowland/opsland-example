@@ -52,6 +52,7 @@ def Main(config):
   elif config.command == 'site_login': ExecuteCommand(config, command_go.Site_Login)
   elif config.command == 'site_editor': ExecuteCommand(config, command_go.Site_Editor)
   elif config.command == 'site_editor_dynamic': ExecuteCommand(config, command_go.Site_Editor_Dynamic)
+  elif config.command == 'site_page': ExecuteCommand(config, command_go.PageData)
 
   # Dynamic Widgets
   elif config.command == 'something': ExecuteCommand(config, command_go.Site_Editor_Dynamic)
