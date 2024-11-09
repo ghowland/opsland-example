@@ -35,6 +35,11 @@ DEFAULT_COLOR_VALUE = 50
 PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
 
 
+def PageData(config):
+  """"""
+  return config.input
+
+
 def LoadWidgetData(base_name, base_key=''):
   """Load our base data"""
   path = PATH_WIDGET_DATA_FORMAT.replace('{name}', base_name)
