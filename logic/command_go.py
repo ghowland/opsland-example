@@ -34,13 +34,53 @@ DEFAULT_COLOR_VALUE = 50
 # Path to load different widget data type
 PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
 
+# Default new widget
+DEFAULT_NEW_WIDGET = 'card0'
+
 
 def Site_Page(config):
   """Returns all the data for rendering an entire page.  Enforces there is at least 1 widget present."""
-  result = {'widget_data': []}
+  result = {'uri': config.input['request']['uri']}
 
-  if config.input:
-    result = config.input
+  # This is the widget that will be editted in the sidebar, if it doesnt exist, we set a default later
+  result['edit_widget'] = config.input['request'].get('edit_widget', None)
+
+
+  # Starting with an empty set of widgets
+  result['widgets'] = []
+  result['widget_input'] = {}
+  result['edit_widget_spec'] = {}
+  result['widget_output'] = {}
+  
+
+  # If we dont have any widgets, create one
+  if len(result['widgets']) == 0:
+    # Add a new widget by UUID, can be re-ordered this way.  Floating data
+    widget_uuid = utility.GetUUID()
+    result['widgets'].append(widget_uuid)
+
+    # Thinnest input possible, we use this to render the widget_output based on the , just the type and widget_id, and we fill the rest when we get input
+    result['widget_input'][widget_uuid] = {'widget_type': DEFAULT_NEW_WIDGET, 'widget_id': widget_uuid}
+
+
+  # If we dont have an edit_widget yet, take the first widget
+  if not result['edit_widget']:
+    result['edit_widget'] = result['widgets'][0]
+
+
+  # Render the output for all our widgets
+  for widget_id in result['widgets']:
+    # Get the spec for this widget
+    widget_spec = LoadWidgetData(result['widget_input'][widget_id]['widget_type'])
+
+    # If this is our `edit_widget`, then return the spec, as we use this to render the sidebar editor
+    if widget_id == result['edit_widget']:
+      result['edit_widget_spec'] = widget_id
+
+    # Simulate empty input getting processed to start out
+    widget_output = ProcessInputFromSpec(config, result['widget_input'][widget_id], widget_id, widget_spec)
+    result['widget_output'].update(widget_output)
+
 
   return result
 
@@ -133,7 +173,7 @@ def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=
 
   # Checkbox
   elif spec_item['type'] == 'checkbox':
-    LOG.info(f'For Widget Checkbox: {widget_id}  Spec Item: {spec_item}')
+    # LOG.info(f'For Widget Checkbox: {widget_id}  Spec Item: {spec_item}')
 
     if raw_input_value == 'true':
       if 'value_if_true' in spec_item:
@@ -212,6 +252,8 @@ def Site_Editor_Dynamic(config):
   
   # Always update the widget_type
   widget_type_key = f'''{config.input['request']['widget_id']}.widget_type'''
+
+  # Save the output result for this widget type key
   result['output'][widget_type_key] = config.input['request']['widget_type']
 
   if config.input:
@@ -307,22 +349,6 @@ def Site_Login(config):
   # We didnt complete login, so yield no data
   failed_result = {'username': username, 'token': '', 'authed': False}
   return failed_result
-
-
-# def Site_VerifyAuth(config):
-#   """"""
-#   if config.input:
-#     # We should have our Auth information from the Site_Login(), so now we just verify the user and token information
-
-#     result = {'authed': False}
-
-#     LOG.debug(f'Crud Test: {config.input}')
-#     LOG.debug(f'Result: {result}')
-
-#     return result
-
-#   else:
-#     return None
 
 
 def Crud_User(config):
@@ -436,7 +462,6 @@ def ParseMTR(output, target):
       hops.append(hop)
 
   return hops
-
 
 
 def Clamp(value, clamp_min, clamp_max):
