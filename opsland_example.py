@@ -7,7 +7,6 @@ Requirements:
   pip3.12 install -r requirements.txt
 """
 
-
 import argparse
 import sys
 import json
@@ -20,8 +19,28 @@ from logic import log
 from logic.log import LOG
 
 
+def ProcessCommands(config):
+  """Process the command.  Routing, basically."""
+  # Testing
+  if config.command == 'go': ExecuteCommand(config, command_go.Go)
+  elif config.command == 'deep': ExecuteCommand(config, command_go.Deep)
+  elif config.command == '2x': ExecuteCommand(config, command_go.Transform2x)
+  elif config.command == 'crud_user': ExecuteCommand(config, command_go.Crud_User)
+
+  # Site Fundamentals
+  elif config.command == 'site_login': ExecuteCommand(config, command_go.Site_Login)
+  elif config.command == 'site_editor': ExecuteCommand(config, command_go.Site_Editor)
+  elif config.command == 'site_editor_dynamic': ExecuteCommand(config, command_go.Site_Editor_Dynamic)
+  elif config.command == 'site_page': ExecuteCommand(config, command_go.Site_Page)
+
+  # More...
+  elif config.command == 'something': ExecuteCommand(config, command_go.Site_Editor_Dynamic)
+
+  else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')
+
+
 def ExecuteCommand(config, exec_func):
-  """"""
+  """Execute the command and dump JSON"""
   result = exec_func(config)
 
   print(json.dumps(result))
@@ -42,22 +61,8 @@ def Main(config):
     else:
       LOG.debug(f'Loaded Input: {input_path}  Input: {config.input}')
 
-  # Testing
-  if config.command == 'go': ExecuteCommand(config, command_go.Go)
-  elif config.command == 'deep': ExecuteCommand(config, command_go.Deep)
-  elif config.command == '2x': ExecuteCommand(config, command_go.Transform2x)
-  elif config.command == 'crud_user': ExecuteCommand(config, command_go.Crud_User)
-
-  # Site Fundamentals
-  elif config.command == 'site_login': ExecuteCommand(config, command_go.Site_Login)
-  elif config.command == 'site_editor': ExecuteCommand(config, command_go.Site_Editor)
-  elif config.command == 'site_editor_dynamic': ExecuteCommand(config, command_go.Site_Editor_Dynamic)
-  elif config.command == 'site_page': ExecuteCommand(config, command_go.Site_Page)
-
-  # Dynamic Widgets
-  elif config.command == 'something': ExecuteCommand(config, command_go.Site_Editor_Dynamic)
-
-  else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')
+  # Progress the commands
+  ProcessCommands(config)
 
 
 if __name__ == '__main__':
