@@ -37,7 +37,12 @@ PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
 
 def PageData(config):
   """"""
-  return config.input
+  result = {'widget_data': []}
+
+  if config.input:
+    result = config.input
+
+  return result
 
 
 def LoadWidgetData(base_name, base_key=''):
