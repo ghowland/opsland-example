@@ -35,8 +35,8 @@ DEFAULT_COLOR_VALUE = 50
 PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
 
 
-def PageData(config):
-  """"""
+def Site_Page(config):
+  """Returns all the data for rendering an entire page.  Enforces there is at least 1 widget present."""
   result = {'widget_data': []}
 
   if config.input:
