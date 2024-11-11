@@ -40,7 +40,7 @@ DEFAULT_NEW_WIDGET = 'card0'
 
 def Site_Page(config):
   """Returns all the data for rendering an entire page.  Enforces there is at least 1 widget present."""
-  result = {'uri': config.input['request']['site_page_uri']}
+  result = {'uri': config.input['request']['site_page_uri'], 'input': config.input['request']}
 
   # This is the widget that will be editted in the sidebar, if it doesnt exist, we set a default later
   result['edit_widget'] = config.input['request'].get('edit_widget', None)
