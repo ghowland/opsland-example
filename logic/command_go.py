@@ -43,14 +43,14 @@ def Site_Page(config):
   result = {'uri': config.input['request']['site_page_uri'].replace('/', '.'), 'input': config.input['request']}
 
   # This is the widget that will be editted in the sidebar, if it doesnt exist, we set a default later
-  result['edit_widget'] = config.input['request'].get('edit_widget', None)
+  result['edit_widget'] = config.input['stored'].get('edit_widget', None)
 
 
   # Starting with an empty set of widgets
-  result['widgets'] = []
-  result['widget_input'] = {}
-  result['edit_widget_spec'] = {}
-  result['widget_output'] = {}
+  result['widgets'] = config.input['stored'].get('widgets', [])
+  result['widget_input'] = config.input['stored'].get('widget_input', {})
+  result['edit_widget_spec'] = config.input['stored'].get('edit_widget_spec', {})
+  result['widget_output'] = config.input['stored'].get('widget_output', {})
   
 
   # If we dont have any widgets, create one
