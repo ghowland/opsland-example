@@ -89,6 +89,29 @@ def Site_Page(config):
         if key.startswith(f'{remove_widget}.'):
           del result['widget_output'][key]
 
+  # Else, Lower the item in the widgets list.  Lower on the page
+  elif request_command == 'lower':
+    try:
+      index = result['widgets'].index(result['edit_widget'])
+      if index < len(result['widgets']) - 1:
+        next_index = index + 1
+        temp = result['widgets'][next_index]
+        result['widgets'][next_index] = result['widgets'][index]
+        result['widgets'][index] = temp
+    except ValueError:
+      pass
+
+  # Else, Raise the item in the widgets list.  Raise on the page
+  elif request_command == 'raise':
+    try:
+      index = result['widgets'].index(result['edit_widget'])
+      if index > 0:
+        next_index = index - 1
+        temp = result['widgets'][next_index]
+        result['widgets'][next_index] = result['widgets'][index]
+        result['widgets'][index] = temp
+    except ValueError:
+      pass
 
   # If we dont have any widgets, or we were given an 'add' command, create one
   if len(result['widgets']) == 0 or request_command == 'add':
