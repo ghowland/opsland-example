@@ -42,8 +42,14 @@ def Site_Page(config):
   """Returns all the data for rendering an entire page.  Enforces there is at least 1 widget present."""
   result = {'uri': config.input['request']['site_page_uri'].replace('/', '.'), 'input': config.input['request']}
 
+  # Assume we will update the widget data from our __edit data, but if we are performing a command, we wont do that this time
+  update_widget_from_edit = True
+
   # This is the widget that will be editted in the sidebar, if it doesnt exist, we set a default later
   result['edit_widget'] = config.input['stored'].get('edit_widget', None)
+  if config.input['request']['__command'] != None:
+    update_widget_from_edit = False
+    LOG.debug(f'''Processing command: {config.input['request']['__command']}''')
 
 
   # Starting with an empty set of widgets
@@ -83,14 +89,16 @@ def Site_Page(config):
     if widget_id == result['edit_widget']:
       result['edit_widget_spec'] = widget_spec
 
-      for input_key, input_value in config.input['request'].items():
-        # Skip anything that isnt from the site_page editor
-        if not input_key.startswith('__edit.'): continue
+      # If we want to update the current edit widget with our __edit data, we do it now.  We wont do this if processing a command
+      if update_widget_from_edit:
+        for input_key, input_value in config.input['request'].items():
+          # Skip anything that isnt from the site_page editor
+          if not input_key.startswith('__edit.'): continue
 
-        # Replace the __edit. prefix that we use generically to silo the edit variables away from any other variables, and store it as the target widget vars
-        input_key = input_key.replace('__edit.', f'''{result['edit_widget']}.''', 1)
-        LOG.debug(f'''Setting: widget_input:  {input_key} == {input_value}  For: {result['edit_widget']}''')
-        result['widget_input'][input_key] = input_value
+          # Replace the __edit. prefix that we use generically to silo the edit variables away from any other variables, and store it as the target widget vars
+          input_key = input_key.replace('__edit.', f'''{result['edit_widget']}.''', 1)
+          LOG.debug(f'''Setting: widget_input:  {input_key} == {input_value}  For: {result['edit_widget']}''')
+          result['widget_input'][input_key] = input_value
 
 
     # Simulate empty input getting processed to start out
@@ -239,9 +247,9 @@ def ProcessInputFromSpec(config, input, widget_id, spec, depth=0):
   """We are given input, and we match it to the spec, so we can organize it into output"""
   result = {}
 
-  LOG.debug(f'Widget: {widget_id}')
-  LOG.debug(f'Input: {pprint.pformat(input)}')
-  LOG.debug(f'Spec: {pprint.pformat(spec)}')
+  # LOG.debug(f'Widget: {widget_id}')
+  # LOG.debug(f'Input: {pprint.pformat(input)}')
+  # LOG.debug(f'Spec: {pprint.pformat(spec)}')
 
   for spec_item in spec:
     # If this is an include of some type, then we recurse with this data as the new root item
