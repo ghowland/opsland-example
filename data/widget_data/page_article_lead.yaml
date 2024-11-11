@@ -1,0 +1,20 @@
+
+- key: color_background
+  label: Card Background Color
+  type: color_background
+
+- key: title
+  label: Title
+  import: string
+
+- key: subtitle
+  label: Subtitle
+  import: string
+
+- key: body
+  label: Body
+  import: string
+
+- key: button
+  label: Button
+  import: button0
