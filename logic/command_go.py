@@ -40,7 +40,7 @@ DEFAULT_NEW_WIDGET = 'card0'
 
 def Site_Page(config):
   """Returns all the data for rendering an entire page.  Enforces there is at least 1 widget present."""
-  result = {'uri': config.input['request']['site_page_uri'], 'input': config.input['request']}
+  result = {'uri': config.input['request']['uri'], 'input': config.input['request']}
 
   # This is the widget that will be editted in the sidebar, if it doesnt exist, we set a default later
   result['edit_widget'] = config.input['request'].get('edit_widget', None)
@@ -58,27 +58,43 @@ def Site_Page(config):
     # Add a new widget by UUID, can be re-ordered this way.  Floating data
     widget_uuid = utility.GetUUID()
     result['widgets'].append(widget_uuid)
+    LOG.info(f''' *** Creating the first widget ***  UUID: {widget_uuid}''')
 
     # Thinnest input possible, we use this to render the widget_output based on the , just the type and widget_id, and we fill the rest when we get input
-    result['widget_input'][widget_uuid] = {'widget_type': DEFAULT_NEW_WIDGET, 'widget_id': widget_uuid}
+    widget_type_key = f'''{widget_uuid}.widget_type'''
+    widget_id_key = f'''{widget_uuid}.widget_id'''
+    result['widget_input'][widget_type_key] = DEFAULT_NEW_WIDGET
+    result['widget_input'][widget_id_key] = widget_uuid
 
 
   # If we dont have an edit_widget yet, take the first widget
-  if not result['edit_widget']:
+  if not result['edit_widget'] or result['edit_widget'] not in result['widgets']:
     result['edit_widget'] = result['widgets'][0]
 
 
   # Render the output for all our widgets
   for widget_id in result['widgets']:
     # Get the spec for this widget
-    widget_spec = LoadWidgetData(result['widget_input'][widget_id]['widget_type'])
+    widget_type_key = f'''{widget_id}.widget_type'''
+    widget_spec = LoadWidgetData(result['widget_input'][widget_type_key])
+    # widget_spec = LoadWidgetData(result['widget_input'][widget_id]['widget_type'])
 
     # If this is our `edit_widget`, then return the spec, as we use this to render the sidebar editor
     if widget_id == result['edit_widget']:
       result['edit_widget_spec'] = widget_spec
 
+      for input_key, input_value in config.input['request'].items():
+        # Skip anything that isnt from the site_page editor
+        if not input_key.startswith('__edit.'): continue
+
+        # Replace the __edit. prefix that we use generically to silo the edit variables away from any other variables, and store it as the target widget vars
+        input_key = input_key.replace('__edit.', f'''{result['edit_widget']}.''', 1)
+        LOG.debug(f'''Setting: widget_input:  {input_key} == {input_value}  For: {result['edit_widget']}''')
+        result['widget_input'][input_key] = input_value
+
+
     # Simulate empty input getting processed to start out
-    widget_output = ProcessInputFromSpec(config, result['widget_input'][widget_id], widget_id, widget_spec)
+    widget_output = ProcessInputFromSpec(config, result['widget_input'], widget_id, widget_spec)
     result['widget_output'].update(widget_output)
 
 
@@ -121,13 +137,17 @@ def LoadWidgetData(base_name, base_key=''):
   return data
 
 
-def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=0):
-  """`input_type_record` is a single spec item, with no children, that results in a single value set by `key_full` into `target_dict`"""
+def ProcessInput_SpecificType(config, input, widget_id, spec_item, target_dict, depth=0):
+  """`input_type_record` is a single spec item, with no children, that results in a single value set by `key_full` into `target_dict`
+  
+  `target_dict` is actually the input we are processing, thus ultimately it is our "output"
+  """
   # key = widget_spec_key
 
   # LOG.info(f'Input: {input}')
   # LOG.debug(f'For Widget: {widget_id}  Spec Item: {spec_item}')
 
+  # widget_edit_key = f'''__edit.{spec_item['key_full']}'''
   widget_spec_key = f'''{widget_id}.{spec_item['key_full']}'''
 
   # Set the raw input value in 1 place, because we need to set the default too
@@ -141,31 +161,31 @@ def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=
   elif spec_item['type'] == 'int':
     # Lookup: Width
     if 'lookup' in spec_item and spec_item['lookup'] == 'width':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_WIDTH_OPTIONS, int(raw_input_value))
+      target_dict[widget_spec_key] = GetOptionByPercent(widget_spec_key, WIDGET_WIDTH_OPTIONS, int(raw_input_value))
     
     # Lookup: Height
     elif 'lookup' in spec_item and spec_item['lookup'] == 'height':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_HEIGHT_OPTIONS, int(raw_input_value))
+      target_dict[widget_spec_key] = GetOptionByPercent(widget_spec_key, WIDGET_HEIGHT_OPTIONS, int(raw_input_value))
     
     # Lookup: Rounded
     elif 'lookup' in spec_item and spec_item['lookup'] == 'rounded':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, ROUNDED_OPTIONS, int(raw_input_value))
+      target_dict[widget_spec_key] = GetOptionByPercent(widget_spec_key, ROUNDED_OPTIONS, int(raw_input_value))
     
     # Lookup: Margin
     elif 'lookup' in spec_item and spec_item['lookup'] == 'margin':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, WIDGET_MARGIN_OPTIONS, int(raw_input_value))
+      target_dict[widget_spec_key] = GetOptionByPercent(widget_spec_key, WIDGET_MARGIN_OPTIONS, int(raw_input_value))
 
     # Lookup: Bold
     elif 'lookup' in spec_item and spec_item['lookup'] == 'bold':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, BOLD_OPTIONS, int(raw_input_value))
+      target_dict[widget_spec_key] = GetOptionByPercent(widget_spec_key, BOLD_OPTIONS, int(raw_input_value))
 
     # Lookup: Align
     elif 'lookup' in spec_item and spec_item['lookup'] == 'text_align':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, TEXT_ALIGNMENT_OPTIONS, int(raw_input_value))
+      target_dict[widget_spec_key] = GetOptionByPercent(widget_spec_key, TEXT_ALIGNMENT_OPTIONS, int(raw_input_value))
 
     # Lookup: Align
     elif 'lookup' in spec_item and spec_item['lookup'] == 'text_size':
-      target_dict[widget_spec_key] = GetOptions(widget_spec_key, TEXT_SIZE_OPTIONS, int(raw_input_value))
+      target_dict[widget_spec_key] = GetOptionByPercent(widget_spec_key, TEXT_SIZE_OPTIONS, int(raw_input_value))
 
     # Else, just direct assignment
     else:
@@ -188,12 +208,12 @@ def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=
 
   # Color
   elif spec_item['type'] == 'color':
-    value_key = f'''{widget_spec_key}_value'''
+    value_key = f'''__edit.{widget_spec_key}_value'''
 
     # Get the raw value color value, or default back to 50
     raw_color_value = input.get(value_key, DEFAULT_COLOR_VALUE)
 
-    color_value = GetOptions(value_key, COLOR_VALUE_OPTIONS, int(raw_color_value))
+    color_value = GetOptionByPercent(value_key, COLOR_VALUE_OPTIONS, int(raw_color_value))
     target_dict[widget_spec_key] = f'''text-{raw_input_value}-{color_value}'''
 
   # Color Background
@@ -203,7 +223,7 @@ def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=
     # Get the raw value color value, or default back to 50
     raw_color_value = input.get(value_key, DEFAULT_COLOR_VALUE)
 
-    color_value = GetOptions(value_key, COLOR_VALUE_OPTIONS, int(raw_color_value))
+    color_value = GetOptionByPercent(value_key, COLOR_VALUE_OPTIONS, int(raw_color_value))
     target_dict[widget_spec_key] = f'''bg-{raw_input_value}-{color_value}'''
 
   # Icon
@@ -212,28 +232,30 @@ def ProcessSpecificType(config, input, widget_id, spec_item, target_dict, depth=
 
   # Unknown: Error
   else:
-    LOG.error(f'''ProcessSpecificType: Unknown type: {spec_item['type']}  Spec Item: {spec_item}''')
+    LOG.error(f'''ProcessInput_SpecificType: Unknown type: {spec_item['type']}  Spec Item: {spec_item}''')
 
 
 def ProcessInputFromSpec(config, input, widget_id, spec, depth=0):
   """We are given input, and we match it to the spec, so we can organize it into output"""
   result = {}
 
-  # LOG.debug(f'Spec: {pprint.pformat(spec)}')
+  LOG.debug(f'Widget: {widget_id}')
+  LOG.debug(f'Input: {pprint.pformat(input)}')
+  LOG.debug(f'Spec: {pprint.pformat(spec)}')
 
   for spec_item in spec:
     # If this is an include of some type, then we recurse with this data as the new root item
     if 'import_data' in spec_item:
-      sub_result = ProcessInputFromSpec(config, input, widget_id, spec_item['import_data'], depth+1)
+      sub_result = ProcessInputFromSpec(config, input, widget_id, spec_item['import_data'], depth=depth+1)
 
       result.update(sub_result)
     elif 'list_data' in spec_item:
-      sub_result = ProcessInputFromSpec(config, input, widget_id, spec_item['list_data'], depth+1)
+      sub_result = ProcessInputFromSpec(config, input, widget_id, spec_item['list_data'], depth=depth+1)
       result.update(sub_result)
 
     # Else, this is a specific type, we process it here
     else:
-      ProcessSpecificType(config, input, widget_id, spec_item, result)
+      ProcessInput_SpecificType(config, input, widget_id, spec_item, result)
 
   return result
 
@@ -285,18 +307,18 @@ def Site_Editor(config):
 
     # widget_width
     var = 'widget_width'
-    if config.input['request'].get(var, None): result[var] = GetOptions(var, WIDGET_WIDTH_OPTIONS, int(config.input['request'][var]))
+    if config.input['request'].get(var, None): result[var] = GetOptionByPercent(var, WIDGET_WIDTH_OPTIONS, int(config.input['request'][var]))
 
     # widget_rounded
     var = 'widget_rounded'
-    if config.input['request'].get(var, None): result[var] = GetOptions(var, ROUNDED_OPTIONS, int(config.input['request'][var]))
+    if config.input['request'].get(var, None): result[var] = GetOptionByPercent(var, ROUNDED_OPTIONS, int(config.input['request'][var]))
 
     # Color: Title: Background
-    color_title_bg_value = GetOptions(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_background_value']))
+    color_title_bg_value = GetOptionByPercent(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_background_value']))
     result['color_background'] = f'''bg-{config.input['request']['color_background']}-{color_title_bg_value}'''
 
     # Color: Title: Text
-    color_title_text_value = GetOptions(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_title_value']))
+    color_title_text_value = GetOptionByPercent(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_title_value']))
     result['color_title'] = f'''text-{config.input['request']['color_title']}-{color_title_text_value}'''
 
     # widget_text_title
@@ -320,7 +342,7 @@ def Site_Editor(config):
     # widget_height
     var = 'widget_height'
     if result['widget_use_height']:
-      if config.input['request'].get(var, None): result[var] = GetOptions(var, WIDGET_HEIGHT_OPTIONS, int(config.input['request'][var]))
+      if config.input['request'].get(var, None): result[var] = GetOptionByPercent(var, WIDGET_HEIGHT_OPTIONS, int(config.input['request'][var]))
     else:
       result[var] = ''
 
@@ -469,7 +491,7 @@ def Clamp(value, clamp_min, clamp_max):
   return min(clamp_max, max(clamp_min, value))
 
 
-def GetOptions(name, options, value_0_100):
+def GetOptionByPercent(name_for_error, options, value_0_100):
   """"""
   try:
     percent = value_0_100 / 100.0
@@ -479,5 +501,5 @@ def GetOptions(name, options, value_0_100):
 
     return options[index]
   except ValueError as e:
-    LOG.error(f'''Site Editor: {name} input is not an integer: {value_0_100}''')
+    LOG.error(f'''Site Editor: {name_for_error} input is not an integer: {value_0_100}''')
     return None

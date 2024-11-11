@@ -10,6 +10,7 @@ Requirements:
 import argparse
 import sys
 import json
+import pprint
 
 from logic import command_go
 
@@ -59,7 +60,7 @@ def Main(config):
       LOG.error(f'Failed to load JSON: {input_path}')
       sys.exit(1)
     else:
-      LOG.debug(f'Loaded Input: {input_path}  Input: {config.input}')
+      LOG.debug(f'Loaded Input: {input_path}\nInput: {pprint.pformat(config.input)}')
 
   # Progress the commands
   ProcessCommands(config)
