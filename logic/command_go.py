@@ -51,7 +51,7 @@ def Site_Page(config):
 
   # This is the widget that will be editted in the sidebar, if it doesnt exist, we set a default later
   result['edit_widget'] = config.input['stored'].get('edit_widget', None)
-  if request_command != 'none':
+  if request_command != 'set':
     update_widget_from_edit = False
     LOG.debug(f'''Processing command: {config.input['request']['__command']}''')
 
@@ -73,19 +73,19 @@ def Site_Page(config):
 
 
   # Remove the selected edit_widget, if we have more than 1 widget
-  if control_widget_selected == 'remove' and len(result['widgets']) > 1:
+  if request_command == 'remove' and len(result['widgets']) > 1:
     remove_widget = result.get('edit_widget', None)
     if remove_widget:
       result['edit_widget'] = None
       result['widgets'].remove(remove_widget)
       
       # Purge all Input of widget keys
-      for key in result['widget_input']:
+      for key in list(result['widget_input'].keys()):
         if key.startswith(f'{remove_widget}.'):
           del result['widget_input'][key]
 
       # Purge all Output of widget keys
-      for key in result['widget_output']:
+      for key in list(result['widget_output'].keys()):
         if key.startswith(f'{remove_widget}.'):
           del result['widget_output'][key]
 
