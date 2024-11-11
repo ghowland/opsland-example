@@ -3,6 +3,7 @@ Commands: Go
 """
 
 import pprint
+import time
 
 from logic import utility
 
@@ -40,11 +41,13 @@ DEFAULT_NEW_WIDGET = 'card0'
 
 def Site_Page(config):
   """Returns all the data for rendering an entire page.  Enforces there is at least 1 widget present."""
-  result = {'uri': config.input['request']['site_page_uri'].replace('/', '.'), 'input': config.input['request']}
+  result = {'uri': config.input['request']['site_page_uri'].replace('/', '.'), 'input': config.input['request'], 'time': time.time()}
 
   # Assume we will update the widget data from our __edit data, but if we are performing a command, we wont do that this time
   update_widget_from_edit = True
   request_command = config.input['request']['__command']
+
+  control_widget_selected = config.input['request']['__control.widget_selected']
 
   # This is the widget that will be editted in the sidebar, if it doesnt exist, we set a default later
   result['edit_widget'] = config.input['stored'].get('edit_widget', None)
@@ -53,12 +56,39 @@ def Site_Page(config):
     LOG.debug(f'''Processing command: {config.input['request']['__command']}''')
 
 
+  # If we want to select a new edit widget, do that
+  if result['edit_widget'] != control_widget_selected:
+    result['edit_widget'] = control_widget_selected
+    # Cant use the edit data, because we just changed widgets
+    update_widget_from_edit = False
+
+  LOG.info(f'Update Widget From Edit: {update_widget_from_edit}')
+
+
   # Starting with an empty set of widgets
   result['widgets'] = config.input['stored'].get('widgets', [])
   result['widget_input'] = config.input['stored'].get('widget_input', {})
   result['edit_widget_spec'] = config.input['stored'].get('edit_widget_spec', {})
   result['widget_output'] = config.input['stored'].get('widget_output', {})
-  
+
+
+  # Remove the selected edit_widget, if we have more than 1 widget
+  if control_widget_selected == 'remove' and len(result['widgets']) > 1:
+    remove_widget = result.get('edit_widget', None)
+    if remove_widget:
+      result['edit_widget'] = None
+      result['widgets'].remove(remove_widget)
+      
+      # Purge all Input of widget keys
+      for key in result['widget_input']:
+        if key.startswith(f'{remove_widget}.'):
+          del result['widget_input'][key]
+
+      # Purge all Output of widget keys
+      for key in result['widget_output']:
+        if key.startswith(f'{remove_widget}.'):
+          del result['widget_output'][key]
+
 
   # If we dont have any widgets, or we were given an 'add' command, create one
   if len(result['widgets']) == 0 or request_command == 'add':
@@ -103,6 +133,20 @@ def Site_Page(config):
           input_key = input_key.replace('__edit.', f'''{result['edit_widget']}.''', 1)
           LOG.debug(f'''Setting: widget_input:  {input_key} == {input_value}  For: {result['edit_widget']}''')
           result['widget_input'][input_key] = input_value
+      
+      # Else, delete all the __edit items, replace them with the current values
+      else:
+        # Delete all the edits for input
+        for input_key in list(result['input'].keys()):
+          if input_key.startswith('__edit.'):
+            LOG.info(f'Found, deleting: {input_key}')
+            del result['input'][input_key]
+        
+        # Set the edits for the new data
+        for input_key, input_value in result['widget_input'].items():
+          if input_key.startswith(f'''{result['edit_widget']}.'''):
+            new_input_key = input_key.replace(f'''{result['edit_widget']}.''', '__edit.', 1)
+            result['input'][new_input_key] = input_value
 
 
     # Simulate empty input getting processed to start out
