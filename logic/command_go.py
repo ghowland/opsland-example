@@ -44,10 +44,11 @@ def Site_Page(config):
 
   # Assume we will update the widget data from our __edit data, but if we are performing a command, we wont do that this time
   update_widget_from_edit = True
+  request_command = config.input['request']['__command']
 
   # This is the widget that will be editted in the sidebar, if it doesnt exist, we set a default later
   result['edit_widget'] = config.input['stored'].get('edit_widget', None)
-  if config.input['request']['__command'] != None:
+  if request_command != 'none':
     update_widget_from_edit = False
     LOG.debug(f'''Processing command: {config.input['request']['__command']}''')
 
@@ -59,8 +60,8 @@ def Site_Page(config):
   result['widget_output'] = config.input['stored'].get('widget_output', {})
   
 
-  # If we dont have any widgets, create one
-  if len(result['widgets']) == 0:
+  # If we dont have any widgets, or we were given an 'add' command, create one
+  if len(result['widgets']) == 0 or request_command == 'add':
     # Add a new widget by UUID, can be re-ordered this way.  Floating data
     widget_uuid = utility.GetUUID()
     result['widgets'].append(widget_uuid)
@@ -71,6 +72,9 @@ def Site_Page(config):
     widget_id_key = f'''{widget_uuid}.widget_id'''
     result['widget_input'][widget_type_key] = DEFAULT_NEW_WIDGET
     result['widget_input'][widget_id_key] = widget_uuid
+
+    # Set the edit widget to this one
+    result['edit_widget'] = widget_uuid
 
 
   # If we dont have an edit_widget yet, take the first widget
