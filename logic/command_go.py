@@ -287,13 +287,13 @@ def ProcessInput_SpecificType(config, input, widget_id, spec_item, target_dict, 
 
   # Color
   elif spec_item['type'] == 'color':
-    value_key = f'''__edit.{widget_spec_key}_value'''
+    value_key = f'''{widget_spec_key}_value'''
 
     # Get the raw value color value, or default back to 50
     raw_color_value = input.get(value_key, DEFAULT_COLOR_VALUE)
 
     color_value = GetOptionByPercent(value_key, COLOR_VALUE_OPTIONS, int(raw_color_value))
-    target_dict[widget_spec_key] = f'''text-{raw_input_value}-{color_value}'''
+    target_dict[widget_spec_key] = f'''text-{raw_input_value}-{color_value} raw-color-{raw_color_value} value-key-{value_key}'''
 
   # Color Background
   elif spec_item['type'] == 'color_background':
@@ -397,8 +397,8 @@ def Site_Editor(config):
     result['color_background'] = f'''bg-{config.input['request']['color_background']}-{color_title_bg_value}'''
 
     # Color: Title: Text
-    color_title_text_value = GetOptionByPercent(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_title_value']))
-    result['color_title'] = f'''text-{config.input['request']['color_title']}-{color_title_text_value}'''
+    color_title_text_value = GetOptionByPercent(var, COLOR_VALUE_OPTIONS, int(config.input['request']['color_text_value']))
+    result['color_text'] = f'''text-{config.input['request']['color_text']}-{color_title_text_value}'''
 
     # widget_text_title
     var = 'widget_title'
