@@ -1,0 +1,7 @@
+fields:
+  - bg-color: theme or color_override
+  - border-color: theme or color_override
+  - border-width: int
+  - rounded: int
+  - container: list
+

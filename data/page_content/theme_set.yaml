@@ -1,0 +1,4 @@
+- theme_set:
+  - name: string
+  - theme_light: theme
+  - theme_dark: theme

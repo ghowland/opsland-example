@@ -1,0 +1,5 @@
+fields:
+  - border-color: theme or color_override
+  - border-width: int
+  - size: int
+  - rounded: int

@@ -1,0 +1,4 @@
+fields:
+  - container_text
+  - container_image
+  - image_justify: int

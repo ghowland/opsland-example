@@ -1,0 +1,6 @@
+fields:
+  - bg-color: theme or color_override
+  - title: string
+  - meta-socials: 
+    select: image
+  - sections: list

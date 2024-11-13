@@ -1,0 +1,8 @@
+fields:
+  - parent
+  - default
+  - alternate
+  - special
+  - highlight
+  - disabled
+  - warning

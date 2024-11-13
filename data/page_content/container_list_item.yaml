@@ -1,0 +1,5 @@
+fields:
+  - margin: int
+  - padding: int
+  - content: list
+    max: 1

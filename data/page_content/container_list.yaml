@@ -1,0 +1,6 @@
+fields:
+  - margin: int
+  - icon: svg
+  - style: int
+    - `enum for style: 0=normal, 1=timeline, 2=etc`
+  - container: list

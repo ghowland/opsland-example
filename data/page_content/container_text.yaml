@@ -1,0 +1,7 @@
+fields:
+  - color: theme or color
+  - font: select
+  - size: int
+  - weight: int
+  - spacing: int
+  - upper: checkbox
