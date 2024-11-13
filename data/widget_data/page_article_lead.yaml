@@ -1,6 +1,6 @@
 
 - key: color_background
-  label: Card Background Color
+  label: Background Color
   type: color_background
 
 - key: title
