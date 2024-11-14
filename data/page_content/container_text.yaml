@@ -4,4 +4,6 @@ fields:
   - size: int
   - weight: int
   - spacing: int
+  - underline: checkbox
   - upper: checkbox
+  - italics: checkbox

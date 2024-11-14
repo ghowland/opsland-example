@@ -5,6 +5,6 @@ fields:
   - padding: int
   - margin: int
   - rounded: int
-  - image: select
-  - content: list
+  # - image: select
+  # - content: list
 
