@@ -1,5 +1,5 @@
 fields:
-  - color: theme or color
+  - color: color_theme_or_override
   - font: select
   - size: int
   - weight: int
