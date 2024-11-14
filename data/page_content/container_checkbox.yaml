@@ -1,4 +1,4 @@
 fields:
   - container_text
   - style: int
-    - `enum for style: 0=box, 1=h_slider, 2=v_slider, 3=etc`
+    info: "enum for style: 0=box, 1=h_slider, 2=v_slider, 3=etc"

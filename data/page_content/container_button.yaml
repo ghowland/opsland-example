@@ -1,4 +1,9 @@
 fields:
-  - container_text
-  - container_image
+  - bg-color: theme or color_override
+  - border-color: theme or color_override
+  - hover-color: theme or color_override
+  - border-width: int
+
+  - container_text: include
+  - container_image: include
   - image_justify: int
