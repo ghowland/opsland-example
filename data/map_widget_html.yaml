@@ -1,31 +1,33 @@
-page:
-  default:
+widgets:
+  default_page:
     path: component/site_renderer/page/page_default.html.j2
+    tags: [page]
 
-section:
-  default:
+  default_section:
     path: component/site_renderer/section/section_default.html.j2
+    tags: [section]
 
-card:
-  default:
+  default_card:
     path: component/site_renderer/card/card_default.html.j2
+    tags: [card, container]
 
-link:
-  default:
-    path: component/site_renderer/link/link_default.html.j2
-
-list:
-  default:
+  default_list:
     path: component/site_renderer/list/list_default.html.j2
+    tags: [list, container]
 
-text:
-  default:
+  default_text:
     path: component/site_renderer/text/text_default.html.j2
+    tags: [text, container]
 
-image:
-  default:
+  default_image:
     path: component/site_renderer/image/image_default.html.j2
+    tags: [image, container]
 
-icon:
-  default:
+  default_icon:
     path: component/site_renderer/icon/icon_default.html.j2
+    tags: [icon]
+
+  default_link:
+    path: component/site_renderer/link/link_default.html.j2
+    tags: [link]
+

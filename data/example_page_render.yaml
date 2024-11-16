@@ -1,0 +1,41 @@
+render:
+  - default_page
+
+widgets:
+  default_page:
+    theme: default
+    data:
+      title: Default page
+      favicon: logo.png
+    include:
+      default:
+        - default_section: section_a
+        - default_section: section_b
+  
+  section_a:
+    theme: default
+    include:
+      default:
+        - default_text: title_a
+        - default_card: cta_a
+
+  title_a:
+    theme: default
+    include: {}
+    data:
+      body: "Going to the moon"
+
+  cta_a:
+    theme: default
+    include:
+      default:
+        - default_image: image_a
+  
+  image_a:
+    theme: default
+    include: {}
+    data:
+      image: picture.png
+      link: null
+
+
