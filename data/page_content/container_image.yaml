@@ -1,3 +1,5 @@
+name: image
+
 tags:
   - basic
   - image
@@ -11,4 +13,4 @@ style:
   - rounded: int
 
 data:
-  image: image
+  - image: image

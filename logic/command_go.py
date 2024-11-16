@@ -2,6 +2,7 @@
 Commands: Go
 """
 
+
 import pprint
 import time
 
@@ -37,6 +38,23 @@ PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
 
 # Default new widget
 DEFAULT_NEW_WIDGET = 'card0'
+
+# A list of all the page content data
+PATH_PAGE_CONTENT = 'data/page_content.yaml'
+
+
+def Site_Page_Content(config):
+  """"""
+  page_content_list = utility.LoadYaml(PATH_PAGE_CONTENT)
+
+  result = {}
+
+  for path in page_content_list:
+    data = utility.LoadYaml(path)
+    LOG.info(f'Page Content path: {path}  Data: {data}')
+    result[data['name']] = data
+  
+  return result
 
 
 def Site_Page(config):

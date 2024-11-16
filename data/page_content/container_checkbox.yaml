@@ -1,3 +1,5 @@
+name: checkbox
+
 tags:
   - basic
   - checkbox
@@ -12,4 +14,4 @@ style:
     info: "enum for style: 0=box, 1=h_slider, 2=v_slider, 3=etc"
 
 data:
-  checked: bool
+  - checked: bool

@@ -1,3 +1,5 @@
+name: card
+
 tags:
   - card
   - container
@@ -13,4 +15,4 @@ style:
   - margin: int
   - rounded: int
 
-data: {}
+data: []

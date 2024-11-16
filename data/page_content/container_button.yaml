@@ -1,16 +1,28 @@
+name: button
+
 tags:
   - basic
   - button
 
-include_tags:
-  - icon
-  - text
-
 style:
-  - bg-color: color_theme_or_override
-  - border-color: color_theme_or_override
-  - hover-color: color_theme_or_override
+  - bg-normal-color: color_theme_or_override
+  - bg-hover-color: color_theme_or_override
+  - bg-focus-color: color_theme_or_override
+
+  - border-normal-color: color_theme_or_override
+  - border-hover-color: color_theme_or_override
+  - border-focus-color: color_theme_or_override
+
+  - text-normal-color: color_theme_or_override
+  - text-hover-color: color_theme_or_override
+  - text-focus-color: color_theme_or_override
+
   - border-width: int
+  - icon-active: checkbox
   - icon-justify: int
 
-data: {}
+data:
+  - text: string
+  - icon: icon
+
+

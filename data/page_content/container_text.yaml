@@ -1,3 +1,5 @@
+name: text
+
 tags:
   - basic
   - text
@@ -15,5 +17,5 @@ style:
   - italics: checkbox
 
 data:
-  body: string
+  - body: string
 

@@ -1,3 +1,5 @@
+name: page
+
 tags:
   - page
 
@@ -8,6 +10,6 @@ style:
   - bg-color: color_theme_or_override
 
 data:
-  title: string
-  favicon: favicon
+  - title: string
+  - favicon: favicon
 

@@ -1,3 +1,5 @@
+name: list_item
+
 tags:
   - basic
   - list_item
@@ -12,4 +14,4 @@ style:
   - content: list
     max: 1
 
-data: {}
+data: []
