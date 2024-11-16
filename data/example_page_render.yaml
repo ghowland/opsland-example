@@ -1,8 +1,8 @@
 render:
-  - default_page
+  - default_page: page_a
 
 widgets:
-  default_page:
+  page_a:
     theme: default
     data:
       title: Default page
