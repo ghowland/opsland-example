@@ -4,6 +4,24 @@ tags:
   - basic
   - button
 
+include_tags:
+  default:
+    - text
+
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include:
+  default:
+    tags:
+      - text
+    min: 1
+    max: 1
+
+  icon:
+    tags:
+      - icon
+    min: 0
+    max: 1
+
 style:
   - bg-normal-color: color_theme_or_override
   - bg-hover-color: color_theme_or_override
@@ -18,11 +36,6 @@ style:
   - text-focus-color: color_theme_or_override
 
   - border-width: int
-  - icon-active: checkbox
   - icon-justify: int
 
-data:
-  - text: string
-  - icon: icon
-
-
+data: []

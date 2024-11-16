@@ -4,8 +4,13 @@ tags:
   - container
   - button_group
 
-include_tags:
-  - button
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include:
+  default:
+    tags:
+      - button
+    min: 1
+    max: 20
 
 style:
   - style: int

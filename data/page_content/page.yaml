@@ -3,8 +3,13 @@ name: page
 tags:
   - page
 
-include_tags:
-  - section
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include:
+  default:
+    tags:
+      - section
+    min: 1
+    max: null
 
 style:
   - bg-color: color_theme_or_override

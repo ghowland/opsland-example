@@ -4,9 +4,13 @@ tags:
   - list
   - container
 
-include_tags:
-  - container
-  - basic
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include:
+  default:
+    tags:
+      - list_item
+    min: 1
+    max: null
 
 style:
   - margin: int

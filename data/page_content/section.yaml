@@ -7,6 +7,15 @@ include_tags:
   - container
   - card
 
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include:
+  default:
+    tags:
+      - container
+      - card
+    min: 1
+    max: null
+
 style:
   - bg-color: color_theme_or_override
   - border-color: color_theme_or_override
@@ -16,3 +25,4 @@ style:
   - rounded: int
 
 data: []
+

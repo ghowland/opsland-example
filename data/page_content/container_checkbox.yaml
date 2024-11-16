@@ -4,8 +4,13 @@ tags:
   - basic
   - checkbox
 
-include_tags:
-  - text
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include:
+  default:
+    tags:
+      - text
+    min: 1
+    max: 1
 
 style:
   - color: color_theme_or_override
