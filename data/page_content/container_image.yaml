@@ -9,3 +9,6 @@ style:
   - border-width: int
   - size: int
   - rounded: int
+
+data:
+  image: image

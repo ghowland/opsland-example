@@ -3,8 +3,8 @@ tags:
   - button
 
 include_tags:
-  - button
   - icon
+  - text
 
 style:
   - bg-color: color_theme_or_override
@@ -12,3 +12,5 @@ style:
   - hover-color: color_theme_or_override
   - border-width: int
   - icon-justify: int
+
+data: {}

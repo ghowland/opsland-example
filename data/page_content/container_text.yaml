@@ -13,3 +13,7 @@ style:
   - underline: checkbox
   - upper: checkbox
   - italics: checkbox
+
+data:
+  body: string
+

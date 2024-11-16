@@ -11,3 +11,5 @@ style:
   - icon: icon
   - style: int
     info: "enum for style: 0=normal, 1=timeline, 2=etc"
+
+data: {}

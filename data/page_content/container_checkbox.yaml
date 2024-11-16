@@ -2,9 +2,14 @@ tags:
   - basic
   - checkbox
 
-include_tags: []
+include_tags:
+  - text
 
 style:
+  - color: color_theme_or_override
   - container_text: include
   - style: int
     info: "enum for style: 0=box, 1=h_slider, 2=v_slider, 3=etc"
+
+data:
+  checked: bool
