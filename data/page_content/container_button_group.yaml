@@ -1,2 +1,10 @@
-fields:
-  - container_button: list
+tags:
+  - container
+  - button_group
+
+include_tags:
+  - button
+
+style:
+  - style: int
+    info: "enum for style: 0=horizontal, 1=vertical, 2=etc, 3=etc"

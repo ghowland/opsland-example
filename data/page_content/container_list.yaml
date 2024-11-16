@@ -1,6 +1,13 @@
-fields:
+tags:
+  - list
+  - container
+
+include_tags:
+  - container
+  - basic
+
+style:
   - margin: int
-  - icon: svg
+  - icon: icon
   - style: int
     info: "enum for style: 0=normal, 1=timeline, 2=etc"
-  - container: list

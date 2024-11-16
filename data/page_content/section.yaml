@@ -1,10 +1,14 @@
-fields:
+tags:
+  - section
+
+include_tags:
+  - container
+  - card
+
+style:
   - bg-color: theme or color_override
   - border-color: theme or color_override
   - border-width: int
   - padding: int
   - margin: int
   - rounded: int
-  # - image: select
-  # - content: list
-

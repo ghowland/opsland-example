@@ -1,4 +1,10 @@
-fields:
+tags:
+  - basic
+  - image
+
+include_tags: []
+
+style:
   - border-color: color_theme_or_override
   - border-width: int
   - size: int

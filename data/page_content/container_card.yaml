@@ -1,9 +1,15 @@
-fields:
+tags:
+  - card
+  - container
+
+include_tags:
+  - basic
+
+style:
   - bg-color: color_theme_or_override
   - border-color: color_theme_or_override
   - border-width: int
   - padding: int
   - margin: int
   - rounded: int
-  # - container: list
 

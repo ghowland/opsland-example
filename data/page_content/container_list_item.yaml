@@ -1,4 +1,12 @@
-fields:
+tags:
+  - basic
+  - list_item
+
+include_tags:
+  - basic
+  - container
+
+style:
   - margin: int
   - padding: int
   - content: list

@@ -1,4 +1,10 @@
-fields:
+tags:
+  - basic
+  - text
+
+include_tags: []
+
+style:
   - color: color_theme_or_override
   - font: select
   - size: int
