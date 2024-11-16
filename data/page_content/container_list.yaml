@@ -12,6 +12,9 @@ include:
     min: 1
     max: null
 
+style_mode:
+  default: style
+
 style:
   - margin: int
   - icon: icon

@@ -12,6 +12,9 @@ include:
     min: 1
     max: 20
 
+style_mode:
+  default: style
+
 style:
   - style: int
     info: "enum for style: 0=horizontal, 1=vertical, 2=etc, 3=etc"

@@ -1,0 +1,31 @@
+page:
+  default:
+    path: component/site_renderer/page/page_default.html.j2
+
+section:
+  default:
+    path: component/site_renderer/section/section_default.html.j2
+
+card:
+  default:
+    path: component/site_renderer/card/card_default.html.j2
+
+link:
+  default:
+    path: component/site_renderer/link/link_default.html.j2
+
+list:
+  default:
+    path: component/site_renderer/list/list_default.html.j2
+
+text:
+  default:
+    path: component/site_renderer/text/text_default.html.j2
+
+image:
+  default:
+    path: component/site_renderer/image/image_default.html.j2
+
+icon:
+  default:
+    path: component/site_renderer/icon/icon_default.html.j2

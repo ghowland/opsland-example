@@ -1,8 +1,8 @@
-name: checkbox
+name: link
 
 tags:
-  - basic
-  - checkbox
+  - link
+  - container
 
 # Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
 include:
@@ -14,12 +14,13 @@ include:
 
 style_mode:
   default: style
+  hover: style-hover
 
 style:
-  - color: color_theme_or_override
-  - container_text: include
-  - style: int
-    info: "enum for style: 0=box, 1=h_slider, 2=v_slider, 3=etc"
+  - open_new_tab: checkbox
+
+style-hover:
+  - open_new_tab: checkbox
 
 data:
-  - checked: bool
+  - url: url

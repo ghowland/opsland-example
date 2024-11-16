@@ -8,7 +8,21 @@ tags:
 # Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
 include: {}
 
+style_mode:
+  default: style
+  hover: style-hover
+
 style:
+  - color: color_theme_or_override
+  - font: select
+  - size: int
+  - weight: int
+  - spacing: int
+  - underline: checkbox
+  - upper: checkbox
+  - italics: checkbox
+
+style-hover:
   - color: color_theme_or_override
   - font: select
   - size: int

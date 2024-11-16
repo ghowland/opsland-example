@@ -17,6 +17,9 @@ include:
     min: 1
     max: 1
 
+style_mode:
+  default: style
+
 style:
   - bg-color: color_theme_or_override
   - border-color: color_theme_or_override
