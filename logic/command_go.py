@@ -56,6 +56,9 @@ def Site_Page_Example_Render(config):
   """"""
   result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
   
+  result['input'] = {}
+  result['output'] = {}
+
   return result
 
 
