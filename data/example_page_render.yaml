@@ -10,7 +10,7 @@ widgets:
     include:
       default:
         - default_section: section_a
-        # - default_section: section_b
+        - default_section: section_b
   
   section_a:
     theme: default
@@ -19,19 +19,39 @@ widgets:
         - default_text: title_a
         - default_card: cta_a
 
+  section_b:
+    theme: default
+    include:
+      default:
+        - default_text: title_a
+        - default_card: cta_b
+
   title_a:
     theme: default
     include: {}
     data:
-      body: "Going to the moon"
+      text: "Going to the moon"
 
   cta_a:
     theme: default
     include:
       default:
         - default_image: image_a
+
+  cta_b:
+    theme: default
+    include:
+      default:
+        - default_image: image_b
   
   image_a:
+    theme: default
+    include: {}
+    data:
+      image: /static/images/spaceship.jpg
+      link: null
+
+  image_b:
     theme: default
     include: {}
     data:
