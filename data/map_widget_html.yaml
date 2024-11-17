@@ -1,33 +1,51 @@
 widgets:
   default_page:
+    spec: page
     path: component/site_renderer/page/page_default.html.j2
     tags: [page]
 
   default_section:
+    spec: section
     path: component/site_renderer/section/section_default.html.j2
     tags: [section]
 
   default_card:
+    spec: container_card
     path: component/site_renderer/card/card_default.html.j2
     tags: [card, container]
 
   default_list:
+    spec: container_list
     path: component/site_renderer/list/list_default.html.j2
     tags: [list, container]
 
   default_text:
+    spec: container_text
     path: component/site_renderer/text/text_default.html.j2
     tags: [text, container]
 
   default_image:
+    spec: container_image
     path: component/site_renderer/image/image_default.html.j2
     tags: [image, container]
 
   default_icon:
+    spec: container_icon
     path: component/site_renderer/icon/icon_default.html.j2
     tags: [icon]
 
   default_link:
+    spec: container_link
     path: component/site_renderer/link/link_default.html.j2
     tags: [link]
+
+  default_button:
+    spec: container_button
+    path: component/site_renderer/button/button_default.html.j2
+    tags: [button]
+
+  default_button_group:
+    spec: container_button_group
+    path: component/site_renderer/button_group/button_group_default.html.j2
+    tags: [button_group]
 
