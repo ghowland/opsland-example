@@ -6,7 +6,7 @@ widgets:
     theme: default
     data:
       title: Page of Dynamic Action
-      favicon: static/images/favicon.ico
+      favicon: /static/images/favicon.ico
     include:
       default:
         - default_section: section_a
@@ -35,7 +35,7 @@ widgets:
     theme: default
     include: {}
     data:
-      image: picture.png
+      image: /static/images/spaceship.jpg
       link: null
 
 

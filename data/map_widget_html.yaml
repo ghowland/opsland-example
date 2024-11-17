@@ -2,7 +2,7 @@ default_page:
   name: Default Page
   # Spec has all the tags and stuff
   spec: page
-  page: component/site_render/page/page_default.html.j2
+  path: component/site_render/page/page_default.html.j2
 
 default_section:
   name: Default Section
