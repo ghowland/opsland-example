@@ -5,8 +5,8 @@ widgets:
   page_a:
     theme: default
     data:
-      title: Default page
-      favicon: logo.png
+      title: Page of Dynamic Action
+      favicon: static/images/favicon.ico
     include:
       default:
         - default_section: section_a
