@@ -37,6 +37,9 @@ def ProcessCommands(config):
   elif config.command == 'site_page': ExecuteCommand(config, command_go.Site_Page)
   elif config.command == 'site_page_content': ExecuteCommand(config, command_go.Site_Page_Content)
 
+  elif config.command == 'site_page_example_render': ExecuteCommand(config, command_go.Site_Page_Example_Render)
+  elif config.command == 'site_page_tags': ExecuteCommand(config, command_go.Site_Page_Tags)
+
   else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')
 
 

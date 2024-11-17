@@ -42,6 +42,29 @@ DEFAULT_NEW_WIDGET = 'card0'
 # A list of all the page content data
 PATH_PAGE_CONTENT = 'data/page_content.yaml'
 
+# Page Content
+PATH_MAP_WIDGET_HTML = 'data/map_widget_html.yaml'
+
+# Tags
+PATH_TAGS = 'data/tags.yaml'
+
+# Example render data
+PATH_EXAMPLE_RENDER = 'data/example_page_render.yaml'
+
+
+def Site_Page_Example_Render(config):
+  """"""
+  result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
+  
+  return result
+
+
+def Site_Page_Tags(config):
+  """"""
+  result = utility.LoadYaml(PATH_TAGS)
+  
+  return result
+
 
 def Site_Page_Content(config):
   """"""
