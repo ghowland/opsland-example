@@ -2,55 +2,55 @@ default_page:
   name: Default Page
   # Spec has all the tags and stuff
   spec: page
-  page: component/site_renderer/page/page_default.html.j2
+  page: component/site_render/page/page_default.html.j2
 
 default_section:
   name: Default Section
   spec: section
-  path: component/site_renderer/section/section_default.html.j2
+  path: component/site_render/section/section_default.html.j2
 
 default_card:
   name: Default Card
   spec: container_card
-  path: component/site_renderer/card/card_default.html.j2
+  path: component/site_render/card/card_default.html.j2
 
 default_list:
   name: Default List
   spec: container_list
-  path: component/site_renderer/list/list_default.html.j2
+  path: component/site_render/list/list_default.html.j2
 
 default_list_item:
   name: Default List Item
   spec: container_list_item
-  path: component/site_renderer/list/list_item_default.html.j2
+  path: component/site_render/list/list_item_default.html.j2
 
 default_text:
   name: Default Text
   spec: container_text
-  path: component/site_renderer/text/text_default.html.j2
+  path: component/site_render/text/text_default.html.j2
 
 default_image:
   name: Default Image
   spec: container_image
-  path: component/site_renderer/image/image_default.html.j2
+  path: component/site_render/image/image_default.html.j2
 
 default_icon:
   name: Default Icon
   spec: container_icon
-  path: component/site_renderer/icon/icon_default.html.j2
+  path: component/site_render/icon/icon_default.html.j2
 
 default_link:
   name: Default Link
   spec: container_link
-  path: component/site_renderer/link/link_default.html.j2
+  path: component/site_render/link/link_default.html.j2
 
 default_button:
   name: Default Button
   spec: container_button
-  path: component/site_renderer/button/button_default.html.j2
+  path: component/site_render/button/button_default.html.j2
 
 default_button_group:
   name: Default Button Group
   spec: container_button_group
-  path: component/site_renderer/button_group/button_group_default.html.j2
+  path: component/site_render/button_group/button_group_default.html.j2
 
