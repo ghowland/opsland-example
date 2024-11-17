@@ -19,3 +19,5 @@ style:
 
 data:
   - image: image
+  - alt: string
+  - url: url

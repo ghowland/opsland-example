@@ -33,5 +33,5 @@ style-hover:
   - italics: checkbox
 
 data:
-  - body: string
+  - text: string
 

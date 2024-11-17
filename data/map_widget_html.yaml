@@ -1,51 +1,56 @@
-widgets:
-  default_page:
-    spec: page
-    path: component/site_renderer/page/page_default.html.j2
-    tags: [page]
+default_page:
+  name: Default Page
+  # Spec has all the tags and stuff
+  spec: page
+  page: component/site_renderer/page/page_default.html.j2
 
-  default_section:
-    spec: section
-    path: component/site_renderer/section/section_default.html.j2
-    tags: [section]
+default_section:
+  name: Default Section
+  spec: section
+  path: component/site_renderer/section/section_default.html.j2
 
-  default_card:
-    spec: container_card
-    path: component/site_renderer/card/card_default.html.j2
-    tags: [card, container]
+default_card:
+  name: Default Card
+  spec: container_card
+  path: component/site_renderer/card/card_default.html.j2
 
-  default_list:
-    spec: container_list
-    path: component/site_renderer/list/list_default.html.j2
-    tags: [list, container]
+default_list:
+  name: Default List
+  spec: container_list
+  path: component/site_renderer/list/list_default.html.j2
 
-  default_text:
-    spec: container_text
-    path: component/site_renderer/text/text_default.html.j2
-    tags: [text, container]
+default_list_item:
+  name: Default List Item
+  spec: container_list_item
+  path: component/site_renderer/list/list_item_default.html.j2
 
-  default_image:
-    spec: container_image
-    path: component/site_renderer/image/image_default.html.j2
-    tags: [image, container]
+default_text:
+  name: Default Text
+  spec: container_text
+  path: component/site_renderer/text/text_default.html.j2
 
-  default_icon:
-    spec: container_icon
-    path: component/site_renderer/icon/icon_default.html.j2
-    tags: [icon]
+default_image:
+  name: Default Image
+  spec: container_image
+  path: component/site_renderer/image/image_default.html.j2
 
-  default_link:
-    spec: container_link
-    path: component/site_renderer/link/link_default.html.j2
-    tags: [link]
+default_icon:
+  name: Default Icon
+  spec: container_icon
+  path: component/site_renderer/icon/icon_default.html.j2
 
-  default_button:
-    spec: container_button
-    path: component/site_renderer/button/button_default.html.j2
-    tags: [button]
+default_link:
+  name: Default Link
+  spec: container_link
+  path: component/site_renderer/link/link_default.html.j2
 
-  default_button_group:
-    spec: container_button_group
-    path: component/site_renderer/button_group/button_group_default.html.j2
-    tags: [button_group]
+default_button:
+  name: Default Button
+  spec: container_button
+  path: component/site_renderer/button/button_default.html.j2
+
+default_button_group:
+  name: Default Button Group
+  spec: container_button_group
+  path: component/site_renderer/button_group/button_group_default.html.j2
 

@@ -59,6 +59,13 @@ def Site_Page_Example_Render(config):
   return result
 
 
+def Site_Page_Map_Widget_HTML(config):
+  """"""
+  result = utility.LoadYaml(PATH_MAP_WIDGET_HTML)
+  
+  return result
+
+
 def Site_Page_Tags(config):
   """"""
   result = utility.LoadYaml(PATH_TAGS)

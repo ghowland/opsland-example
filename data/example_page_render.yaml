@@ -10,7 +10,7 @@ widgets:
     include:
       default:
         - default_section: section_a
-        - default_section: section_b
+        # - default_section: section_b
   
   section_a:
     theme: default
