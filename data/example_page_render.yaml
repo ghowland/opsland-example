@@ -18,19 +18,30 @@ widgets:
       default:
         - default_text: title_a
         - default_card: cta_a
+        - default_card: cta_b
+    data:
+      bg-color: bg-green-500
 
   section_b:
     theme: default
     include:
       default:
-        - default_text: title_a
+        - default_text: title_b
         - default_card: cta_b
+    data:
+      bg-color: bg-blue-500
 
   title_a:
     theme: default
     include: {}
     data:
       text: "Going to the moon"
+
+  title_b:
+    theme: default
+    include: {}
+    data:
+      text: "Never coming back"
 
   cta_a:
     theme: default
@@ -55,7 +66,7 @@ widgets:
     theme: default
     include: {}
     data:
-      image: /static/images/spaceship.jpg
+      image: /static/images/spaceship2.jpg
       link: null
 
 
