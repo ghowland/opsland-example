@@ -1,61 +1,69 @@
 render:
-  - default_page: page_a
+  - page_a
 
 widgets:
   page_a:
+    widget: default_page
     theme: default
     data:
       title: Page of Dynamic Action
       favicon: /static/images/favicon.ico
     include:
       default:
-        - default_section: section_a
-        - default_section: section_b
+        - section_a
+        - section_b
   
   section_a:
+    widget: default_section
     theme: default
     include:
       default:
-        - default_text: title_a
-        - default_card: cta_a
-        - default_card: cta_b
+        - title_a
+        - cta_a
+        - cta_b
     data:
       bg-color: bg-green-500
 
   section_b:
+    widget: default_section
     theme: default
     include:
       default:
-        - default_text: title_b
-        - default_card: cta_b
+        - title_b
+        - cta_b
     data:
       bg-color: bg-blue-500
 
   title_a:
+    widget: default_text
     theme: default
     include: {}
     data:
       text: "Going to the moon"
 
   title_b:
+    widget: default_text
     theme: default
     include: {}
     data:
       text: "Never coming back"
 
   cta_a:
+    widget: default_card
     theme: default
     include:
       default:
-        - default_image: image_a
+        - image_a
 
   cta_b:
+    widget: default_card
     theme: default
     include:
       default:
-        - default_image: image_b
+        - image_b
   
   image_a:
+    widget: default_image
     theme: default
     include: {}
     data:
@@ -63,6 +71,7 @@ widgets:
       link: null
 
   image_b:
+    widget: default_image
     theme: default
     include: {}
     data:
