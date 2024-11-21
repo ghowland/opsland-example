@@ -52,12 +52,37 @@ PATH_TAGS = 'data/tags.yaml'
 PATH_EXAMPLE_RENDER = 'data/example_page_render.yaml'
 
 
+
+def Site_Page_Content(config):
+  """"""
+  LOG.info(f'Input: {config.input}')
+
+  page_content_list = utility.LoadYaml(PATH_PAGE_CONTENT)
+
+  result = {}
+
+  for path in page_content_list:
+    data = utility.LoadYaml(path)
+    LOG.info(f'Page Content path: {path}  Data: {data}')
+    result[data['name']] = data
+  
+  return result
+
+
 def Site_Page_Example_Render(config):
   """"""
+  LOG.info(f'Input: {config.input}')
+
   result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
   
   result['input'] = {}
   result['output'] = {}
+
+  result['parents'] = {}
+  for widget_key, widget_data in result['widgets'].items():
+    for include_key, include_widget_ids in widget_data['include'].items():
+      for include_widget_id in include_widget_ids:
+        result['parents'][include_widget_id] = widget_key
 
   return result
 
@@ -75,19 +100,6 @@ def Site_Page_Tags(config):
   
   return result
 
-
-def Site_Page_Content(config):
-  """"""
-  page_content_list = utility.LoadYaml(PATH_PAGE_CONTENT)
-
-  result = {}
-
-  for path in page_content_list:
-    data = utility.LoadYaml(path)
-    LOG.info(f'Page Content path: {path}  Data: {data}')
-    result[data['name']] = data
-  
-  return result
 
 
 def Site_Page(config):

@@ -16,16 +16,16 @@ include:
     min: 1
     max: null
 
-style_mode:
-  default: style
+# style_mode:
+#   default: style
 
-style:
-  - bg-color: color_theme_or_override
-  - border-color: color_theme_or_override
-  - border-width: int
-  - padding: int
-  - margin: int
-  - rounded: int
+# style:
+#   - bg-color: color_theme_or_override
+#   - border-color: color_theme_or_override
+#   - border-width: int
+#   - padding: int
+#   - margin: int
+#   - rounded: int
 
 data:
   - theme: theme

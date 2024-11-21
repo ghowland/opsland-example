@@ -11,11 +11,11 @@ include:
     min: 1
     max: null
 
-style_mode:
-  default: style
+# style_mode:
+#   default: style
 
-style:
-  - bg-color: color_theme_or_override
+# style:
+#   - bg-color: color_theme_or_override
 
 data:
   - theme: theme
