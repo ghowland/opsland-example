@@ -95,7 +95,7 @@ def Site_Page_Example_Render(config):
 
 
 def Site_Page_Content(config):
-  """"""
+  """TODO:RENAME: space_widget_spec"""
   LOG.info(f'Input: {config.input}')
 
   page_content_list = utility.LoadYaml(PATH_PAGE_CONTENT)
@@ -111,18 +111,17 @@ def Site_Page_Content(config):
 
 
 def Site_Page_Map_Widget_HTML(config):
-  """"""
+  """TODO:RENAME: space_map_widget_html"""
   result = utility.LoadYaml(PATH_MAP_WIDGET_HTML)
   
   return result
 
 
 def Site_Page_Tags(config):
-  """"""
+  """TODO:RENAME: space_widget_tags"""
   result = utility.LoadYaml(PATH_TAGS)
   
   return result
-
 
 
 def Site_Page(config):
