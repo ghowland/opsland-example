@@ -59,9 +59,6 @@ def Space_Page_Data(config):
   # result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
   result = config.input['site_page']
   
-  result['input'] = {}
-  result['output'] = {}
-
   # Update with the 'parents'
   UpdateWidgetsWithParents(result)
 
