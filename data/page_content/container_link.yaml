@@ -23,4 +23,5 @@ style-hover:
   - open_new_tab: checkbox
 
 data:
+  - theme: theme
   - url: url

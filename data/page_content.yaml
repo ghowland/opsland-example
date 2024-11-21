@@ -1,6 +1,6 @@
 - data/page_content/container_button_group.yaml
 - data/page_content/container_button.yaml
-- data/page_content/container_card.yaml
+- data/page_content/card.yaml
 - data/page_content/container_checkbox.yaml
 - data/page_content/container_image.yaml
 - data/page_content/container_list_item.yaml

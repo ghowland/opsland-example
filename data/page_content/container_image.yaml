@@ -18,6 +18,7 @@ style:
   - rounded: int
 
 data:
+  - theme: theme
   - image: image
   - alt: string
   - url: url

@@ -22,4 +22,5 @@ style:
   - content: list
     max: 1
 
-data: []
+data:
+  - theme: theme

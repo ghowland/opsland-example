@@ -44,4 +44,5 @@ style-focus:
   - border-width: int
   - icon-justify: int
 
-data: []
+data:
+  - theme: theme

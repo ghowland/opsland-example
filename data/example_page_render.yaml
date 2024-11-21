@@ -4,77 +4,79 @@ render:
 widgets:
   page_a:
     widget: default_page
-    theme: default
-    data:
-      title: Page of Dynamic Action
-      favicon: /static/images/favicon.ico
     include:
       default:
         - section_a
         - section_b
+    data:
+      theme: parent
+      title: Page of Dynamic Action
+      favicon: /static/images/favicon.ico
   
   section_a:
     widget: default_section
-    theme: default
     include:
       default:
         - title_a
         - cta_a
         - cta_b
     data:
+      theme: parent
       bg-color: bg-green-500
 
   section_b:
     widget: default_section
-    theme: default
     include:
       default:
         - title_b
         - cta_b
     data:
+      theme: parent
       bg-color: bg-blue-500
 
   title_a:
     widget: default_text
-    theme: default
     include: {}
     data:
+      theme: parent
       text: "Going to the moon"
 
   title_b:
     widget: default_text
-    theme: default
     include: {}
     data:
+      theme: parent
       text: "Never coming back"
 
   cta_a:
     widget: default_card
-    theme: default
     include:
       default:
         - image_a
+    data:
+      theme: parent
 
   cta_b:
     widget: default_card
-    theme: default
     include:
       default:
         - image_b
+    data:
+      theme: parent
   
   image_a:
     widget: default_image
-    theme: default
     include: {}
     data:
+      theme: parent
       image: /static/images/spaceship.jpg
       link: null
 
   image_b:
     widget: default_image
-    theme: default
     include: {}
     data:
+      theme: parent
       image: /static/images/spaceship2.jpg
       link: null
 

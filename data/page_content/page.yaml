@@ -18,6 +18,7 @@ style:
   - bg-color: color_theme_or_override
 
 data:
+  - theme: theme
   - title: string
   - favicon: favicon
 

@@ -33,5 +33,6 @@ style-hover:
   - italics: checkbox
 
 data:
+  - theme: theme
   - text: string
 

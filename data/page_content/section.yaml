@@ -27,5 +27,6 @@ style:
   - margin: int
   - rounded: int
 
-data: []
+data:
+  - theme: theme
 
