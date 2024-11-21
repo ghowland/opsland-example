@@ -18,31 +18,31 @@ include:
     min: 0
     max: 1
 
-style_mode:
-  default: style
-  hover: style-hover
-  focus: style-focus
+# style_mode:
+#   default: style
+#   hover: style-hover
+#   focus: style-focus
 
-style:
-  - bg-color: color_theme_or_override
-  - border-color: color_theme_or_override
-  - text-color: color_theme_or_override
-  - border-width: int
-  - icon-justify: int
+# style:
+#   - bg-color: color_theme_or_override
+#   - border-color: color_theme_or_override
+#   - text-color: color_theme_or_override
+#   - border-width: int
+#   - icon-justify: int
 
-style-hover:
-  - bg-color: color_theme_or_override
-  - border-color: color_theme_or_override
-  - text-color: color_theme_or_override
-  - border-width: int
-  - icon-justify: int
+# style-hover:
+#   - bg-color: color_theme_or_override
+#   - border-color: color_theme_or_override
+#   - text-color: color_theme_or_override
+#   - border-width: int
+#   - icon-justify: int
 
-style-focus:
-  - bg-color: color_theme_or_override
-  - border-color: color_theme_or_override
-  - text-color: color_theme_or_override
-  - border-width: int
-  - icon-justify: int
+# style-focus:
+#   - bg-color: color_theme_or_override
+#   - border-color: color_theme_or_override
+#   - text-color: color_theme_or_override
+#   - border-width: int
+#   - icon-justify: int
 
 data:
   - theme: theme
