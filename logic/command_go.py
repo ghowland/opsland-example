@@ -56,7 +56,8 @@ def Space_Page_Data(config):
   """This will be the new way to handle all page data.  Not the spec for widgets, but the data for this specific page"""
   LOG.info(f'Input: {config.input}')
 
-  result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
+  # result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
+  result = config.input['site_page']
   
   result['input'] = {}
   result['output'] = {}
@@ -65,6 +66,8 @@ def Space_Page_Data(config):
   UpdateWidgetsWithParents(result)
 
   result['uri'] = config.input['request']['site_page_uri']
+
+  UpdateWithEdits(config.input['request'], result['widgets'])
 
   return result
 
@@ -79,8 +82,26 @@ def UpdateWidgetsWithParents(data):
   return data
 
 
+def UpdateWithEdits(edit_data, data):
+  """Make changes to `data` from `edit_data`"""
+  LOG.info(f'Update with edits: {edit_data}')
+
+  for key, value in edit_data.items():
+    # Skip non-edit keys
+    if not key.startswith('__edit'): continue
+
+    # Clear the edit info
+    key = key.replace('__edit.', '')
+
+    # Split the widget and data variable name
+    (widget_id, data_var) = key.split('.', 1)
+
+    data[widget_id]['data'][data_var] = value
+
+
+#TODO:DECOMM
 def Site_Page_Example_Render(config):
-  """DECOMM: Static data -- Phasing this out now"""
+  """DECOMM: Static data -- Phasing this out now -- DECOMM"""
   LOG.info(f'Input: {config.input}')
 
   result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
