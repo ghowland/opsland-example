@@ -52,6 +52,45 @@ PATH_TAGS = 'data/tags.yaml'
 PATH_EXAMPLE_RENDER = 'data/example_page_render.yaml'
 
 
+def Space_Page_Data(config):
+  """This will be the new way to handle all page data.  Not the spec for widgets, but the data for this specific page"""
+  LOG.info(f'Input: {config.input}')
+
+  result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
+  
+  result['input'] = {}
+  result['output'] = {}
+
+  # Update with the 'parents'
+  UpdateWidgetsWithParents(result)
+
+  return result
+
+
+def UpdateWidgetsWithParents(data):
+  data['parents'] = {}
+  for widget_key, widget_data in data['widgets'].items():
+    for include_key, include_widget_ids in widget_data['include'].items():
+      for include_widget_id in include_widget_ids:
+        data['parents'][include_widget_id] = widget_key
+
+  return data
+
+
+def Site_Page_Example_Render(config):
+  """DECOMM: Static data -- Phasing this out now"""
+  LOG.info(f'Input: {config.input}')
+
+  result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
+  
+  result['input'] = {}
+  result['output'] = {}
+
+  # Update with the 'parents'
+  UpdateWidgetsWithParents(result)
+
+  return result
+
 
 def Site_Page_Content(config):
   """"""
@@ -66,24 +105,6 @@ def Site_Page_Content(config):
     LOG.info(f'Page Content path: {path}  Data: {data}')
     result[data['name']] = data
   
-  return result
-
-
-def Site_Page_Example_Render(config):
-  """"""
-  LOG.info(f'Input: {config.input}')
-
-  result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
-  
-  result['input'] = {}
-  result['output'] = {}
-
-  result['parents'] = {}
-  for widget_key, widget_data in result['widgets'].items():
-    for include_key, include_widget_ids in widget_data['include'].items():
-      for include_widget_id in include_widget_ids:
-        result['parents'][include_widget_id] = widget_key
-
   return result
 
 
