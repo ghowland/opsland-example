@@ -70,7 +70,8 @@ widgets:
     data:
       theme: parent
       image: /static/images/spaceship.jpg
-      link: null
+      url: homeboy
+      alt: Spacing the Ship
 
   image_b:
     widget: default_image
@@ -78,6 +79,7 @@ widgets:
     data:
       theme: parent
       image: /static/images/spaceship2.jpg
-      link: null
+      url: null
+      alt: Shipping the Space
 
 

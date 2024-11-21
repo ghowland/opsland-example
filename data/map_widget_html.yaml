@@ -11,46 +11,46 @@ default_section:
 
 default_card:
   name: Default Card
-  spec: container_card
+  spec: card
   path: component/site_render/card/card_default.html.j2
 
 default_list:
   name: Default List
-  spec: container_list
+  spec: list
   path: component/site_render/list/list_default.html.j2
 
 default_list_item:
   name: Default List Item
-  spec: container_list_item
+  spec: list_item
   path: component/site_render/list/list_item_default.html.j2
 
 default_text:
   name: Default Text
-  spec: container_text
+  spec: text
   path: component/site_render/text/text_default.html.j2
 
 default_image:
   name: Default Image
-  spec: container_image
+  spec: image
   path: component/site_render/image/image_default.html.j2
 
 default_icon:
   name: Default Icon
-  spec: container_icon
+  spec: icon
   path: component/site_render/icon/icon_default.html.j2
 
 default_link:
   name: Default Link
-  spec: container_link
+  spec: link
   path: component/site_render/link/link_default.html.j2
 
 default_button:
   name: Default Button
-  spec: container_button
+  spec: button
   path: component/site_render/button/button_default.html.j2
 
 default_button_group:
   name: Default Button Group
-  spec: container_button_group
+  spec: button_group
   path: component/site_render/button_group/button_group_default.html.j2
 
