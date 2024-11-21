@@ -64,6 +64,8 @@ def Space_Page_Data(config):
   # Update with the 'parents'
   UpdateWidgetsWithParents(result)
 
+  result['uri'] = config.input['request']['site_page_uri']
+
   return result
 
 
