@@ -51,6 +51,10 @@ PATH_TAGS = 'data/tags.yaml'
 # Example render data
 PATH_EXAMPLE_RENDER = 'data/example_page_render.yaml'
 
+# How we get default values for any type of data.  Simple lookup table per type
+PATH_DATA_VAR_DEFAULTS = 'data/data_var_defaults.yaml'
+DATA_VAR_DEFAULTS = utility.LoadYaml(PATH_DATA_VAR_DEFAULTS)
+
 
 def Space_Page_Data(config):
   """This will be the new way to handle all page data.  Not the spec for widgets, but the data for this specific page"""
@@ -66,7 +70,7 @@ def Space_Page_Data(config):
 
   result['uri'] = config.input['request']['site_page_uri']
 
-  UpdateWithEdits(config.input['request'], result['widgets'])
+  UpdateWithEdits(config.input['request'], result['widgets'], result['map_widget_html'], result['widget_specs'])
 
   UpdateWithAddableWidgets(result)
 
@@ -176,7 +180,7 @@ def UpdateWidgetsWithParents(data):
   return data
 
 
-def UpdateWithEdits(edit_data, widget_data):
+def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
   """Make changes to `data` from `edit_data`"""
   LOG.debug(f'Update with edits: {edit_data}')
 
@@ -233,20 +237,39 @@ def UpdateWithEdits(edit_data, widget_data):
   elif edit_data['__command'] == 'add_widget':
     edit_widget_key = f'__control.add_widget.{edit_widget}'
 
+    widget_label = edit_data[edit_widget_key]
+    
     new_widget_data = {
-      'widget': edit_data[edit_widget_key],
+      'widget': widget_label,
       'include': {
         # 'default': {},
       },
       'data':
       {
         #NOTE: Set me!
+        'theme': 'parent',
       }
     }
 
     # Set the new widget data
-    # new_widget_data['data'][''] = 
-    # new_widget_data['data'][''] = 
+    widget_map_data = map_widget_html[widget_label]
+    
+    widget_spec = widget_specs[widget_map_data['spec']]
+
+    # Add any includes in widget_spec to new_widget_data.include
+    for include_key in widget_spec['include']:
+      new_widget_data['include'][include_key] = []
+
+    # Add default data for the widget_spec to new_widget_data.data
+    for data_var_pair in widget_spec['data']:
+      for (data_var_name, data_var_type) in data_var_pair.items():
+        # Set Default data, if not already set
+        if data_var_name not in new_widget_data['data']:
+          new_widget_data['data'][data_var_name] = DATA_VAR_DEFAULTS[data_var_type]
+
+        # Get the var_type_data, so we can get the default
+        pass  # Is this really needed?  I dont have any meta-data for this at all.  I just do it with HTML
+
     
     # Create a new Wigdet ID from UUID, and assign the new widget data into the widget data set (`data`)
     new_widget_id = utility.GetUUID()

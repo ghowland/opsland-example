@@ -1,0 +1,8 @@
+theme: parent
+int: 0
+string: ""
+text: ""
+favicon: ""
+url: ""
+image: ""
+bool: False
