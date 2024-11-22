@@ -24,6 +24,8 @@ ROUNDED_OPTIONS = ['rounded-none', 'rounded-sm', 'rounded', 'rounded-md', 'round
 
 WIDGET_MARGIN_OPTIONS = ['m-0', 'm-2', 'm-4', 'm-6', 'm-8', 'm-12', 'm-16', 'm-24', 'm-32']
 
+WIDGET_PADDING_OPTIONS = ['p-0', 'p-2', 'p-4', 'p-6', 'p-8', 'p-12', 'p-16', 'p-24', 'p-32']
+
 BOLD_OPTIONS = ['', 'font-thin', 'font-normal', 'font-medium', 'font-semibold', 'font-bold', 'font-extrabold', 'font-black']
 
 TEXT_ALIGNMENT_OPTIONS = ['text-left', 'text-left', 'text-center', 'text-justify', 'text-right']
