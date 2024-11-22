@@ -160,11 +160,11 @@ def Space_Widget_Spec(config):
   """TODO:RENAME: space_widget_spec"""
   LOG.info(f'Input: {config.input}')
 
-  page_content_list = utility.LoadYaml(PATH_WIDGET_SPECS)
+  widget_spec_list = utility.LoadYaml(PATH_WIDGET_SPECS)
 
   result = {}
 
-  for path in page_content_list:
+  for path in widget_spec_list:
     data = utility.LoadYaml(path)
     LOG.info(f'Page Content path: {path}  Data: {data}')
     result[data['name']] = data
