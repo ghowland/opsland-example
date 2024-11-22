@@ -184,6 +184,8 @@ def UpdateWithEdits(edit_data, data):
   edit_target = edit_data.get('__edit_target', None)
   edit_include_widget_id = edit_data.get('__edit_include_widget_id', None)
 
+  LOG.info(f'Edit Widget: {edit_widget}  Target: {edit_target}  Include Widget ID: {edit_include_widget_id}')
+
   # If we are setting data
   if edit_data['__command'] == 'set':
     for key, value in edit_data.items():
@@ -241,6 +243,14 @@ def UpdateWithEdits(edit_data, data):
       }
     }
     
+    # Create a new Wigdet ID from UUID, and assign the new widget data into the widget data set (`data`)
+    new_widget_id = utility.GetUUID()
+    data[new_widget_id] = new_widget_data
+
+    # Append the new widget ID at end of our `edit_widget`s include list, so that it will append
+    data[edit_widget]['include'][edit_target].append(new_widget_id)
+
+
     LOG.info(f'Add Widget: New Widget Data: {new_widget_data}')
 
 
