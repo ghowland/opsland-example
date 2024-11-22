@@ -54,7 +54,7 @@ PATH_EXAMPLE_RENDER = 'data/example_page_render.yaml'
 
 def Space_Page_Data(config):
   """This will be the new way to handle all page data.  Not the spec for widgets, but the data for this specific page"""
-  LOG.info(f'Input: {config.input}')
+  # LOG.info(f'Input: {config.input}')
 
   # result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
   result = config.input['site_page']
@@ -77,7 +77,7 @@ def UpdateWithAddableWidgets(data):
   """The purpose of this to to find all the widgets we could add, and then make a list to make it really easy to see what widgets could go where."""
   data['include_options'] = {}
 
-  LOG.info(f'Data: {pprint.pformat(data)}')
+  # LOG.info(f'Data: {pprint.pformat(data)}')
 
   # For every widget we have
   for (widget_id, widget_data) in data['widgets'].items():
@@ -102,8 +102,10 @@ def UpdateWithAddableWidgets(data):
       matched_maps = []
       for (map_name, map_data) in data['map_widget_html'].items():
         for include_widget_spec in include_widget_specs:
+          
           LOG.info(f'Map Data: {map_data}')
           LOG.info(f'Widget Spec Data: {widget_spec_data}')
+
           # If this is spec is in our tags, and it isnt a special var
           if include_widget_spec in widget_spec_data['tags'] and not map_name.startswith('__'):
             matched_maps.append(map_name)
@@ -133,14 +135,15 @@ def GetWidgetSpecsByTag(widget_specs, tag):
   """From a dictionary of `widget_specs` we look for a string `tag` in `widget_specs.tags`, and return the list that match."""
   specs = []
 
-  LOG.info(f'Widget Specs: {widget_specs}   Search: {tag}')
+  LOG.debug(f'Widget Specs: {widget_specs}   Search: {tag}')
 
   for (spec_key, spec_data) in widget_specs.items():
     # Skip special data
     if spec_key.startswith('__'): continue
 
-    LOG.info(f'''Spec key: {spec_key}  Spec Data: {spec_data}''')
-    LOG.info(f'''Get Widget Spec by Tag: {tag}  In: {spec_data['tags']}''')
+    LOG.debug(f'''Spec key: {spec_key}  Spec Data: {spec_data}''')
+    LOG.debug(f'''Get Widget Spec by Tag: {tag}  In: {spec_data['tags']}''')
+
     if tag in spec_data['tags']:
       specs.append(spec_key)
 
@@ -160,7 +163,7 @@ def UpdateWidgetsWithParents(data):
 
 def UpdateWithEdits(edit_data, data):
   """Make changes to `data` from `edit_data`"""
-  LOG.info(f'Update with edits: {edit_data}')
+  LOG.debug(f'Update with edits: {edit_data}')
 
   edit_widget = edit_data.get('__edit_widget', None)
   edit_target = edit_data.get('__edit_target', None)
