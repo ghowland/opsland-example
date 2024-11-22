@@ -85,9 +85,10 @@ def UpdateWithEdits(edit_data, data):
 
   for key, value in edit_data.items():
     # Skip non-edit keys
-    if not key.startswith('__edit'): continue
+    if not key.startswith('__edit.'): continue
 
     # Clear the edit info
+    LOG.info(f'Key: {key}')
     key = key.replace('__edit.', '')
 
     # Split the widget and data variable name
