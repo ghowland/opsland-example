@@ -110,7 +110,7 @@ def UpdateWithAddableWidgets(data):
         # Check all the Widget HTML Maps, which are where the `spec` is defined, mapping an HTML file and a name, to a spec
         for (map_name, map_data) in data['map_widget_html'].items():
           if map_name.startswith('__'): continue
-          
+
           # If this is spec matches are spec, we add it, if it isnt already there
           if map_data['spec'] == include_widget_spec and map_name not in matched_maps:
             matched_maps.append(map_name)
@@ -226,6 +226,22 @@ def UpdateWithEdits(edit_data, data):
     except ValueError as e:
       LOG.error(f'Couldnt find index raise: {edit_widget}  ID: {edit_include_widget_id}')
       return
+
+  # Add Widget
+  elif edit_data['__command'] == 'add_widget':
+    edit_widget_key = f'__control.add_widget.{edit_widget}'
+
+    new_widget_data = {
+      'widget': edit_data[edit_widget_key],
+      'include': {
+        # 'default': {},
+      },
+      'data':
+      {
+      }
+    }
+    
+    LOG.info(f'Add Widget: New Widget Data: {new_widget_data}')
 
 
 
