@@ -176,7 +176,7 @@ def UpdateWidgetsWithParents(data):
   return data
 
 
-def UpdateWithEdits(edit_data, data):
+def UpdateWithEdits(edit_data, widget_data):
   """Make changes to `data` from `edit_data`"""
   LOG.debug(f'Update with edits: {edit_data}')
 
@@ -199,7 +199,7 @@ def UpdateWithEdits(edit_data, data):
       # Split the widget and data variable name
       (widget_id, data_var) = key.split('.', 1)
 
-      data[widget_id]['data'][data_var] = value
+      widget_data[widget_id]['data'][data_var] = value
   
   # Else, if Delete
   elif edit_data['__command'] == 'delete':
@@ -208,11 +208,11 @@ def UpdateWithEdits(edit_data, data):
   # Else, if Lower
   elif edit_data['__command'] == 'lower':
     try:
-      index = data[edit_widget]['include'][edit_target].index(edit_include_widget_id)
-      if index < len(data[edit_widget]['include'][edit_target]) - 1:
-        temp = data[edit_widget]['include'][edit_target][index+1]
-        data[edit_widget]['include'][edit_target][index+1] = data[edit_widget]['include'][edit_target][index]
-        data[edit_widget]['include'][edit_target][index] = temp
+      index = widget_data[edit_widget]['include'][edit_target].index(edit_include_widget_id)
+      if index < len(widget_data[edit_widget]['include'][edit_target]) - 1:
+        temp = widget_data[edit_widget]['include'][edit_target][index+1]
+        widget_data[edit_widget]['include'][edit_target][index+1] = widget_data[edit_widget]['include'][edit_target][index]
+        widget_data[edit_widget]['include'][edit_target][index] = temp
     except ValueError as e:
       LOG.error(f'Couldnt find index lower: {edit_widget}  ID: {edit_include_widget_id}')
       return
@@ -220,11 +220,11 @@ def UpdateWithEdits(edit_data, data):
   # Else, if Raise
   elif edit_data['__command'] == 'raise':
     try:
-      index = data[edit_widget]['include'][edit_target].index(edit_include_widget_id)
+      index = widget_data[edit_widget]['include'][edit_target].index(edit_include_widget_id)
       if index > 0:
-        temp = data[edit_widget]['include'][edit_target][index-1]
-        data[edit_widget]['include'][edit_target][index-1] = data[edit_widget]['include'][edit_target][index]
-        data[edit_widget]['include'][edit_target][index] = temp
+        temp = widget_data[edit_widget]['include'][edit_target][index-1]
+        widget_data[edit_widget]['include'][edit_target][index-1] = widget_data[edit_widget]['include'][edit_target][index]
+        widget_data[edit_widget]['include'][edit_target][index] = temp
     except ValueError as e:
       LOG.error(f'Couldnt find index raise: {edit_widget}  ID: {edit_include_widget_id}')
       return
@@ -240,16 +240,20 @@ def UpdateWithEdits(edit_data, data):
       },
       'data':
       {
+        #NOTE: Set me!
       }
     }
+
+    # Set the new widget data
+    # new_widget_data['data'][''] = 
+    # new_widget_data['data'][''] = 
     
     # Create a new Wigdet ID from UUID, and assign the new widget data into the widget data set (`data`)
     new_widget_id = utility.GetUUID()
-    data[new_widget_id] = new_widget_data
+    widget_data[new_widget_id] = new_widget_data
 
     # Append the new widget ID at end of our `edit_widget`s include list, so that it will append
-    data[edit_widget]['include'][edit_target].append(new_widget_id)
-
+    widget_data[edit_widget]['include'][edit_target].append(new_widget_id)
 
     LOG.info(f'Add Widget: New Widget Data: {new_widget_data}')
 
