@@ -113,7 +113,6 @@ def GetWidgetSpecsByTagList(widget_specs, tag_list):
   return final_specs
 
 
-
 def GetWidgetSpecsByTag(widget_specs, tag):
   """From a dictionary of `widget_specs` we look for a string `tag` in `widget_specs.tags`, and return the list that match."""
   specs = []
