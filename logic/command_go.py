@@ -79,7 +79,9 @@ def UpdateWithAddableWidgets(data):
 
   LOG.info(f'Data: {pprint.pformat(data)}')
 
+  # For every widget we have
   for (widget_id, widget_data) in data['widgets'].items():
+    # Get their data
     widget_spec_instance = widget_data['widget']
 
     widget_html_mapping = data['map_widget_html'][widget_spec_instance]
@@ -87,13 +89,27 @@ def UpdateWithAddableWidgets(data):
 
     widget_spec_data = data['widget_specs'][widget_spec]
 
+    # For each item they include
     for (include_target, include_data) in widget_spec_data['include'].items():
       # Test for tags
       if include_target not in data['include_options']:
         data['include_options'][include_target] = {}
       
       # Save the list of tags
-      data['include_options'][include_target][widget_id] = GetWidgetSpecsByTagList(data['widget_specs'], include_data['tags'])
+      include_widget_specs = GetWidgetSpecsByTagList(data['widget_specs'], include_data['tags'])
+
+      # Add matching widget_html maps, by name, so we can reference them easily
+      matched_maps = []
+      for (map_name, map_data) in data['map_widget_html'].items():
+        for include_widget_spec in include_widget_specs:
+          LOG.info(f'Map Data: {map_data}')
+          LOG.info(f'Widget Spec Data: {widget_spec_data}')
+          # If this is spec is in our tags, and it isnt a special var
+          if include_widget_spec in widget_spec_data['tags'] and not map_name.startswith('__'):
+            matched_maps.append(map_name)
+
+      # Add the maps we mathched above
+      data['include_options'][include_target][widget_id] = matched_maps
 
       # Test for min
 
