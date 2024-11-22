@@ -76,6 +76,7 @@ def Space_Page_Data(config):
 def UpdateWithAddableWidgets(data):
   """The purpose of this to to find all the widgets we could add, and then make a list to make it really easy to see what widgets could go where."""
   data['include_options'] = {}
+  data['include_widget_specs'] = {}
 
   # LOG.info(f'Data: {pprint.pformat(data)}')
 
@@ -95,21 +96,34 @@ def UpdateWithAddableWidgets(data):
       if include_target not in data['include_options']:
         data['include_options'][include_target] = {}
       
+      if include_target not in data['include_widget_specs']:
+        data['include_widget_specs'][include_target] = {}
+      
       # Save the list of tags
       include_widget_specs = GetWidgetSpecsByTagList(data['widget_specs'], include_data['tags'])
+      data['include_widget_specs'][include_target][widget_id] = include_widget_specs
 
       # Add matching widget_html maps, by name, so we can reference them easily
       matched_maps = []
-      for (map_name, map_data) in data['map_widget_html'].items():
-        for include_widget_spec in include_widget_specs:
+      # Starting with all the specs we allow...
+      for include_widget_spec in include_widget_specs:
+        # Check all the Widget HTML Maps, which are where the `spec` is defined, mapping an HTML file and a name, to a spec
+        for (map_name, map_data) in data['map_widget_html'].items():
+          if map_name.startswith('__'): continue
           
-          LOG.info(f'Include Widget Spec: {include_widget_spec}')
-          LOG.info(f'Map Name: {map_name}   Map Data: {map_data}')
-          LOG.info(f'Widget Spec Data: {widget_spec_data}')
-
-          # If this is spec is in our tags, and it isnt a special var
-          if include_widget_spec in widget_spec_data['tags'] and not map_name.startswith('__'):
+          # If this is spec matches are spec, we add it, if it isnt already there
+          if map_data['spec'] == include_widget_spec and map_name not in matched_maps:
             matched_maps.append(map_name)
+            break
+
+          #TODO:REMOVE: After above code is working, or this is forgotten, just delete.  It was from previous attempt          
+          # LOG.info(f'Include Widget Spec: {include_widget_spec}')
+          # LOG.info(f'Map Name: {map_name}   Map Data: {map_data}')
+          # LOG.info(f'Widget Spec Data: {widget_spec_data}')
+
+          # # If this is spec is in our tags, and it isnt a special var
+          # if include_widget_spec in widget_spec_data['tags'] and not map_name.startswith('__'):
+          #   matched_maps.append(map_name)
 
       # Add the maps we mathched above
       data['include_options'][include_target][widget_id] = matched_maps
