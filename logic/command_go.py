@@ -40,7 +40,7 @@ PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
 DEFAULT_NEW_WIDGET = 'card0'
 
 # A list of all the page content data
-PATH_PAGE_CONTENT = 'data/page_content.yaml'
+PATH_PAGE_CONTENT = 'data/widget_specs.yaml'
 
 # Page Content
 PATH_MAP_WIDGET_HTML = 'data/map_widget_html.yaml'

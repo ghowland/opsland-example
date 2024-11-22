@@ -1,0 +1,10 @@
+- data/widget_spec/button_group.yaml
+- data/widget_spec/button.yaml
+- data/widget_spec/card.yaml
+- data/widget_spec/checkbox.yaml
+- data/widget_spec/image.yaml
+- data/widget_spec/list_item.yaml
+- data/widget_spec/list.yaml
+- data/widget_spec/text.yaml
+- data/widget_spec/page.yaml
+- data/widget_spec/section.yaml

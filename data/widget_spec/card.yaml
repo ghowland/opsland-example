@@ -1,18 +1,19 @@
-name: section
+name: card
 
 tags:
-  - section
-
-include_tags:
-  - container
   - card
+  - container
+
+# include_tags:
+#   - basic
 
 # Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
 include:
   default:
     tags:
-      - container
       - card
+      - container
+      - basic
     min: 1
     max: null
 
@@ -29,4 +30,3 @@ include:
 
 data:
   - theme: theme
-
