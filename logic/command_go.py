@@ -66,10 +66,18 @@ def Space_Page_Data(config):
 
   UpdateWithEdits(config.input['request'], result['widgets'])
 
+  UpdateWithAddableWidgets(result)
+
   return result
 
 
+def UpdateWithAddableWidgets(data):
+  """The purpose of this to to find all the widgets we could add, and then make a list to make it really easy to see what widgets could go where."""
+
+
+
 def UpdateWidgetsWithParents(data):
+  """Add parents to the widgets"""
   data['parents'] = {}
   for widget_key, widget_data in data['widgets'].items():
     for include_key, include_widget_ids in widget_data['include'].items():
