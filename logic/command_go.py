@@ -58,6 +58,8 @@ def Space_Page_Data(config):
 
   # result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
   result = config.input['site_page']
+  result['map_widget_html'] = config.input['map_widget_html']
+  result['widget_specs'] = config.input['widget_specs']
   
   # Update with the 'parents'
   UpdateWidgetsWithParents(result)
@@ -73,7 +75,61 @@ def Space_Page_Data(config):
 
 def UpdateWithAddableWidgets(data):
   """The purpose of this to to find all the widgets we could add, and then make a list to make it really easy to see what widgets could go where."""
+  data['include_options'] = {}
 
+  LOG.info(f'Data: {pprint.pformat(data)}')
+
+  for (widget_id, widget_data) in data['widgets'].items():
+    widget_spec_instance = widget_data['widget']
+
+    widget_html_mapping = data['map_widget_html'][widget_spec_instance]
+    widget_spec = widget_html_mapping['spec']
+
+    widget_spec_data = data['widget_specs'][widget_spec]
+
+    for (include_target, include_data) in widget_spec_data['include'].items():
+      # Test for tags
+      if include_target not in data['include_options']:
+        data['include_options'][include_target] = {}
+      
+      # Save the list of tags
+      data['include_options'][include_target][widget_id] = GetWidgetSpecsByTagList(data['widget_specs'], include_data['tags'])
+
+      # Test for min
+
+      # Test for max
+
+
+def GetWidgetSpecsByTagList(widget_specs, tag_list):
+  """"""
+  final_specs = []
+
+  for tag in tag_list:
+    specs = GetWidgetSpecsByTag(widget_specs, tag)
+    for spec in specs:
+      if spec not in final_specs:
+        final_specs.append(spec)
+
+  return final_specs
+
+
+
+def GetWidgetSpecsByTag(widget_specs, tag):
+  """From a dictionary of `widget_specs` we look for a string `tag` in `widget_specs.tags`, and return the list that match."""
+  specs = []
+
+  LOG.info(f'Widget Specs: {widget_specs}   Search: {tag}')
+
+  for (spec_key, spec_data) in widget_specs.items():
+    # Skip special data
+    if spec_key.startswith('__'): continue
+
+    LOG.info(f'''Spec key: {spec_key}  Spec Data: {spec_data}''')
+    LOG.info(f'''Get Widget Spec by Tag: {tag}  In: {spec_data['tags']}''')
+    if tag in spec_data['tags']:
+      specs.append(spec_key)
+
+  return specs
 
 
 def UpdateWidgetsWithParents(data):
