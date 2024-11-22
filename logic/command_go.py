@@ -103,7 +103,8 @@ def UpdateWithAddableWidgets(data):
       for (map_name, map_data) in data['map_widget_html'].items():
         for include_widget_spec in include_widget_specs:
           
-          LOG.info(f'Map Data: {map_data}')
+          LOG.info(f'Include Widget Spec: {include_widget_spec}')
+          LOG.info(f'Map Name: {map_name}   Map Data: {map_data}')
           LOG.info(f'Widget Spec Data: {widget_spec_data}')
 
           # If this is spec is in our tags, and it isnt a special var
