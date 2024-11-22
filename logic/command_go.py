@@ -40,7 +40,7 @@ PATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'
 DEFAULT_NEW_WIDGET = 'card0'
 
 # A list of all the page content data
-PATH_PAGE_CONTENT = 'data/widget_specs.yaml'
+PATH_WIDGET_SPECS = 'data/widget_specs.yaml'
 
 # Page Content
 PATH_MAP_WIDGET_HTML = 'data/map_widget_html.yaml'
@@ -156,11 +156,11 @@ def Site_Page_Example_Render(config):
   return result
 
 
-def Site_Page_Content(config):
+def Space_Widget_Spec(config):
   """TODO:RENAME: space_widget_spec"""
   LOG.info(f'Input: {config.input}')
 
-  page_content_list = utility.LoadYaml(PATH_PAGE_CONTENT)
+  page_content_list = utility.LoadYaml(PATH_WIDGET_SPECS)
 
   result = {}
 
@@ -172,14 +172,14 @@ def Site_Page_Content(config):
   return result
 
 
-def Site_Page_Map_Widget_HTML(config):
+def Space_Map_Widget_HTML(config):
   """TODO:RENAME: space_map_widget_html"""
   result = utility.LoadYaml(PATH_MAP_WIDGET_HTML)
   
   return result
 
 
-def Site_Page_Tags(config):
+def Space_Widget_Tags(config):
   """TODO:RENAME: space_widget_tags"""
   result = utility.LoadYaml(PATH_TAGS)
   

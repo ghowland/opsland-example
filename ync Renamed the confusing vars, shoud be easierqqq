@@ -1,0 +1,68 @@
+[1mdiff --git a/logic/command_go.py b/logic/command_go.py[m
+[1mindex 1b027fe..84bfc51 100644[m
+[1m--- a/logic/command_go.py[m
+[1m+++ b/logic/command_go.py[m
+[36m@@ -40,7 +40,7 @@[m [mPATH_WIDGET_DATA_FORMAT = 'data/widget_data/{name}.yaml'[m
+ DEFAULT_NEW_WIDGET = 'card0'[m
+ [m
+ # A list of all the page content data[m
+[31m-PATH_PAGE_CONTENT = 'data/widget_specs.yaml'[m
+[32m+[m[32mPATH_WIDGET_SPECS = 'data/widget_specs.yaml'[m
+ [m
+ # Page Content[m
+ PATH_MAP_WIDGET_HTML = 'data/map_widget_html.yaml'[m
+[36m@@ -156,11 +156,11 @@[m [mdef Site_Page_Example_Render(config):[m
+   return result[m
+ [m
+ [m
+[31m-def Site_Page_Content(config):[m
+[32m+[m[32mdef Space_Widget_Spec(config):[m
+   """TODO:RENAME: space_widget_spec"""[m
+   LOG.info(f'Input: {config.input}')[m
+ [m
+[31m-  page_content_list = utility.LoadYaml(PATH_PAGE_CONTENT)[m
+[32m+[m[32m  page_content_list = utility.LoadYaml(PATH_WIDGET_SPECS)[m
+ [m
+   result = {}[m
+ [m
+[36m@@ -172,14 +172,14 @@[m [mdef Site_Page_Content(config):[m
+   return result[m
+ [m
+ [m
+[31m-def Site_Page_Map_Widget_HTML(config):[m
+[32m+[m[32mdef Space_Map_Widget_HTML(config):[m
+   """TODO:RENAME: space_map_widget_html"""[m
+   result = utility.LoadYaml(PATH_MAP_WIDGET_HTML)[m
+   [m
+   return result[m
+ [m
+ [m
+[31m-def Site_Page_Tags(config):[m
+[32m+[m[32mdef Space_Widget_Tags(config):[m
+   """TODO:RENAME: space_widget_tags"""[m
+   result = utility.LoadYaml(PATH_TAGS)[m
+   [m
+[1mdiff --git a/opsland_example.py b/opsland_example.py[m
+[1mindex 167f5b5..0f9e8c1 100755[m
+[1m--- a/opsland_example.py[m
+[1m+++ b/opsland_example.py[m
+[36m@@ -35,14 +35,16 @@[m [mdef ProcessCommands(config):[m
+ [m
+   # Site Page[m
+   elif config.command == 'site_page': ExecuteCommand(config, command_go.Site_Page)[m
+[31m-  elif config.command == 'site_page_content': ExecuteCommand(config, command_go.Site_Page_Content)[m
+ [m
+[32m+[m[32m  # Old New[m
+   elif config.command == 'site_page_example_render': ExecuteCommand(config, command_go.Site_Page_Example_Render)[m
+[31m-  elif config.command == 'site_page_tags': ExecuteCommand(config, command_go.Site_Page_Tags)[m
+[31m-  elif config.command == 'site_page_map_widget_html': ExecuteCommand(config, command_go.Site_Page_Map_Widget_HTML)[m
+[32m+[m
+ [m
+   # Space[m
+   elif config.command == 'space_page_data': ExecuteCommand(config, command_go.Space_Page_Data)[m
+[32m+[m[32m  elif config.command == 'space_map_widget_html': ExecuteCommand(config, command_go.Space_Map_Widget_HTML)[m
+[32m+[m[32m  elif config.command == 'space_widget_tags': ExecuteCommand(config, command_go.Space_Widget_Tags)[m
+[32m+[m[32m  elif config.command == 'space_widget_spec': ExecuteCommand(config, command_go.Space_Widget_Spec)[m
+ [m
+ [m
+   else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')[m

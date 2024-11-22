@@ -35,14 +35,16 @@ def ProcessCommands(config):
 
   # Site Page
   elif config.command == 'site_page': ExecuteCommand(config, command_go.Site_Page)
-  elif config.command == 'site_page_content': ExecuteCommand(config, command_go.Site_Page_Content)
 
+  # Old New
   elif config.command == 'site_page_example_render': ExecuteCommand(config, command_go.Site_Page_Example_Render)
-  elif config.command == 'site_page_tags': ExecuteCommand(config, command_go.Site_Page_Tags)
-  elif config.command == 'site_page_map_widget_html': ExecuteCommand(config, command_go.Site_Page_Map_Widget_HTML)
+
 
   # Space
   elif config.command == 'space_page_data': ExecuteCommand(config, command_go.Space_Page_Data)
+  elif config.command == 'space_map_widget_html': ExecuteCommand(config, command_go.Space_Map_Widget_HTML)
+  elif config.command == 'space_widget_tags': ExecuteCommand(config, command_go.Space_Widget_Tags)
+  elif config.command == 'space_widget_spec': ExecuteCommand(config, command_go.Space_Widget_Spec)
 
 
   else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')
