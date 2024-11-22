@@ -83,18 +83,53 @@ def UpdateWithEdits(edit_data, data):
   """Make changes to `data` from `edit_data`"""
   LOG.info(f'Update with edits: {edit_data}')
 
-  for key, value in edit_data.items():
-    # Skip non-edit keys
-    if not key.startswith('__edit.'): continue
+  edit_widget = edit_data.get('__edit_widget', None)
+  edit_target = edit_data.get('__edit_target', None)
+  edit_include_widget_id = edit_data.get('__edit_include_widget_id', None)
 
-    # Clear the edit info
-    LOG.info(f'Key: {key}')
-    key = key.replace('__edit.', '')
+  # If we are setting data
+  if edit_data['__command'] == 'set':
+    for key, value in edit_data.items():
+      # Skip non-edit keys
+      if not key.startswith('__edit.'): continue
 
-    # Split the widget and data variable name
-    (widget_id, data_var) = key.split('.', 1)
+      # Clear the edit info
+      LOG.info(f'Key: {key}')
+      key = key.replace('__edit.', '')
 
-    data[widget_id]['data'][data_var] = value
+      # Split the widget and data variable name
+      (widget_id, data_var) = key.split('.', 1)
+
+      data[widget_id]['data'][data_var] = value
+  
+  # Else, if Delete
+  elif edit_data['__command'] == 'delete':
+    pass
+  
+  # Else, if Lower
+  elif edit_data['__command'] == 'lower':
+    try:
+      index = data[edit_widget]['include'][edit_target].index(edit_include_widget_id)
+      if index < len(data[edit_widget]['include'][edit_target]) - 1:
+        temp = data[edit_widget]['include'][edit_target][index+1]
+        data[edit_widget]['include'][edit_target][index+1] = data[edit_widget]['include'][edit_target][index]
+        data[edit_widget]['include'][edit_target][index] = temp
+    except ValueError as e:
+      LOG.error(f'Couldnt find index lower: {edit_widget}  ID: {edit_include_widget_id}')
+      return
+  
+  # Else, if Raise
+  elif edit_data['__command'] == 'raise':
+    try:
+      index = data[edit_widget]['include'][edit_target].index(edit_include_widget_id)
+      if index > 0:
+        temp = data[edit_widget]['include'][edit_target][index-1]
+        data[edit_widget]['include'][edit_target][index-1] = data[edit_widget]['include'][edit_target][index]
+        data[edit_widget]['include'][edit_target][index] = temp
+    except ValueError as e:
+      LOG.error(f'Couldnt find index raise: {edit_widget}  ID: {edit_include_widget_id}')
+      return
+
 
 
 #TODO:DECOMM
