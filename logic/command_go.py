@@ -63,9 +63,22 @@ def Space_Style(config):
   # LOG.info(f'Input: {config.input}')
 
   # Pass through to start
-  result = config.input
+  styles = {}
 
-  return result
+  style = 'default'
+  if style not in styles:
+    styles[style] = {}
+  
+  cur_style = styles[style]
+  
+  styles['__current'] = style
+
+  for key, value in config.input['request'].items():
+    if key.startswith('__style.'):
+      key = key.replace('__style.', '')
+      cur_style[key] = value
+
+  return styles
 
 
 def Space_Page_Data(config):
