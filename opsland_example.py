@@ -45,6 +45,7 @@ def ProcessCommands(config):
   elif config.command == 'space_map_widget_html': ExecuteCommand(config, command_go.Space_Map_Widget_HTML)
   elif config.command == 'space_widget_tags': ExecuteCommand(config, command_go.Space_Widget_Tags)
   elif config.command == 'space_widget_spec': ExecuteCommand(config, command_go.Space_Widget_Spec)
+  elif config.command == 'space_style': ExecuteCommand(config, command_go.Space_Style)
 
 
   else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')

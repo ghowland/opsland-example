@@ -58,6 +58,16 @@ PATH_DATA_VAR_DEFAULTS = 'data/data_var_defaults.yaml'
 DATA_VAR_DEFAULTS = utility.LoadYaml(PATH_DATA_VAR_DEFAULTS)
 
 
+def Space_Style(config):
+  """Save our styling data"""
+  # LOG.info(f'Input: {config.input}')
+
+  # Pass through to start
+  result = config.input
+
+  return result
+
+
 def Space_Page_Data(config):
   """This will be the new way to handle all page data.  Not the spec for widgets, but the data for this specific page"""
   # LOG.info(f'Input: {config.input}')
