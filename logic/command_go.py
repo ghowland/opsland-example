@@ -75,7 +75,6 @@ def Space_Style(config):
 
   for key, value in config.input['request'].items():
     if key.startswith('__style.'):
-      key = key.replace('__style.', '')
       cur_style[key] = value
 
   return styles
