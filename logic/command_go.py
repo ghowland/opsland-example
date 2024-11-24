@@ -63,19 +63,40 @@ def Space_Style(config):
   # LOG.info(f'Input: {config.input}')
 
   # Pass through to start
-  styles = {}
+  styles = dict(config.input['style_data'])
+  del styles['__time']
 
-  style = 'default'
+  # We assume we to update our data this time
+  do_update_data = True
+
+  # If we are changing styles, then dont update any data now
+  if '__control.style' in config.input['request'] and config.input['request']['__control.style'] != config.input['request']['__control.current_style']:
+    LOG.info(f'''Changing styles: From: {config.input['request']['__control.current_style']}  To: {config.input['request']['__control.style']}''')
+    do_update_data = False
+
+  # Set the styles
+  style = config.input['request']['__control.style']
+  styles['__control.style'] = config.input['request']['__control.style']
+
+  # Save the current style, so it passes through to the web page, to come back here again
+  styles['__current'] = style
+  styles['__control.current_style'] = style
+
+  LOG.info(f'Current Style: {style}')
+
+  # If this is the first time we've set this style, create the dict
   if style not in styles:
     styles[style] = {}
   
+  # Assign our current style for update
   cur_style = styles[style]
   
-  styles['__current'] = style
 
-  for key, value in config.input['request'].items():
-    if key.startswith('__style.'):
-      cur_style[key] = value
+  # If we want to update the data, do it.  If we just changed keys, we want the page to load fresh data and submit again, so we dont do anything now
+  if do_update_data:
+    for key, value in config.input['request'].items():
+      if key.startswith('__style.'):
+        cur_style[key] = value
 
   return styles
 
