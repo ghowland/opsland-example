@@ -64,6 +64,14 @@ STYLES = ['default', 'alternate', 'headline', 'section_head', 'title', 'big', 's
           'custom_00', 'custom_01', 'custom_02']
 
 
+
+def Space_Edit_Widget(config):
+  """Allow single edits, testing how this works"""
+  result = config.input
+
+  return result
+
+
 def Space_Style(config):
   """Save our styling data"""
   # LOG.info(f'Input: {config.input}')
