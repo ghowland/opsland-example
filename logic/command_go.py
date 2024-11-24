@@ -57,14 +57,20 @@ PATH_EXAMPLE_RENDER = 'data/example_page_render.yaml'
 PATH_DATA_VAR_DEFAULTS = 'data/data_var_defaults.yaml'
 DATA_VAR_DEFAULTS = utility.LoadYaml(PATH_DATA_VAR_DEFAULTS)
 
+# Styles
+STYLES = ['default', 'alternate', 'headline', 'section_head', 'title', 'big', 'small', 'extra_small', 'highlight', 'disabled', 'warning', 'attract', 'hero', 'promotion', 'premium', 
+          'boost', 'spotlight', 'callout', 'exclusive', 'engage', 'iconic', 'launch', 'vivid', 'vip', 'curated', 'impact', 'limited', 'conversion', 'security', 'problem', 'error', 
+          'critical_failure', 'verification_required', 'access_denied', 'data_breach_alert', 'blocked', 'update_required', 'maintenance_mode', 'recover_account', 
+          'custom_00', 'custom_01', 'custom_02']
+
 
 def Space_Style(config):
   """Save our styling data"""
   # LOG.info(f'Input: {config.input}')
 
   # Pass through to start
-  styles = dict(config.input['style_data'])
-  del styles['__time']
+  styles = dict(config.input.get('style_data', {}).get('actual', {}))
+  control = dict(config.input.get('style_data', {}).get('merged', {}))
 
   # We assume we to update our data this time
   do_update_data = True
@@ -76,11 +82,6 @@ def Space_Style(config):
 
   # Set the styles
   style = config.input['request']['__control.style']
-  styles['__control.style'] = config.input['request']['__control.style']
-
-  # Save the current style, so it passes through to the web page, to come back here again
-  styles['__current'] = style
-  styles['__control.current_style'] = style
 
   LOG.info(f'Current Style: {style}')
 
@@ -90,7 +91,6 @@ def Space_Style(config):
   
   # Assign our current style for update
   cur_style = styles[style]
-  
 
   # If we want to update the data, do it.  If we just changed keys, we want the page to load fresh data and submit again, so we dont do anything now
   if do_update_data:
@@ -98,7 +98,85 @@ def Space_Style(config):
       if key.startswith('__style.'):
         cur_style[key] = value
 
-  return styles
+  # Take the actual and create a merged section, so this isnt tricky in Jinja
+  (merged, merged_info) = MergeStylesWithParentData(styles)
+
+  result = {'actual': styles, 'merged': merged, 'merged_info': merged_info}
+
+  # Save the current style, so it passes through to the web page, to come back here again
+  result['__control.style'] = config.input['request']['__control.style']
+  result['__current'] = style
+  result['__control.current_style'] = style
+
+  return result
+
+
+def MergeStylesWithParentData(styles):
+  """Merge all the stylse """
+  merged = {}
+  info = ''
+
+  styles_wait_parent_list = []
+  styles_processed = []
+
+  # Walk the list first, and find any that havent had their parents processed yet we put them into `styles_wait_parent_list` and process them later
+  for style in STYLES:
+    # Get the style data, or empty dict
+    style_data = styles.get(style, {})
+
+    # If this is the default style, or it's parent was already processed
+    if style == 'default' or style_data.get('__style.style.parent', 'default') in styles_processed:
+      # Merge Parent to Child, and mark processed for others to use as parent
+      merged[style] = MergeStyleParentToChild(styles, style_data.get('__style.style.parent', 'default'), style)
+      styles_processed.append(style)
+
+    # Else, defer this style until later
+    else:
+      styles_wait_parent_list.append(style)
+
+  # Process any of the wait list styles, we keep processing this until we get them all, or just default the rest to `default` because there is a loop
+  while styles_wait_parent_list:
+    found_one = False
+
+    for style in styles_wait_parent_list:
+      style_data = styles.get(style, {})
+      if style_data.get('__style.style.parent', 'default') in styles_processed:
+        # Merge Parent to Child, and mark processed for others to use as parent
+        merged[style] = MergeStyleParentToChild(styles, style_data.get('__style.style.parent', 'default'), style)
+        styles_processed.append(style)
+        found_one = True
+
+    # We didnt find any, so take the first one in the list, and flip it to default and continue, until we process them all
+    if not found_one:
+      # Set the first item in the list to be parented, to default.  This is sure to complete, and then maybe others will, or the same will happen.  No problem
+      styles_wait_parent_list[0]['__style.style.parent'] = 'default'
+      
+      # Feedback for the user to see we changed data
+      info += f'Style parent set to default: `{style}`.  '
+
+  return (merged, info)
+
+
+def MergeStyleParentToChild(styles, parent_style, child_style):
+  """"""
+  merged = {}
+
+  style_parent = styles.get(parent_style, {})
+  style_child = styles.get(child_style, {})
+
+  # Use the `default` entry keys for the master list of keys
+  style_keys = style_parent.keys()
+
+  # Loop over our master list of keys, so it's easy
+  for style_key in style_keys:
+    # Try to get from the child data
+    merged[style_key] = style_child.get(style_key, 'parent')
+
+    # If we want parent data, get from the parent
+    if merged[style_key] == 'parent':
+      merged[style_key] = style_parent.get(style_key, 'parent')
+
+  return merged
 
 
 def Space_Page_Data(config):
