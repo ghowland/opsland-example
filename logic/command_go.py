@@ -173,7 +173,7 @@ def MergeStyleParentToChild(styles, parent_style, child_style):
     merged[style_key] = style_child.get(style_key, 'parent')
 
     # If we want parent data, get from the parent
-    if merged[style_key] == 'parent':
+    if merged[style_key] in ('parent', ''):
       merged[style_key] = style_parent.get(style_key, 'parent')
 
   return merged
