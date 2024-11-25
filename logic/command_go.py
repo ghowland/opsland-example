@@ -65,11 +65,10 @@ STYLES = ['default', 'alternate', 'headline', 'section_head', 'title', 'big', 's
 
 
 
-def Space_Edit_Widget(config):
-  """Allow single edits, testing how this works"""
-  result = config.input
-
-  return result
+# def Space_Edit_Widget(config):
+#   """Allow single edits, testing how this works"""
+#   result = config.input
+#   return result
 
 
 def Space_Style(config):
@@ -201,7 +200,8 @@ def Space_Page_Data(config):
 
   result['uri'] = config.input['request']['site_page_uri']
 
-  UpdateWithEdits(config.input['request'], result['widgets'], result['map_widget_html'], result['widget_specs'])
+  update_data = UpdateWithEdits(config.input['request'], result['widgets'], result['map_widget_html'], result['widget_specs'])
+  result.update(update_data)
 
   UpdateWithAddableWidgets(result)
 
@@ -315,6 +315,9 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
   """Make changes to `data` from `edit_data`"""
   LOG.debug(f'Update with edits: {edit_data}')
 
+  # Only needed sometimes
+  result_data = {}
+
   edit_widget = edit_data.get('__edit_widget', None)
   edit_target = edit_data.get('__edit_target', None)
   edit_include_widget_id = edit_data.get('__edit_include_widget_id', None)
@@ -336,6 +339,10 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
 
       widget_data[widget_id]['data'][data_var] = value
   
+  # Else, if Fetch
+  elif edit_data['__command'] == 'fetch':
+    result_data['__select_edit.widget_id'] = edit_data['__select_edit.widget_id']
+
   # Else, if Delete
   elif edit_data['__command'] == 'delete':
     pass
@@ -410,6 +417,8 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
     widget_data[edit_widget]['include'][edit_target].append(new_widget_id)
 
     LOG.info(f'Add Widget: New Widget Data: {new_widget_data}')
+  
+  return result_data
 
 
 
