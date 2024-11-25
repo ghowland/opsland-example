@@ -57,19 +57,19 @@ default_button_group:
 default_search:
   name: Search
   spec: search
-  path: component/site_render//search_default.html.j2
+  path: component/site_render/search_default.html.j2
 
 default_tag:
   name: Tag
   spec: tag
-  path: component/site_render//tag_default.html.j2
+  path: component/site_render/tag_default.html.j2
 
 default_toggle:
   name: Toggle 
   spec: toggle
-  path: component/site_render//toggle_default.html.j2
+  path: component/site_render/toggle_default.html.j2
 
 default_upload:
   name: Upload 
   spec: upload
-  path: component/site_render//upload_default.html.j2
+  path: component/site_render/upload_default.html.j2
