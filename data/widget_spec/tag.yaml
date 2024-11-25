@@ -1,8 +1,9 @@
-name: text
+name: tag
 
 tags:
   - basic
-  - text
+  - form
+  - tag
 
 # Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
 include: {}
