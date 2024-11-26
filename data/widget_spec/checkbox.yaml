@@ -12,15 +12,6 @@ include:
     min: 1
     max: 1
 
-# style_mode:
-#   default: style
-
-# style:
-#   - color: color_theme_or_override
-#   - container_text: include
-#   - style: int
-#     info: "enum for style: 0=box, 1=h_slider, 2=v_slider, 3=etc"
-
 data:
   - theme: theme
   - checked: bool

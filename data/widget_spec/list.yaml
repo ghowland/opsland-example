@@ -12,14 +12,5 @@ include:
     min: 1
     max: null
 
-# style_mode:
-#   default: style
-
-# style:
-#   - margin: int
-#   - icon: icon
-#   - style: int
-#     info: "enum for style: 0=normal, 1=timeline, 2=etc"
-
 data:
   - theme: theme
