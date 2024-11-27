@@ -131,8 +131,13 @@ def MergeStylesWithParentData(styles):
     # Get the style data, or empty dict
     style_data = styles.get(style, {})
 
-    # If this is the default style, or it's parent was already processed
-    if style == 'default' or style_data.get('__style.style.parent', 'default') in styles_processed:
+    # If this is default, accept as-is.  It must be complete as it's the basis for everything else
+    if style == 'default':
+      merged['default'] = style_data
+      styles_processed.append(style)
+
+    # Else, If it's parent was already processed
+    elif style_data.get('__style.style.parent', 'default') in styles_processed:
       # Merge Parent to Child, and mark processed for others to use as parent
       merged[style] = MergeStyleParentToChild(styles, style_data.get('__style.style.parent', 'default'), style)
       styles_processed.append(style)

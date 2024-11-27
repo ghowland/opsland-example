@@ -73,3 +73,8 @@ default_upload:
   name: Upload 
   spec: upload
   path: component/site_render/upload/upload_default.html.j2
+
+default_table:
+  name: Table 
+  spec: table
+  path: component/site_render/table/table_default.html.j2
