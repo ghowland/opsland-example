@@ -78,3 +78,8 @@ default_table:
   name: Table 
   spec: table
   path: component/site_render/table/table_default.html.j2
+
+default_search_content:
+  name: Search Content
+  spec: search
+  path: component/site_render/search_result/search_result_content.html.j2

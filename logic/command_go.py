@@ -91,17 +91,68 @@ def Upload_Refresh(config):
 
     path_data = {'path': path, 'size': stat_data.st_size, 'created': stat_data.st_ctime}
 
+    # Create thumbnail
     thumb_path = UPLOAD_THUMBNAIL_PATH+path
-    if not os.path.exists(thumb_path):
-      # LOG.info(f'Looking for: {thumb_path}  Making from: {full_path}')
-      img = Image.open(full_path)
-      max_size = (320, 240)
-      img.thumbnail(max_size)
-      img.save(thumb_path)
+    CreateThumbnail(full_path, thumb_path)
+
 
     result.append(path_data)
 
   return result
+
+
+DEFAULT_THUMB_SIZE = [320, 240]
+
+def CreateThumbnail(full_path, thumb_path):
+  """Create a thumbnail for an image, to a path"""
+  # If the thumb already exists, return
+  # if os.path.exists(thumb_path): return
+
+  img = Image.open(full_path)
+
+  # Ensure correct orientation for camera photos EXIF data
+  if img._getexif():
+    if img._getexif().get(274) == 3:
+        img = img.rotate(180, expand=True)
+    elif img._getexif().get(274) == 6:
+        img = img.rotate(270, expand=True)
+    elif img._getexif().get(274) == 8:
+        img = img.rotate(90, expand=True)
+
+  # LOG.info(f'Looking for: {thumb_path}  Making from: {full_path}')
+  max_size = list(DEFAULT_THUMB_SIZE)
+
+  (width, height) = img.size
+
+  crop_x = width
+  crop_y = height
+
+  # Landscape crop
+  if width > height:
+    # crop_y = height * size_ratio
+    size_ratio = height / width
+    max_size[1] = int(max_size[1] * size_ratio)
+    
+  # Portrait crop (or square)
+  else:
+    # crop_x = width / size_ratio
+    size_ratio = width / height
+    max_size[0] = int(max_size[0] * size_ratio)
+
+  # # Get the difference to create the boundary of what to crop  
+  # crop_diff_x = width - crop_x
+  # crop_diff_y = height - crop_y
+
+  # crop_bounds = [crop_diff_x / 2, crop_diff_y / 2, width - (crop_diff_x / 2), height - (crop_diff_y / 2)]
+
+  # LOG.info(f'Size: {img.size}  Max Size: {max_size}  Ratio: {size_ratio}  Crop X/Y: {crop_x}, {crop_y}')
+
+  # img_crop = img.crop(crop_bounds)
+  img_resize = img.resize(max_size)
+
+  LOG.info(f'Size: [{width}, {height}]  Max Size: {max_size}  Ratio: {size_ratio}  Final Size: {img_resize.size}')
+
+  img_resize.save(thumb_path)
 
 
 def Space_Style(config):
@@ -287,7 +338,7 @@ def UpdateWithAddableWidgets(data):
           # If this is spec matches are spec, we add it, if it isnt already there
           if map_data['spec'] == include_widget_spec and map_name not in matched_maps:
             matched_maps.append(map_name)
-            break
+            # break
 
           #TODO:REMOVE: After above code is working, or this is forgotten, just delete.  It was from previous attempt          
           # LOG.info(f'Include Widget Spec: {include_widget_spec}')
