@@ -5,6 +5,7 @@ Commands: Go
 
 import pprint
 import time
+import os
 
 from logic import utility
 
@@ -63,12 +64,25 @@ STYLES = ['default', 'alternate', 'headline', 'section_head', 'title', 'big', 's
           'critical_failure', 'verification_required', 'access_denied', 'data_breach_alert', 'blocked', 'update_required', 'maintenance_mode', 'recover_account', 
           'custom_00', 'custom_01', 'custom_02']
 
+# Upload Path
+UPLOAD_PATH = '/mnt/d/_OpsLand/uploads/'
 
 
-# def Space_Edit_Widget(config):
-#   """Allow single edits, testing how this works"""
-#   result = config.input
-#   return result
+def Upload_Refresh(config):
+  """"""
+  # Ensure we have a dictionary to start with
+  # result = config.input.get('existing', [])
+  # if not result: result = []
+
+  result = []
+
+  paths = os.listdir(UPLOAD_PATH)
+  for path in paths:
+    stat_data = os.stat(UPLOAD_PATH+path)
+    path_data = {'path': path, 'size': stat_data.st_size, 'created': stat_data.st_ctime}
+    result.append(path_data)
+
+  return result
 
 
 def Space_Style(config):
