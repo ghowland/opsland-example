@@ -350,7 +350,9 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
 
   # Else, if Delete
   elif edit_data['__command'] == 'delete':
-    pass
+    LOG.info(f'Include for delete: {widget_data[edit_widget]}')
+    widget_data[edit_widget]['include'][edit_target].remove(edit_include_widget_id)
+    del widget_data[edit_include_widget_id]
   
   # Else, if Lower
   elif edit_data['__command'] == 'lower':
