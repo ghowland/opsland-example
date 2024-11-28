@@ -7,6 +7,8 @@ import pprint
 import time
 import os
 
+from PIL import Image
+
 from logic import utility
 
 from logic.log import LOG
@@ -66,6 +68,7 @@ STYLES = ['default', 'alternate', 'headline', 'section_head', 'title', 'big', 's
 
 # Upload Path
 UPLOAD_PATH = '/mnt/d/_OpsLand/uploads/'
+UPLOAD_THUMBNAIL_PATH = '/mnt/d/_OpsLand/uploads/thumbnail/'
 
 
 def Upload_Refresh(config):
@@ -78,8 +81,24 @@ def Upload_Refresh(config):
 
   paths = os.listdir(UPLOAD_PATH)
   for path in paths:
-    stat_data = os.stat(UPLOAD_PATH+path)
+    full_path = UPLOAD_PATH + path
+
+    # Skip directories or anything not a file
+    if not os.path.isfile(full_path): continue
+
+    stat_data = os.stat(full_path)
+    # LOG.info(f'Stat: {stat_data}')
+
     path_data = {'path': path, 'size': stat_data.st_size, 'created': stat_data.st_ctime}
+
+    thumb_path = UPLOAD_THUMBNAIL_PATH+path
+    if not os.path.exists(thumb_path):
+      # LOG.info(f'Looking for: {thumb_path}  Making from: {full_path}')
+      img = Image.open(full_path)
+      max_size = (320, 240)
+      img.thumbnail(max_size)
+      img.save(thumb_path)
+
     result.append(path_data)
 
   return result
