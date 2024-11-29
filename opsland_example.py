@@ -51,6 +51,7 @@ def ProcessCommands(config):
 
   # Upload
   elif config.command == 'upload_refresh': ExecuteCommand(config, command_go.Upload_Refresh)
+  elif config.command == 'table_data_refresh': ExecuteCommand(config, command_go.Table_Data_Refresh)
 
 
   else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')

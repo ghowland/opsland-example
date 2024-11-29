@@ -6,6 +6,7 @@ Commands: Go
 import pprint
 import time
 import os
+import glob
 
 from PIL import Image
 
@@ -75,6 +76,22 @@ DEFAULT_THUMB_SIZE = [320, 240]
 
 # Style Select Data 
 PATH_STYLE_SELECT_DATA = 'data/style_select.yaml'
+
+# Glob for Table Data to load
+GLOB_TABLE_DATA = 'data/table_data/*.yaml'
+
+
+def Table_Data_Refresh(config):
+  """"""
+  data = {}
+
+  paths = glob.glob(GLOB_TABLE_DATA)
+  for path in paths:
+    path_data = utility.LoadYaml(path)
+
+    data[path_data['name']] = path_data
+
+  return data
 
 
 def Space_Style_Select_Data(config):
