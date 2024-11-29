@@ -339,16 +339,18 @@ def PurgeUnreferencedWidgets(data, referenced_widgets):
       del data['parents'][widget_id]
 
   # Delete unreferenced `include_widget_specs`
-  for widget_id in list(data['include_widget_specs'].keys()):
-    if widget_id not in referenced_widgets:
-      LOG.info(f'Delete: include_widget_specs: {widget_id}')
-      del data['include_widget_specs'][widget_id]
+  for channel in list(data['include_widget_specs'].keys()):
+    for widget_id in list(data['include_widget_specs'][channel].keys()):
+      if widget_id not in referenced_widgets:
+        LOG.info(f'Delete: include_widget_specs: {widget_id}')
+        del data['include_widget_specs'][widget_id]
 
   # Delete unreferenced `include_options`
-  for widget_id in list(data['include_options'].keys()):
-    if widget_id not in referenced_widgets:
-      LOG.info(f'Delete: include_options: {widget_id}')
-      del data['include_options'][widget_id]
+  for channel in list(data['include_options'].keys()):
+    for widget_id in list(data['include_options'][channel].keys()):
+      if widget_id not in referenced_widgets:
+        LOG.info(f'Delete: include_options: {widget_id}')
+        del data['include_options'][widget_id]
 
 
 def UpdateWithAddableWidgets(data):
