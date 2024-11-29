@@ -13,6 +13,18 @@ data:
   - image: image
   - alt: string
   - url: url
+
+  # Style Overrides
   - justify: select
     _source: justify
+  - rounded: select
+    _source: rounded
+  - width: select
+    _source: width
+  - width_max: select
+    _source: width_max
+  - width_min: select
+    _source: width_min
+  - padding: select
+    _source: padding
 
