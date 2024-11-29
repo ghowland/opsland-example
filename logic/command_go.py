@@ -136,9 +136,6 @@ def CreateThumbnail(full_path, thumb_path):
 
   (width, height) = img.size
 
-  crop_x = width
-  crop_y = height
-
   # Landscape crop
   if width > height:
     # crop_y = height * size_ratio
@@ -151,15 +148,6 @@ def CreateThumbnail(full_path, thumb_path):
     size_ratio = width / height
     max_size[0] = int(max_size[0] * size_ratio)
 
-  # # Get the difference to create the boundary of what to crop  
-  # crop_diff_x = width - crop_x
-  # crop_diff_y = height - crop_y
-
-  # crop_bounds = [crop_diff_x / 2, crop_diff_y / 2, width - (crop_diff_x / 2), height - (crop_diff_y / 2)]
-
-  # LOG.info(f'Size: {img.size}  Max Size: {max_size}  Ratio: {size_ratio}  Crop X/Y: {crop_x}, {crop_y}')
-
-  # img_crop = img.crop(crop_bounds)
   img_resize = img.resize(max_size)
 
   LOG.info(f'Size: [{width}, {height}]  Max Size: {max_size}  Ratio: {size_ratio}  Final Size: {img_resize.size}')
