@@ -306,7 +306,60 @@ def Space_Page_Data(config):
 
   UpdateWithAddableWidgets(result)
 
+  # Find all the referenced widgets
+  referenced_widgets = []
+  FindReferencedWidgets(result, result['render'], referenced_widgets)
+
+  LOG.info(f'Found widgets referenced: {referenced_widgets}')
+
+  PurgeUnreferencedWidgets(result, referenced_widgets)
+
   return result
+
+
+def FindReferencedWidgets(data, widget_list, referenced_widgets):
+  """Find all the referenced to widgets from our render list to the includes below"""
+  for widget_id in widget_list:
+    referenced_widgets.append(widget_id)
+
+    # Loop over all the include dict-lists and find those too
+    for include_key, include_widget_id_list in data['widgets'][widget_id]['include'].items():
+      FindReferencedWidgets(data, include_widget_id_list, referenced_widgets)
+
+
+def PurgeUnreferencedWidgets(data, referenced_widgets):
+  """Remove all the widgets not in the referenced_widgets list"""
+  purge_list = []
+
+  for widget_id in data['widgets']:
+    if widget_id not in referenced_widgets and widget_id not in purge_list:
+      purge_list.append(widget_id)
+
+  LOG.info(f'Purge Widget List: {purge_list}')
+
+  # Delete unreferenced `widgets`
+  for widget_id in list(data['widgets'].keys()):
+    if widget_id not in referenced_widgets:
+      LOG.info(f'Delete: widgets: {widget_id}')
+      del data['widgets'][widget_id]
+
+  # Delete unreferenced `parents`
+  for widget_id in list(data['parents'].keys()):
+    if widget_id not in referenced_widgets:
+      LOG.info(f'Delete: parents: {widget_id}')
+      del data['parents'][widget_id]
+
+  # Delete unreferenced `include_widget_specs`
+  for widget_id in list(data['include_widget_specs'].keys()):
+    if widget_id not in referenced_widgets:
+      LOG.info(f'Delete: include_widget_specs: {widget_id}')
+      del data['include_widget_specs'][widget_id]
+
+  # Delete unreferenced `include_options`
+  for widget_id in list(data['include_options'].keys()):
+    if widget_id not in referenced_widgets:
+      LOG.info(f'Delete: include_options: {widget_id}')
+      del data['include_options'][widget_id]
 
 
 def UpdateWithAddableWidgets(data):
