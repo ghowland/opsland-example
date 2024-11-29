@@ -106,7 +106,7 @@ DEFAULT_THUMB_SIZE = [320, 240]
 def CreateThumbnail(full_path, thumb_path):
   """Create a thumbnail for an image, to a path"""
   # If the thumb already exists, return
-  # if os.path.exists(thumb_path): return
+  if os.path.exists(thumb_path): return
 
   img = Image.open(full_path)
 
