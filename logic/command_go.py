@@ -75,7 +75,7 @@ PATH_STYLE_SELECT_DATA = 'data/style_select.yaml'
 
 
 def Space_Style_Select_Data(config):
-  """"""
+  """Styling options for Select HTML widgets"""
   result = {}
 
   result = utility.LoadYaml(PATH_STYLE_SELECT_DATA)
@@ -84,7 +84,7 @@ def Space_Style_Select_Data(config):
 
 
 def Upload_Refresh(config):
-  """"""
+  """Refresh files and thumbnails after an upload"""
   # Ensure we have a dictionary to start with
   # result = config.input.get('existing', [])
   # if not result: result = []
