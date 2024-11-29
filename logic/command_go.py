@@ -70,6 +70,9 @@ STYLES = ['default', 'alternate', 'headline', 'section_head', 'title', 'big', 's
 UPLOAD_PATH = '/mnt/d/_OpsLand/uploads/'
 UPLOAD_THUMBNAIL_PATH = '/mnt/d/_OpsLand/uploads/thumbnail/'
 
+# Upload Thumbnail size
+DEFAULT_THUMB_SIZE = [320, 240]
+
 # Style Select Data 
 PATH_STYLE_SELECT_DATA = 'data/style_select.yaml'
 
@@ -112,8 +115,6 @@ def Upload_Refresh(config):
 
   return result
 
-
-DEFAULT_THUMB_SIZE = [320, 240]
 
 def CreateThumbnail(full_path, thumb_path):
   """Create a thumbnail for an image, to a path"""
@@ -563,7 +564,6 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
     LOG.info(f'Add Widget: New Widget Data: {new_widget_data}')
   
   return result_data
-
 
 
 #TODO:DECOMM
