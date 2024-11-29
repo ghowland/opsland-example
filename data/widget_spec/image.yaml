@@ -13,6 +13,6 @@ data:
   - image: image
   - alt: string
   - url: url
-  - alignment: select
-    _source: flex_alignment
+  - justify: select
+    _source: justify
 

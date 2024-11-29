@@ -108,7 +108,7 @@ justify:
   - justify-stretch: Stretch
 
 
-flex_alignment:
+flex_justify:
   - parent: Use Parent
   - "": No Setting
   - content-normal: Normal
