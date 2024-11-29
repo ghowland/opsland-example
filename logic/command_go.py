@@ -70,6 +70,18 @@ STYLES = ['default', 'alternate', 'headline', 'section_head', 'title', 'big', 's
 UPLOAD_PATH = '/mnt/d/_OpsLand/uploads/'
 UPLOAD_THUMBNAIL_PATH = '/mnt/d/_OpsLand/uploads/thumbnail/'
 
+# Style Select Data 
+PATH_STYLE_SELECT_DATA = 'data/style_select.yaml'
+
+
+def Space_Style_Select_Data(config):
+  """"""
+  result = {}
+
+  result = utility.LoadYaml(PATH_STYLE_SELECT_DATA)
+
+  return result
+
 
 def Upload_Refresh(config):
   """"""
