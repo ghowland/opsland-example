@@ -179,3 +179,166 @@ text_font_style:
   - not-italic: Not Italic
   - italic: Italic
 
+gap:
+  - parent: Use Parent
+  - gap-0: No Gap
+  - gap-0.5: 0.5 em
+  - gap-1: 1 em
+  - gap-2: 2 em
+  - gap-3: 3 em
+  - gap-4: 4 em
+  - gap-5: 5 em
+  - gap-6: 6 em
+  - gap-7: 7 em
+  - gap-8: 8 em
+  - gap-9: 9 em
+  - gap-10: 10 em
+  - gap-11: 11 em
+  - gap-12: 12 em
+  - gap-14: 14 em
+  - gap-16: 16 em
+  - gap-20: 20 em
+  - gap-24: 24 em
+  - gap-28: 28 em
+  - gap-32: 32 em
+  - gap-36: 36 em
+  - gap-40: 40 em
+  - gap-44: 44 em
+  - gap-48: 48 em
+  - gap-52: 52 em
+  - gap-56: 56 em
+  - gap-60: 60 em
+  - gap-64: 64 em
+  - gap-72: 72 em
+  - gap-80: 80 em
+  - gap-96: 96 em
+
+gap_x:
+  - parent: Use Parent
+  - gap-x-0: No Gap
+  - gap-x-0.5: 0.5 em
+  - gap-x-1: 1 em
+  - gap-x-2: 2 em
+  - gap-x-3: 3 em
+  - gap-x-4: 4 em
+  - gap-x-5: 5 em
+  - gap-x-6: 6 em
+  - gap-x-7: 7 em
+  - gap-x-8: 8 em
+  - gap-x-9: 9 em
+  - gap-x-10: 10 em
+  - gap-x-11: 11 em
+  - gap-x-12: 12 em
+  - gap-x-14: 14 em
+  - gap-x-16: 16 em
+  - gap-x-20: 20 em
+  - gap-x-24: 24 em
+  - gap-x-28: 28 em
+  - gap-x-32: 32 em
+  - gap-x-36: 36 em
+  - gap-x-40: 40 em
+  - gap-x-44: 44 em
+  - gap-x-48: 48 em
+  - gap-x-52: 52 em
+  - gap-x-56: 56 em
+  - gap-x-60: 60 em
+  - gap-x-64: 64 em
+  - gap-x-72: 72 em
+  - gap-x-80: 80 em
+  - gap-x-96: 96 em
+
+gap_y:
+  - parent: Use Parent
+  - gap-y-0: No Gap
+  - gap-y-0.5: 0.5 em
+  - gap-y-1: 1 em
+  - gap-y-2: 2 em
+  - gap-y-3: 3 em
+  - gap-y-4: 4 em
+  - gap-y-5: 5 em
+  - gap-y-6: 6 em
+  - gap-y-7: 7 em
+  - gap-y-8: 8 em
+  - gap-y-9: 9 em
+  - gap-y-10: 10 em
+  - gap-y-11: 11 em
+  - gap-y-12: 12 em
+  - gap-y-14: 14 em
+  - gap-y-16: 16 em
+  - gap-y-20: 20 em
+  - gap-y-24: 24 em
+  - gap-y-28: 28 em
+  - gap-y-32: 32 em
+  - gap-y-36: 36 em
+  - gap-y-40: 40 em
+  - gap-y-44: 44 em
+  - gap-y-48: 48 em
+  - gap-y-52: 52 em
+  - gap-y-56: 56 em
+  - gap-y-60: 60 em
+  - gap-y-64: 64 em
+  - gap-y-72: 72 em
+  - gap-y-80: 80 em
+  - gap-y-96: 96 em
+
+grid_column:
+  - grid-cols-1: 1 Column
+  - grid-cols-2: 2 Column
+  - grid-cols-3: 3 Column
+  - grid-cols-4: 4 Column
+  - grid-cols-5: 5 Column
+  - grid-cols-6: 6 Column
+  - grid-cols-7: 7 Column
+  - grid-cols-8: 8 Column
+  - grid-cols-9: 9 Column
+  - grid-cols-10: 10 Column
+  - grid-cols-11: 11 Column
+  - grid-cols-12: 12 Column
+  - grid-cols-none: No Columns
+  - grid-cols-subgrid: Subgrid
+
+grid_item_column_span:
+  - col-span-1: 1 Column Span
+  - col-span-2: 2 Column Span
+  - col-span-3: 3 Column Span
+  - col-span-4: 4 Column Span
+  - col-span-5: 5 Column Span
+  - col-span-6: 6 Column Span
+  - col-span-7: 7 Column Span
+  - col-span-8: 8 Column Span
+  - col-span-9: 9 Column Span
+  - col-span-10: 10 Column Span
+  - col-span-11: 11 Column Span
+  - col-span-12: 12 Column Span
+  - col-auto: Auto
+
+grid_item_column_start:
+  - col-start-1: 1 Column Span
+  - col-start-2: 2 Column Span
+  - col-start-3: 3 Column Span
+  - col-start-4: 4 Column Span
+  - col-start-5: 5 Column Span
+  - col-start-6: 6 Column Span
+  - col-start-7: 7 Column Span
+  - col-start-8: 8 Column Span
+  - col-start-9: 9 Column Span
+  - col-start-10: 10 Column Span
+  - col-start-11: 11 Column Span
+  - col-start-12: 12 Column Span
+  - col-start-auto: Auto
+
+grid_item_column_end:
+  - col-end-1: 1 Column Span
+  - col-end-2: 2 Column Span
+  - col-end-3: 3 Column Span
+  - col-end-4: 4 Column Span
+  - col-end-5: 5 Column Span
+  - col-end-6: 6 Column Span
+  - col-end-7: 7 Column Span
+  - col-end-8: 8 Column Span
+  - col-end-9: 9 Column Span
+  - col-end-10: 10 Column Span
+  - col-end-11: 11 Column Span
+  - col-end-12: 12 Column Span
+  - col-end-auto: Auto
+

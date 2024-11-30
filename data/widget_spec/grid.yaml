@@ -1,0 +1,25 @@
+name: grid
+
+tags:
+  - grid
+  - container
+
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include:
+  default:
+    tags:
+      - grid_item
+    min: 1
+    max: null
+
+data:
+  - theme: theme
+  - column: select
+    _source: grid_column
+  - column_gap: select
+    _source: gap
+  - column_gap_x: select
+    _source: gap_x
+  - column_gap_y: select
+    _source: gap_y
+

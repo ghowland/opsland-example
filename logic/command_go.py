@@ -567,10 +567,12 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
       for (data_var_name, data_var_type) in data_var_pair.items():
         # Set Default data, if not already set
         if data_var_name not in new_widget_data['data']:
-          new_widget_data['data'][data_var_name] = DATA_VAR_DEFAULTS[data_var_type]#.get(data_var_type, 'parent')
+          # Dont process our meta-data (like `_source`)
+          if not data_var_name.startwith('_'):
+            new_widget_data['data'][data_var_name] = DATA_VAR_DEFAULTS[data_var_type]#.get(data_var_type, 'parent')
 
-          if data_var_type not in DATA_VAR_DEFAULTS:
-            LOG.error(f'Missing Data Type Var default: {data_var_type}')
+            if data_var_type not in DATA_VAR_DEFAULTS:
+              LOG.error(f'Missing Data Type Var default: {data_var_type}')
 
         # Get the var_type_data, so we can get the default
         pass  # Is this really needed?  I dont have any meta-data for this at all.  I just do it with HTML
