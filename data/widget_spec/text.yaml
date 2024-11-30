@@ -11,3 +11,13 @@ data:
   - theme: theme
   - text: string
 
+  # Style Overrides
+  - alignment: select
+    _source: text_alignment
+  - size: select
+    _source: text_size
+  - bold: select
+    _source: text_bold
+  - margin: select
+    _source: margin
+
