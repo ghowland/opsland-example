@@ -107,7 +107,6 @@ justify:
   - content-baseline: Baseline
   - justify-stretch: Stretch
 
-
 flex_justify:
   - parent: Use Parent
   - "": No Setting
