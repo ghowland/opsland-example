@@ -159,3 +159,23 @@ text_size:
   - text-8xl: 8XL
   - text-9xl: 9XL
 
+text_transform:
+  - parent: Use Parent
+  - "": No Transform
+  - normal-case: Normal Case
+  - uppercase: Upper Case
+  - lowercase: Lower Case
+  - capitalize: Capitalize
+
+text_decoration:
+  - parent: Use Parent
+  - no-underline: No Underline
+  - underline: Underline
+  - overline: Overline
+  - line-through: Line Through
+
+text_font_style:
+  - parent: Use Parent
+  - not-italic: Not Italic
+  - italic: Italic
+

@@ -21,4 +21,10 @@ data:
     _source: text_bold
   - margin: select
     _source: margin
+  - transform: select
+    _source: text_transform
+  - decoration: select
+    _source: text_decoration
+  - font_style: select
+    _source: text_font_style
 

@@ -6,3 +6,7 @@ favicon: ""
 url: ""
 image: ""
 bool: False
+color: blue-400
+select: parent
+text_alignment: parent
+text_bold: parent

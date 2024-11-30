@@ -22,7 +22,7 @@ default_list:
 default_list_item:
   name: Default List Item
   spec: list_item
-  path: component/site_render/list/list_item_default.html.j2
+  path: component/site_render/list_item/list_item_default.html.j2
 
 default_text:
   name: Default Text

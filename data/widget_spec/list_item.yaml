@@ -1,7 +1,6 @@
 name: list_item
 
 tags:
-  - basic
   - list_item
 
 # Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
@@ -13,14 +12,7 @@ include:
     min: 1
     max: 1
 
-# style_mode:
-#   default: style
-
-# style:
-#   - margin: int
-#   - padding: int
-#   - content: list
-#     max: 1
-
 data:
   - theme: theme
+  - text: string
+
