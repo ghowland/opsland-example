@@ -12,6 +12,7 @@ data:
   - text: string
 
   # Style Overrides
+  - color: color
   - alignment: select
     _source: text_alignment
   - size: select
