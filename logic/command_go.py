@@ -505,11 +505,49 @@ def UpdateWidgetsWithParents(data):
 
 
 class MistuneMarkdownRenderer(HTMLRenderer):
-    def codespan(self, text):
-        if text.startswith('$') and text.endswith('$'):
-            return '<span class="math">' + escape(text) + '</span>'
-        return '<code>' + escape(text) + '</code>'
+  def codespan(self, text):
+    if text.startswith('$') and text.endswith('$'):
+      return '<span class="math">' + EscapeHTML(text) + '</span>'
+    
+    return '<code>' + EscapeHTML(text) + '</code>'
 
+  def paragraph(self, text):
+    return '<p class="text-blue-400">' + EscapeHTML(text) + '</p>'
+
+  def text(self, text):
+    return '<text class="text-blue-400">' + EscapeHTML(text) + '</text>'
+
+  def link(self, text, url, title=None):
+    return f'<a href="{url}" title="{title}" class="text-blue-400">' + EscapeHTML(text) + '</link>'
+
+  def linebreak(self):
+    return '<br>'
+
+  def strong(self, text):
+    return '<strong class="text-blue-400">' + EscapeHTML(text) + '</strong>'
+
+  def emphasis(self, text):
+    return '<em class="text-blue-400">' + EscapeHTML(text) + '</em>'
+
+  def image(self, alt, url, title=None):
+    return f'<image class="text-blue-400" src="{url}" alt="{alt}" title="{title}">'
+
+  def heading(self, text, level, **attrs):
+    return '<h class="text-blue-400">' + EscapeHTML(text) + '</h>'
+
+  def block_quote(self, text):
+    return '<quote class="text-blue-400">' + EscapeHTML(text) + '</quote>'
+
+  def block_code(self, text):
+    return '<code class="text-blue-400">' + EscapeHTML(text) + '</code>'
+
+  def block_error(self, text):
+    return '<error class="text-blue-400">' + EscapeHTML(text) + '</error>'
+
+
+def EscapeHTML(text):
+  """TODO: Write something useful here"""
+  return text
 
 def UpdateWithSpecialValues(data):
   """"""
