@@ -93,3 +93,8 @@ default_search_content:
   name: Search Content
   spec: search
   path: component/site_render/search_result/search_result_content.html.j2
+
+default_embed_youtube:
+  name: Embed Youtube
+  spec: embed_youtube
+  path: component/site_render/emded/embed_youtube.html.j2

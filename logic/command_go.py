@@ -507,47 +507,128 @@ def UpdateWidgetsWithParents(data):
 class MistuneMarkdownRenderer(HTMLRenderer):
   def codespan(self, text):
     if text.startswith('$') and text.endswith('$'):
-      return '<span class="math">' + EscapeHTML(text) + '</span>'
+      return f'''<span class="math">{ EscapeHTML(text) }</span>'''
     
-    return '<code>' + EscapeHTML(text) + '</code>'
+    return '''<code>'''+ EscapeHTML(text) +'''</code>'''
 
   def paragraph(self, text):
-    return '<p class="text-blue-400">' + EscapeHTML(text) + '</p>'
+    return '''<p class="
+                        {% if cur_data.color and cur_data.color != 'parent' %} text-{{cur_data.color}}
+                        {% else %}                                             text-{{cur_style['__style.text.color']}}   {% endif %}
+
+                        {% if cur_style['__style.text.override_hover_color'] == 'true' %}hover:text-{{cur_style['__style.text.hover_color']}}{%endif%}
+                        {% if cur_style['__style.text.override_focus_color'] == 'true' %}focus:text-{{cur_style['__style.text.focus_color']}}{%endif%}
+
+                        {% if cur_data.margin and cur_data.margin != 'parent' %} {{cur_data.margin}}
+                        {% else %}                                               {{cur_style['__style.text.margin']}}   {% endif %}
+
+                        {% if cur_data.alignment and cur_data.alignment != 'parent' %} {{cur_data.alignment}}
+                        {% else %}                                                     {{cur_style['__style.text.alignment']}}   {% endif %}
+
+                        {% if cur_data.size and cur_data.size != 'parent' %} {{cur_data.size}}
+                        {% else %}                                           {{cur_style['__style.text.size']}}   {% endif %}
+
+                        {% if cur_data.bold and cur_data.bold != 'parent' %} {{cur_data.bold}}
+                        {% else %}                                           {{cur_style['__style.text.bold']}}   {% endif %}
+
+                        
+                        {% if cur_data.transform and cur_data.transform != 'parent' %} {{cur_data.transform}}
+                        {% else %}                                                     {{cur_style['__style.text.transform']}}   {% endif %}
+
+                        {% if cur_data.decoration and cur_data.decoration != 'parent' %} {{cur_data.decoration}}
+                        {% else %}                                                       {{cur_style['__style.text.decoration']}}   {% endif %}
+
+                        {% if cur_data.font_style and cur_data.font_style != 'parent' %} {{cur_data.font_style}}
+                        {% else %}                                                       {{cur_style['__style.text.font_style']}}   {% endif %}
+              ">'''+ EscapeHTML(text) +'''</p>'''
 
   def text(self, text):
-    return '<text class="text-blue-400">' + EscapeHTML(text) + '</text>'
+    return text
 
   def link(self, text, url, title=None):
-    return f'<a href="{url}" title="{title}" class="text-blue-400">' + EscapeHTML(text) + '</a>'
+    return f'''<a href="{url}" title="{title}" class="''' + '''
+                        underline
+                                                {% if cur_data.color and cur_data.color != 'parent' %} text-{{cur_data.color}}
+                        {% else %}                                             text-{{cur_style['__style.text.color']}}   {% endif %}
+
+                        {% if cur_style['__style.text.override_hover_color'] == 'true' %}hover:text-{{cur_style['__style.text.hover_color']}}{%endif%}
+                        {% if cur_style['__style.text.override_focus_color'] == 'true' %}focus:text-{{cur_style['__style.text.focus_color']}}{%endif%}
+
+                        {% if cur_data.margin and cur_data.margin != 'parent' %} {{cur_data.margin}}
+                        {% else %}                                               {{cur_style['__style.text.margin']}}   {% endif %}
+
+                        {% if cur_data.alignment and cur_data.alignment != 'parent' %} {{cur_data.alignment}}
+                        {% else %}                                                     {{cur_style['__style.text.alignment']}}   {% endif %}
+
+                        {% if cur_data.size and cur_data.size != 'parent' %} {{cur_data.size}}
+                        {% else %}                                           {{cur_style['__style.text.size']}}   {% endif %}
+
+                        {% if cur_data.bold and cur_data.bold != 'parent' %} {{cur_data.bold}}
+                        {% else %}                                           {{cur_style['__style.text.bold']}}   {% endif %}
+
+                        
+                        {% if cur_data.transform and cur_data.transform != 'parent' %} {{cur_data.transform}}
+                        {% else %}                                                     {{cur_style['__style.text.transform']}}   {% endif %}
+
+                        {% if cur_data.font_style and cur_data.font_style != 'parent' %} {{cur_data.font_style}}
+                        {% else %}                                                       {{cur_style['__style.text.font_style']}}   {% endif %}
+              ">'''+ EscapeHTML(text) +'''</a>'''
 
   def linebreak(self):
-    return '<br>'
+    return f'''<br>'''
 
   def strong(self, text):
-    return '<strong class="text-blue-400">' + EscapeHTML(text) + '</strong>'
+    return '''<strong class="
+                        {% if cur_data.color and cur_data.color != 'parent' %} text-{{cur_data.color}}
+                        {% else %}                                             text-{{cur_style['__style.text.color']}}   {% endif %}
 
+                        {% if cur_style['__style.text.override_hover_color'] == 'true' %}hover:text-{{cur_style['__style.text.hover_color']}}{%endif%}
+                        {% if cur_style['__style.text.override_focus_color'] == 'true' %}focus:text-{{cur_style['__style.text.focus_color']}}{%endif%}
+
+                        {% if cur_data.alignment and cur_data.alignment != 'parent' %} {{cur_data.alignment}}
+                        {% else %}                                                     {{cur_style['__style.text.alignment']}}   {% endif %}
+
+                        {% if cur_data.size and cur_data.size != 'parent' %} {{cur_data.size}}
+                        {% else %}                                           {{cur_style['__style.text.size']}}   {% endif %}
+
+                        {% if cur_data.bold and cur_data.bold != 'parent' %} {{cur_data.bold}}
+                        {% else %}                                           {{cur_style['__style.text.bold_strong']}}   {% endif %}
+
+                        
+                        {% if cur_data.transform and cur_data.transform != 'parent' %} {{cur_data.transform}}
+                        {% else %}                                                     {{cur_style['__style.text.transform']}}   {% endif %}
+
+                        {% if cur_data.decoration and cur_data.decoration != 'parent' %} {{cur_data.decoration}}
+                        {% else %}                                                       {{cur_style['__style.text.decoration']}}   {% endif %}
+
+                        {% if cur_data.font_style and cur_data.font_style != 'parent' %} {{cur_data.font_style}}
+                        {% else %}                                                       {{cur_style['__style.text.font_style']}}   {% endif %}
+              ">'''+ EscapeHTML(text) +'''</strong>'''
+  
   def emphasis(self, text):
-    return '<em class="text-blue-400">' + EscapeHTML(text) + '</em>'
+    return f'''<em class="text-blue-400">{ EscapeHTML(text) }</em>'''
 
   def image(self, alt, url, title=None):
-    return f'<image class="text-blue-400" src="{url}" alt="{alt}" title="{title}">'
+    return f'<image class="text-blue-400" src="{url}" alt="{alt}" title="{title}">'''
 
   def heading(self, text, level, **attrs):
-    return '<h class="text-blue-400">' + EscapeHTML(text) + '</h>'
+    return f'''<h class="text-blue-400">{ EscapeHTML(text) }</h>'''
 
   def block_quote(self, text):
-    return '<quote class="text-blue-400">' + EscapeHTML(text) + '</quote>'
+    return f'''<quote class="text-blue-400">{ EscapeHTML(text) }</quote>'''
 
   def block_code(self, text):
-    return '<code class="text-blue-400">' + EscapeHTML(text) + '</code>'
+    return f'''<code class="text-blue-400">{ EscapeHTML(text) }</code>'''
 
   def block_error(self, text):
-    return '<error class="text-blue-400">' + EscapeHTML(text) + '</error>'
+    return f'''<error class="text-blue-400">{ EscapeHTML(text) }</error>'''
 
 
 def EscapeHTML(text):
   """TODO: Write something useful here"""
+  # Escape brackets
   return text
+
 
 def UpdateWithSpecialValues(data):
   """"""
@@ -676,7 +757,13 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
         if data_var_name not in new_widget_data['data']:
           # Dont process our meta-data (like `_source`)
           if not data_var_name.startswith('_'):
-            new_widget_data['data'][data_var_name] = DATA_VAR_DEFAULTS[data_var_type]#.get(data_var_type, 'parent')
+            # If we had a default set, then use that
+            if '_default' in data_var_pair:
+              new_widget_data['data'][data_var_name] = data_var_pair['_default']
+            # Else, use the type default
+            else:
+              new_widget_data['data'][data_var_name] = DATA_VAR_DEFAULTS[data_var_type]#.get(data_var_type, 'parent')
+
 
             if data_var_type not in DATA_VAR_DEFAULTS:
               LOG.error(f'Missing Data Type Var default: {data_var_type}')

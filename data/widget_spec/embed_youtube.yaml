@@ -1,0 +1,23 @@
+name: embed_youtube
+
+tags:
+  - basic
+  - container
+  - embed_youtube
+
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include: {}
+
+data:
+  - theme: theme
+  - video_id: string
+  - width: int
+    _default: 640
+  - height: int
+    _default: 360
+  - title: string
+  - autoplay: bool
+  - justify: select
+    _source: justify
+  - padding: select
+    _source: padding
