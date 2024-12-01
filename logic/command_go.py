@@ -8,6 +8,7 @@ import time
 import os
 import glob
 import mistune
+from mistune import HTMLRenderer
 
 from PIL import Image
 
@@ -502,10 +503,20 @@ def UpdateWidgetsWithParents(data):
   return data
 
 
+
+class MistuneMarkdownRenderer(HTMLRenderer):
+    def codespan(self, text):
+        if text.startswith('$') and text.endswith('$'):
+            return '<span class="math">' + escape(text) + '</span>'
+        return '<code>' + escape(text) + '</code>'
+
+
 def UpdateWithSpecialValues(data):
   """"""
   map_widget_html = Space_Map_Widget_HTML(None)
   widget_specs = Space_Widget_Spec(None)
+
+  markdown = mistune.create_markdown(renderer=MistuneMarkdownRenderer())
 
   # For all the widgets, get their specs and look for special field tyle to update
   for (widget_id, widget_data) in data['widgets'].items():
@@ -526,8 +537,9 @@ def UpdateWithSpecialValues(data):
               markdown_key = f'{spec_data_var}_html'
 
               # Add our custom key
-              widget_data['data'][markdown_key] = mistune.html(widget_data['data'][spec_data_var])
-              widget_data['data'][markdown_key] = widget_data['data'][markdown_key].replace('<p>', '').replace('</p>', '')
+              # widget_data['data'][markdown_key] = mistune.html(widget_data['data'][spec_data_var])
+              # widget_data['data'][markdown_key] = widget_data['data'][markdown_key].replace('<p>', '').replace('</p>', '')
+              widget_data['data'][markdown_key] = markdown(widget_data['data'][spec_data_var])
 
 
 def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
