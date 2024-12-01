@@ -8,5 +8,3 @@ image: ""
 bool: False
 color: parent
 select: parent
-text_alignment: parent
-text_bold: parent
