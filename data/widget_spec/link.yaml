@@ -2,16 +2,15 @@ name: link
 
 tags:
   - link
-  - container
+  - basic
 
 # Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
-include:
-  default:
-    tags:
-      - text
-    min: 1
-    max: 1
+include: {}
 
 data:
   - theme: theme
   - url: url
+  - text: string
+  - color: color
+  - color_hover: color
+
