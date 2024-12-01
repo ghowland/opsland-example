@@ -518,7 +518,7 @@ class MistuneMarkdownRenderer(HTMLRenderer):
     return '<text class="text-blue-400">' + EscapeHTML(text) + '</text>'
 
   def link(self, text, url, title=None):
-    return f'<a href="{url}" title="{title}" class="text-blue-400">' + EscapeHTML(text) + '</link>'
+    return f'<a href="{url}" title="{title}" class="text-blue-400">' + EscapeHTML(text) + '</a>'
 
   def linebreak(self):
     return '<br>'
