@@ -568,7 +568,7 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
         # Set Default data, if not already set
         if data_var_name not in new_widget_data['data']:
           # Dont process our meta-data (like `_source`)
-          if not data_var_name.startwith('_'):
+          if not data_var_name.startswith('_'):
             new_widget_data['data'][data_var_name] = DATA_VAR_DEFAULTS[data_var_type]#.get(data_var_type, 'parent')
 
             if data_var_type not in DATA_VAR_DEFAULTS:

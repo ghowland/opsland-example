@@ -311,8 +311,10 @@ grid_item_column_span:
   - col-span-11: 11 Column Span
   - col-span-12: 12 Column Span
   - col-auto: Auto
+  - "": Not Specified
 
 grid_item_column_start:
+  - "": Not Specified
   - col-start-1: 1 Column Span
   - col-start-2: 2 Column Span
   - col-start-3: 3 Column Span
@@ -328,6 +330,7 @@ grid_item_column_start:
   - col-start-auto: Auto
 
 grid_item_column_end:
+  - "": Not Specified
   - col-end-1: 1 Column Span
   - col-end-2: 2 Column Span
   - col-end-3: 3 Column Span
