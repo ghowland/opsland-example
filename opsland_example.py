@@ -49,9 +49,10 @@ def ProcessCommands(config):
   elif config.command == 'space_style_select_data': ExecuteCommand(config, command_go.Space_Style_Select_Data)
   # elif config.command == 'space_edit_widget': ExecuteCommand(config, command_go.Space_Edit_Widget)
 
-  # Upload
+  # Content
   elif config.command == 'upload_refresh': ExecuteCommand(config, command_go.Upload_Refresh)
   elif config.command == 'table_data_refresh': ExecuteCommand(config, command_go.Table_Data_Refresh)
+  elif config.command == 'cache_icons': ExecuteCommand(config, command_go.Cache_Icons)
 
 
   else: print(f'''{{"_error": "Unknown command: {config.command}"}}''')

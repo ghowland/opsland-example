@@ -80,6 +80,28 @@ PATH_STYLE_SELECT_DATA = 'data/style_select.yaml'
 # Glob for Table Data to load
 GLOB_TABLE_DATA = 'data/table_data/*.yaml'
 
+# Glob for all the icons
+GLOB_ICONS = 'data/icons/*/*/*.svg'
+
+
+def Cache_Icons(config):
+  """"""
+  data = {}
+
+  paths = glob.glob(GLOB_ICONS)
+
+  for path in paths:
+    parts = path.replace('.svg', '').split('/')
+    LOG.info(f'Parts: {parts}')
+
+    with open(path) as stream:
+      content = stream.read()
+
+      item = {'html': content, 'style': parts[2], 'group': parts[3], 'name': parts[4].lower()}
+      data[item['name']] = item
+
+  return data
+
 
 def Table_Data_Refresh(config):
   """"""
