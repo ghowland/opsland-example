@@ -7,6 +7,7 @@ import pprint
 import time
 import os
 import glob
+import mistune
 
 from PIL import Image
 
@@ -329,17 +330,23 @@ def Space_Page_Data(config):
 
   result['uri'] = config.input['request']['site_page_uri']
 
+  # Update over our original values
   update_data = UpdateWithEdits(config.input['request'], result['widgets'], result['map_widget_html'], result['widget_specs'])
   result.update(update_data)
 
+  # Add widgets
   UpdateWithAddableWidgets(result)
 
-  # Find all the referenced widgets
+  # Update with any special values (ex: markdown)
+  UpdateWithSpecialValues(result)
+
+  # Find all the referenced widgets, preparing to purge
   referenced_widgets = []
   FindReferencedWidgets(result, result['render'], referenced_widgets)
 
-  LOG.info(f'Found widgets referenced: {referenced_widgets}')
+  # LOG.info(f'Found widgets referenced: {referenced_widgets}')
 
+  # Purge unreferenced widgets
   PurgeUnreferencedWidgets(result, referenced_widgets)
 
   return result
@@ -495,6 +502,34 @@ def UpdateWidgetsWithParents(data):
   return data
 
 
+def UpdateWithSpecialValues(data):
+  """"""
+  map_widget_html = Space_Map_Widget_HTML(None)
+  widget_specs = Space_Widget_Spec(None)
+
+  # For all the widgets, get their specs and look for special field tyle to update
+  for (widget_id, widget_data) in data['widgets'].items():
+    map_widget = map_widget_html[widget_data['widget']]
+    spec_widget = widget_specs[map_widget['spec']]
+    # LOG.info(f'''Widget: {widget_id} -> {spec_widget['name']}  Data: {widget_data['data']}''')
+
+    # Loop over the vars as a list, because I will be adding new ones with special value
+    for (data_var, data_type) in list(widget_data['data'].items()):
+      # Markdown
+      # if data_type == 'markdown':
+      for spec_data_pair in spec_widget['data']:
+        for (spec_data_var, spec_data_type) in spec_data_pair.items():
+          # If we matched the spec with our data var
+          if spec_data_var == data_var:
+            if spec_data_type == 'markdown':
+              LOG.info(f'''Widget: {widget_id} -> {spec_widget['name']}  Markdown: {data_var} -> {spec_data_type}''')
+              markdown_key = f'{spec_data_var}_html'
+
+              # Add our custom key
+              widget_data['data'][markdown_key] = mistune.html(widget_data['data'][spec_data_var])
+              widget_data['data'][markdown_key] = widget_data['data'][markdown_key].replace('<p>', '').replace('</p>', '')
+
+
 def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
   """Make changes to `data` from `edit_data`"""
   LOG.debug(f'Update with edits: {edit_data}')
@@ -599,7 +634,6 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
         # Get the var_type_data, so we can get the default
         pass  # Is this really needed?  I dont have any meta-data for this at all.  I just do it with HTML
 
-    
     # Create a new Wigdet ID from UUID, and assign the new widget data into the widget data set (`data`)
     new_widget_id = utility.GetUUID()
     widget_data[new_widget_id] = new_widget_data
@@ -630,15 +664,13 @@ def Site_Page_Example_Render(config):
 
 def Space_Widget_Spec(config):
   """TODO:RENAME: space_widget_spec"""
-  LOG.info(f'Input: {config.input}')
-
   widget_spec_list = utility.LoadYaml(PATH_WIDGET_SPECS)
 
   result = {}
 
   for path in widget_spec_list:
     data = utility.LoadYaml(path)
-    LOG.info(f'Page Content path: {path}  Data: {data}')
+    # LOG.info(f'Page Content path: {path}  Data: {data}')
     result[data['name']] = data
   
   return result

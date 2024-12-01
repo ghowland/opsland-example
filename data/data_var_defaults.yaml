@@ -1,6 +1,7 @@
 theme: parent
 int: 0
 string: ""
+markdown: ""
 text: ""
 favicon: ""
 url: ""

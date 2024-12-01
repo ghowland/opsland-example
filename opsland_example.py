@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.12
 
 """
 OpsLand Example: A basic program that has different commands to output different JSON and other values to test a OpsLand bundle

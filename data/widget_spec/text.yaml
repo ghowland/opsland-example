@@ -9,7 +9,7 @@ include: {}
 
 data:
   - theme: theme
-  - text: string
+  - text: markdown
 
   # Style Overrides
   - color: color
