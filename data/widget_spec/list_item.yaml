@@ -16,3 +16,4 @@ data:
   - theme: theme
   - text: string
   - icon: icon
+  - icon_color: color
