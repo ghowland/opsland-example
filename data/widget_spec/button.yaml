@@ -46,3 +46,34 @@ include:
 
 data:
   - theme: theme
+  # Style Overrides
+  - color: color
+  - alignment: select
+    _source: text_alignment
+  - text_size: select
+    _source: text_size
+  - text_bold: select
+    _source: text_bold
+  - hover_text_bold: select
+    _source: text_bold
+  - margin: select
+    _source: margin
+  - transform: select
+    _source: text_transform
+  - decoration: select
+    _source: text_decoration
+  - hover_decoration: select
+    _source: text_decoration
+  - font_style: select
+    _source: text_font_style
+  - hover_font_style: select
+    _source: text_font_style
+  - width: select
+    _source: width
+  - width_min: select
+    _source: width_min
+  - width_max: select
+    _source: width_max
+  - justify: select
+    _source: justify
+

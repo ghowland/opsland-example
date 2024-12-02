@@ -12,5 +12,22 @@ data:
   - url: url
   - text: string
   - color: color
-  - color_hover: color
+  - hover_color: color
+  - focus_color: color
+  - text_size: select
+    _source: text_size
+  - text_bold: select
+    _source: text_bold
+  - text_alignment: select
+    _source: text_alignment
+  - transform: select
+    _source: text_transform
+  - decoration: select
+    _source: text_decoration
+  - hover_decoration: select
+    _source: text_decoration
+  - font_style: select
+    _source: text_font_style
+  - hover_font_style: select
+    _source: text_font_style
 
