@@ -48,8 +48,26 @@ width_min:
 height:
   - parent: Use Parent
   - "": No Setting
-  - h-min: Minimum Width
-  - h-full: Full Width
+  - h-min: Minimum Height
+  - h-full: Full Height
+  - h-fit: Fit Content
+  - h-0: 0 em
+  - h-1: 1 em
+  - h-2: 2 em
+  - h-3: 3 em
+  - h-4: 4 em
+  - h-5: 5 em
+  - h-6: 6 em
+  - h-7: 7 em
+  - h-8: 8 em
+  - h-9: 9 em
+  - h-10: 10 em
+  - h-11: 11 em
+  - h-12: 12 em
+  - h-14: 14 em
+  - h-16: 16 em
+  - h-18: 18 em
+  - h-20: 20 em
   - h-24: 24 em
   - h-32: 32 em
   - h-40: 40 em
@@ -58,6 +76,15 @@ height:
   - h-72: 72 em
   - h-90: 90 em
   - h-96: 96 em
+  - h-1/2: 1/2 - 50%
+  - h-2/3: 2/ - 66%
+  - h-1/4: 1/4 - 25%
+  - h-2/4: 2/4 - 50%
+  - h-3/4: 3/4 - 75%
+  - h-1/5: 1/5 - 20%
+  - h-2/5: 2/5 - 40%
+  - h-3/5: 3/5 - 60%
+  - h-4/5: 4/5 - 80%
 
 padding:
   - parent: Use Parent
