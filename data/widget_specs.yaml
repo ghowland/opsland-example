@@ -16,3 +16,4 @@
 - data/widget_spec/search.yaml
 - data/widget_spec/table.yaml
 - data/widget_spec/embed_youtube.yaml
+- data/widget_spec/icon.yaml

@@ -725,7 +725,8 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
 
   # Add Widget
   elif edit_data['__command'] == 'add_widget':
-    edit_widget_key = f'__control.add_widget.{edit_widget}'
+    include_target = edit_target # This is the name mapping between the two sides
+    edit_widget_key = f'__control.add_widget.{include_target}.{edit_widget}'
 
     widget_label = edit_data[edit_widget_key]
     
@@ -740,6 +741,8 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
         'theme': 'parent',
       }
     }
+
+    LOG.info(f'Widget Data before failure: Key: {edit_widget_key}  Widget Label: "{widget_label}"')
 
     # Set the new widget data
     widget_map_data = map_widget_html[widget_label]
@@ -760,6 +763,7 @@ def UpdateWithEdits(edit_data, widget_data, map_widget_html, widget_specs):
             # If we had a default set, then use that
             if '_default' in data_var_pair:
               new_widget_data['data'][data_var_name] = data_var_pair['_default']
+
             # Else, use the type default
             else:
               new_widget_data['data'][data_var_name] = DATA_VAR_DEFAULTS[data_var_type]#.get(data_var_type, 'parent')

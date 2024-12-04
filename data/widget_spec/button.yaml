@@ -18,62 +18,50 @@ include:
     min: 0
     max: 1
 
-# style_mode:
-#   default: style
-#   hover: style-hover
-#   focus: style-focus
+  icon_left:
+    tags:
+      - icon
+    min: 0
+    max: 1
 
-# style:
-#   - bg-color: color_theme_or_override
-#   - border-color: color_theme_or_override
-#   - text-color: color_theme_or_override
-#   - border-width: int
-#   - icon-justify: int
-
-# style-hover:
-#   - bg-color: color_theme_or_override
-#   - border-color: color_theme_or_override
-#   - text-color: color_theme_or_override
-#   - border-width: int
-#   - icon-justify: int
-
-# style-focus:
-#   - bg-color: color_theme_or_override
-#   - border-color: color_theme_or_override
-#   - text-color: color_theme_or_override
-#   - border-width: int
-#   - icon-justify: int
+  icon_right:
+    tags:
+      - icon
+    min: 0
+    max: 1
 
 data:
   - theme: theme
+
   # Style Overrides
-  - color: color
+  - color: color  
+  - hover_color: color
+  - focus_color: color
+
+  - border_width: select
+    _source: border_width
+
+  - border_color: color
+  - hover_border_color: color
+  - focus_border_color: color
+
+  - ring_width: select
+    _source: ring_width
+    
+  - ring_color: color
+
   - alignment: select
-    _source: text_alignment
-  - text_size: select
-    _source: text_size
-  - text_bold: select
-    _source: text_bold
-  - hover_text_bold: select
-    _source: text_bold
-  - margin: select
-    _source: margin
-  - transform: select
-    _source: text_transform
-  - decoration: select
-    _source: text_decoration
-  - hover_decoration: select
-    _source: text_decoration
-  - font_style: select
-    _source: text_font_style
-  - hover_font_style: select
-    _source: text_font_style
+    _source: justify
+
+  - padding: select
+    _source: padding
+
   - width: select
     _source: width
   - width_min: select
     _source: width_min
   - width_max: select
     _source: width_max
-  - justify: select
-    _source: justify
+  - height: select
+    _source: height
 

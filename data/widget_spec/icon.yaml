@@ -1,0 +1,31 @@
+name: icon
+
+tags:
+  - icon
+  - basic
+
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include: {}
+
+data:
+  - theme: theme
+  - icon: icon
+
+  - size: select
+    _source: text_size
+
+  - color: color
+  - hover_color: color
+  - focus_color: color
+
+  - ring_width: select
+    _source: ring_width
+  - ring_color: color
+
+  - bold: select
+    _source: text_bold
+  - alignment: select
+    _source: justify
+  - padding: select
+    _source: padding
+

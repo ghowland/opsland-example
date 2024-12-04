@@ -1,3 +1,8 @@
+color: ['slate', 'gray', 'zinc', 'neutral', 'stone', 'red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 
+        'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose']
+
+color_value: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]
+
 width:
   - parent: Use Parent
   - "": No Setting
@@ -148,10 +153,83 @@ flex_justify:
   - content-stretch: Stretch
 
 border_width:
-  - 0: No Border
-  - 2: 2px
-  - 4: 4px
-  - 8: 8px
+  - border-0: No Border
+  - border: 1px
+  - border-2: 2px
+  - border-3: 4px
+  - border-8: 8px
+
+border_width_x:
+  - border-x-0: No Border
+  - border-x: 1px
+  - border-x-2: 2px
+  - border-x-3: 4px
+  - border-x-8: 8px
+
+border_width_y:
+  - border-y-0: No Border
+  - border-y: 1px
+  - border-y-2: 2px
+  - border-y-3: 4px
+  - border-y-8: 8px
+
+border_width_start:
+  - border-s-0: No Border
+  - border-s: 1px
+  - border-s-2: 2px
+  - border-s-3: 4px
+  - border-s-8: 8px
+
+border_width_end:
+  - border-e-0: No Border
+  - border-e: 1px
+  - border-e-2: 2px
+  - border-e-3: 4px
+  - border-e-8: 8px
+
+border_width_top:
+  - border-t-0: No Border
+  - border-t: 1px
+  - border-t-2: 2px
+  - border-t-3: 4px
+  - border-t-8: 8px
+
+border_width_bottom:
+  - border-b-0: No Border
+  - border-b: 1px
+  - border-b-2: 2px
+  - border-b-3: 4px
+  - border-b-8: 8px
+
+outline_width:
+  - outline-0: No Outline
+  - outline-1: 1px
+  - outline-2: 2px
+  - outline-4: 4px
+  - outline-8: 8px
+
+outline_offset:
+  - outline-offset-0: No Offset
+  - outline-offset-1: 1px
+  - outline-offset-2: 2px
+  - outline-offset-4: 4px
+  - outline-offset-8: 8px
+
+outline_style:
+  - outline-none: No Outline
+  - outline: Solid
+  - outline-dashed: Dashed
+  - outline-dotted: Dotted
+  - outline-double: Double
+
+ring_width:
+  - ring-0: No Ring
+  - ring-1: 1px
+  - ring-2: 2px
+  - ring: 3px
+  - ring-4: 4px
+  - ring-8: 8px
+  - ring-inset: Inset Ring
 
 text_bold:
   - parent: Use Parent
