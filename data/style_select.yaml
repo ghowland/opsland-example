@@ -153,6 +153,7 @@ flex_justify:
   - content-stretch: Stretch
 
 border_width:
+  - parent: Use Parent
   - border-0: No Border
   - border: 1px
   - border-2: 2px
@@ -160,6 +161,7 @@ border_width:
   - border-8: 8px
 
 border_width_x:
+  - parent: Use Parent
   - border-x-0: No Border
   - border-x: 1px
   - border-x-2: 2px
@@ -167,6 +169,7 @@ border_width_x:
   - border-x-8: 8px
 
 border_width_y:
+  - parent: Use Parent
   - border-y-0: No Border
   - border-y: 1px
   - border-y-2: 2px
@@ -174,6 +177,7 @@ border_width_y:
   - border-y-8: 8px
 
 border_width_start:
+  - parent: Use Parent
   - border-s-0: No Border
   - border-s: 1px
   - border-s-2: 2px
@@ -181,6 +185,7 @@ border_width_start:
   - border-s-8: 8px
 
 border_width_end:
+  - parent: Use Parent
   - border-e-0: No Border
   - border-e: 1px
   - border-e-2: 2px
@@ -188,6 +193,7 @@ border_width_end:
   - border-e-8: 8px
 
 border_width_top:
+  - parent: Use Parent
   - border-t-0: No Border
   - border-t: 1px
   - border-t-2: 2px
@@ -195,6 +201,7 @@ border_width_top:
   - border-t-8: 8px
 
 border_width_bottom:
+  - parent: Use Parent
   - border-b-0: No Border
   - border-b: 1px
   - border-b-2: 2px
@@ -202,6 +209,7 @@ border_width_bottom:
   - border-b-8: 8px
 
 outline_width:
+  - parent: Use Parent
   - outline-0: No Outline
   - outline-1: 1px
   - outline-2: 2px
@@ -209,6 +217,7 @@ outline_width:
   - outline-8: 8px
 
 outline_offset:
+  - parent: Use Parent
   - outline-offset-0: No Offset
   - outline-offset-1: 1px
   - outline-offset-2: 2px
@@ -216,6 +225,7 @@ outline_offset:
   - outline-offset-8: 8px
 
 outline_style:
+  - parent: Use Parent
   - outline-none: No Outline
   - outline: Solid
   - outline-dashed: Dashed
@@ -223,6 +233,7 @@ outline_style:
   - outline-double: Double
 
 ring_width:
+  - parent: Use Parent
   - ring-0: No Ring
   - ring-1: 1px
   - ring-2: 2px
