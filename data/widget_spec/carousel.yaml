@@ -1,0 +1,40 @@
+name: carousel
+
+tags:
+  - container
+  - carousel
+
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include:
+  default:
+    tags:
+      - carousel_image
+    min: 1
+    max: null
+
+data:
+  - theme: theme
+
+  # Style Overrides
+  - color: color
+
+  - border_width: select
+    _source: border_width
+
+  - border_color: color
+
+  - alignment: select
+    _source: justify
+
+  - padding: select
+    _source: padding
+
+  - width: select
+    _source: width
+  - width_min: select
+    _source: width_min
+  - width_max: select
+    _source: width_max
+  - height: select
+    _source: height
+

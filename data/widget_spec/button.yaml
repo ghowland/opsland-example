@@ -32,6 +32,15 @@ include:
 
 data:
   - theme: theme
+  - on_click: script_function
+  - on_load: script_function
+
+  - on_click_api_url: url
+  - on_click_api_method: select
+    _source: api_method
+    # _default: post
+  - on_click_api_is_multipart_form: bool
+
 
   # Style Overrides
   - color: color  

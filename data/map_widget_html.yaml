@@ -99,3 +99,13 @@ default_embed_youtube:
   spec: embed_youtube
   path: component/site_render/emded/embed_youtube.html.j2
 
+default_carousel:
+  name: Carousel
+  spec: carousel
+  path: component/site_render/carousel/carousel_default.html.j2
+
+default_carousel_image:
+  name: Carousel Image
+  spec: carousel_image
+  path: component/site_render/carousel/carousel_image_default.html.j2
+

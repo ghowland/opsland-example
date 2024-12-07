@@ -1,0 +1,14 @@
+name: carousel_image
+
+tags:
+  - carousel_image
+
+
+# Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
+include: {}
+
+data:
+  - theme: theme
+  - image: image
+  - alt: string
+  - url: url

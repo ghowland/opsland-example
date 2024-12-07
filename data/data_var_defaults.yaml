@@ -9,3 +9,4 @@ image: ""
 bool: False
 color: parent
 select: parent
+script_function: ""

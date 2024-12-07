@@ -17,3 +17,5 @@
 - data/widget_spec/table.yaml
 - data/widget_spec/embed_youtube.yaml
 - data/widget_spec/icon.yaml
+- data/widget_spec/carousel.yaml
+- data/widget_spec/carousel_image.yaml

@@ -461,3 +461,10 @@ grid_item_column_end:
   - col-end-12: 12 Column Span
   - col-end-auto: Auto
 
+api_method:
+  - post: POST
+  - get: GET
+  - put: PUT
+  - delete: DELETE
+  - fetch: FETCH
+
