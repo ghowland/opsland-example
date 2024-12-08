@@ -53,6 +53,9 @@ PATH_WIDGET_SPECS = 'data/widget_specs.yaml'
 # Page Content
 PATH_MAP_WIDGET_HTML = 'data/map_widget_html.yaml'
 
+# Content Data Type
+PATH_CONTENT_DATA = 'data/content_data.yaml'
+
 # Tags
 PATH_TAGS = 'data/tags.yaml'
 
@@ -820,11 +823,18 @@ def Space_Widget_Spec(config):
   return result
 
 
+def Space_Content_Data(config):
+  """TODO:RENAME: space_content_data"""
+  result = utility.LoadYaml(PATH_CONTENT_DATA)
+  
+  return result
+
 def Space_Map_Widget_HTML(config):
   """TODO:RENAME: space_map_widget_html"""
   result = utility.LoadYaml(PATH_MAP_WIDGET_HTML)
   
   return result
+
 
 
 def Space_Widget_Tags(config):

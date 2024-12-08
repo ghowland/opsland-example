@@ -1,0 +1,23 @@
+image:
+  - uuid: uuid
+  - label: label
+    _type: list
+  - comment: comment
+    _type: list
+
+icon:
+  - uuid: uuid
+  - label: label
+    _type: list
+  - comment: comment
+    _type: list
+
+comment:
+  - author: string
+  - created_at: timestamp
+  - updated_at: timestamp
+  - body: string
+  - comment: comment
+    _type: list
+
+
