@@ -861,7 +861,6 @@ shadow:
   - shadow-inner: Inner
   - shadow-none: None
 
-
 drop_shadow:
   - parent: Use Parent
   - "": Not Specified
