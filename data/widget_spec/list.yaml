@@ -36,5 +36,7 @@ data:
     _source: flex_justify
   - rounded: select
     _source: rounded
+  - shadow: select
+    _source: shadow
   - border_width: select
     _source: border_width
