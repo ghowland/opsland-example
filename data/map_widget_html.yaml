@@ -29,6 +29,11 @@ timeline_list_item:
   spec: list_item
   path: component/site_render/list_item/list_item_timeline.html.j2
 
+site_editor_widget_list_item:
+  name: Site Editor Widget List Item
+  spec: list_item
+  path: component/site_render/list_item/list_item_site_editor_widget.html.j2
+
 default_grid:
   name: Default Grid
   spec: grid

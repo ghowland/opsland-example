@@ -15,7 +15,16 @@ include:
 
 data:
   - theme: theme
+
+  - title: string
+  - title_color: color
+
   - text: markdown
+  - text_color: color
+
+  - tag: string
+  - tag_color: color
+
   - color: color
   - icon: icon
   - icon_color: color
