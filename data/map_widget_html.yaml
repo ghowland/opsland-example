@@ -109,3 +109,8 @@ default_carousel_image:
   spec: carousel_image
   path: component/site_render/carousel/carousel_image_default.html.j2
 
+default_overlay:
+  name: Overlay
+  spec: overlay
+  path: component/site_render/overlay/overlay_default.html.j2
+

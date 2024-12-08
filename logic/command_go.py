@@ -512,6 +512,9 @@ class MistuneMarkdownRenderer(HTMLRenderer):
     return '''<code>'''+ EscapeHTML(text) +'''</code>'''
 
   def paragraph(self, text):
+    # Add line breaks
+    text = text.replace('\n', '<br>')
+
     return '''<p class="
                         {% if cur_data.color and cur_data.color != 'parent' %} text-{{cur_data.color}}
                         {% else %}                                             text-{{cur_style['__style.text.color']}}   {% endif %}

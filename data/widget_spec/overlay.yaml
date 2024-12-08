@@ -1,38 +1,28 @@
-name: image
+name: overlay
 
 tags:
-  - basic
-  - image
-
+  - overlay
 
 # Include content into this widget.  Each include key is a new place to template all the includes, which we can limit to 1 or have more
 include:
   default:
     tags:
-      - overlay
-      - basic
+      - text
+      - button
+      - image
     min: 1
     max: null
 
 data:
   - theme: theme
-  - image: image
-  - alt: string
-  - url: url
 
   # Style Overrides
-  - alignment: select
-    _source: justify
-  - rounded: select
-    _source: rounded
   - width: select
     _source: width
-  - width_max: select
-    _source: width_max
   - width_min: select
     _source: width_min
+  - width_max: select
+    _source: width_max
   - height: select
     _source: height
-  - padding: select
-    _source: padding
 
