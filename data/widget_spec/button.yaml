@@ -35,6 +35,9 @@ data:
   - on_click: script_function
   - on_load: script_function
 
+  - icon_left: icon
+  - icon_right: icon
+
 
   # Style Overrides
   - color: color  

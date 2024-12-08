@@ -77,7 +77,7 @@ UPLOAD_THUMBNAIL_PATH = '/mnt/d/_OpsLand/uploads/thumbnail/'
 DEFAULT_THUMB_SIZE = [320, 240]
 
 # Style Select Data 
-PATH_STYLE_SELECT_DATA = 'data/style_select.yaml'
+PATH_STYLE_SELECT_DATA = 'data/select_data.yaml'
 
 # Glob for Table Data to load
 GLOB_TABLE_DATA = 'data/table_data/*.yaml'
