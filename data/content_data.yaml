@@ -1,5 +1,6 @@
 image:
   - uuid: uuid
+  - name: string
   
   - label: list
     _type: label
@@ -9,6 +10,7 @@ image:
 
 icon:
   - uuid: uuid
+  - name: string
   
   - label: list
     _data: label
