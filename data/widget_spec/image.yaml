@@ -35,4 +35,7 @@ data:
     _source: height
   - padding: select
     _source: padding
+  - shadow: select
+    _source: shadow
+    
 

@@ -11,3 +11,5 @@ data:
   - theme: theme
   - text: string
 
+  - shadow: select
+    _source: shadow

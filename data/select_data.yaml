@@ -766,6 +766,7 @@ gap_y:
   - gap-y-96: 96 em
 
 grid_column:
+  - parent: Use Parent
   - grid-cols-1: 1 Column
   - grid-cols-2: 2 Column
   - grid-cols-3: 3 Column
@@ -782,6 +783,7 @@ grid_column:
   - grid-cols-subgrid: Subgrid
 
 grid_item_column_span:
+  - parent: Use Parent
   - col-span-1: 1 Column Span
   - col-span-2: 2 Column Span
   - col-span-3: 3 Column Span
@@ -846,4 +848,28 @@ image_crop_sizing:
   - fixed-21x9: 21 x 9
   - fixed-185x100: Film Cinema 1.85 x 1
   - fixed-235x100: Cinemascope 2.35 x 1
+
+shadow:
+  - parent: Use Parent
+  - "": Not Specified
+  - shadow-sm: Small
+  - shadow: Normal
+  - shadow-md: Medium
+  - shadow-lg: Large
+  - shadow-xl: XL
+  - shadow-2xl: 2XL
+  - shadow-inner: Inner
+  - shadow-none: None
+
+
+drop_shadow:
+  - parent: Use Parent
+  - "": Not Specified
+  - drop-shadow-sm: Small
+  - drop-shadow: Normal
+  - drop-shadow-md: Medium
+  - drop-shadow-lg: Large
+  - drop-shadow-xl: XL
+  - drop-shadow-2xl: 2XL
+  - drop-shadow-none: None
 

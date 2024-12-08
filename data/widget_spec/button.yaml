@@ -71,3 +71,5 @@ data:
   - height: select
     _source: height
 
+  - shadow: select
+    _source: shadow

@@ -17,3 +17,5 @@ include:
 data:
   - theme: theme
 
+  - shadow: select
+    _source: shadow
