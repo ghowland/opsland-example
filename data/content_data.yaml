@@ -16,6 +16,19 @@ icon:
   - comment: list
     _data: comment
 
+label:
+  - name: string
+
+  # 0=Category.  1=Unique.  N=Limited.
+  - limit: int
+    _default: 0
+
+  - bg_color: color
+  - text_color: color
+
+  - comment: list
+    _data: comment
+  
 comment:
   - author: string
   - created_at: timestamp
