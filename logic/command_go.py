@@ -89,6 +89,26 @@ GLOB_TABLE_DATA = 'data/table_data/*.yaml'
 GLOB_ICONS = 'data/icons/*/*/*.svg'
 
 
+
+def Site_Content_Admin(config):
+  """This is the data for ALL the content, and it edits data fields, or adds/removes, whatever.  Label management as well, since `limit` must be upheld
+
+  `limit` and `limit_queue`, where we insert new elements into the front of the queue, so it bumps the old.  `limit` causes additions to fail until 1 is removed.  Make that easy, viewer-select
+
+  """
+  # Start with the pass through and mutate
+  result = config.input['existing']
+   
+  return result
+
+
+def Space_Content_Data(config):
+  """Data schema for our core records, that other sources can map their data to, or edit in our system."""
+  result = utility.LoadYaml(PATH_CONTENT_DATA)
+  
+  return result
+
+
 def Cache_Icons(config):
   """"""
   data = {}
@@ -822,12 +842,6 @@ def Space_Widget_Spec(config):
   
   return result
 
-
-def Space_Content_Data(config):
-  """TODO:RENAME: space_content_data"""
-  result = utility.LoadYaml(PATH_CONTENT_DATA)
-  
-  return result
 
 def Space_Map_Widget_HTML(config):
   """TODO:RENAME: space_map_widget_html"""
