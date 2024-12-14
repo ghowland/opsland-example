@@ -124,3 +124,8 @@ default_overlay:
   spec: overlay
   path: component/site_render/overlay/overlay_default.html.j2
 
+default_column_2:
+  name: 2 Columns
+  spec: column_2
+  path: component/site_render/columb/column_2_side_right_default.html.j2
+
