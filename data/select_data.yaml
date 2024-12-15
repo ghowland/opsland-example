@@ -888,3 +888,27 @@ content_generate_tag:
   # User who uploaded this content, and owns it.  If you want to own it, make a new item so you are now the owner, you cant take it from them?  Not sure..
   - owner: Owner
 
+# Labels for all the site specific things
+label_site:
+  - "": "- Select a Site Label -"
+  # Labels for common Site Text
+  - string_title: Site Title
+  - string_subtitle: Site Subtitle
+  - string_copyright: Copyright
+
+  - image_hero: Site Hero Image
+
+  # Widgets used throughout the website that we will label
+  - widget_header: Header Widget
+  - widget_footer: Footer Widget
+  - widget_sidebar: Sidebar Widget
+
+# Custom labels the user made up and can be applied
+#TODO: This must become data
+label_custom:
+  - "": "- Select a Custom Label -"
+  - notice_important: "Notice: Important"
+  - notice_urgent: "Notice: Urgent"
+  - notice_critical: "Notice: Critical"
+  - image_hero_alt: Alt Site Hero Image
+
