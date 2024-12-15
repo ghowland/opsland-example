@@ -872,3 +872,19 @@ drop_shadow:
   - drop-shadow-2xl: 2XL
   - drop-shadow-none: None
 
+# Used for determining what a 
+label_data_domain:
+  # Related to the primary site information
+  - site: Site
+  # Auto-Applied on Upload
+  - gen: Generated
+  # User Created
+  - custom: Custom
+
+# These tags are automatically added, if they are relevant to the data
+content_generate_tag:
+  # This comes from other data (such as an Image is a crop of an uploaded Image, which is not derivative).  This is not the original data
+  - processed: Processed
+  # User who uploaded this content, and owns it.  If you want to own it, make a new item so you are now the owner, you cant take it from them?  Not sure..
+  - owner: Owner
+
