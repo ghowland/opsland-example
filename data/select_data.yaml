@@ -896,7 +896,17 @@ label_site:
   - string_subtitle: Site Subtitle
   - string_copyright: Copyright
 
+  # When we want to use a hero, we can use a default one
   - image_hero: Site Hero Image
+
+  # If we have this, here it is
+  - image_background: Site Background Image
+
+  # Icon to prefix lists by default
+  - icon_list_unsorted: List Icon 
+
+  # Special image format for Favicon
+  - favicon_site_icon: Site Favicon
 
   # Widgets used throughout the website that we will label
   - widget_header: Header Widget
@@ -912,3 +922,17 @@ label_custom:
   - notice_critical: "Notice: Critical"
   - image_hero_alt: Alt Site Hero Image
 
+# Ratings
+rating_score:
+  - "0.0": "0"
+  - "0.5": "0.5"
+  - "1.0": "1"
+  - "1.5": "1.5"
+  - "2.0": "2"
+  - "2.5": "2.5"
+  - "3.0": "3"
+  - "3.5": "3.5"
+  - "4.0": "4"
+  - "4.5": "4.5"
+  - "5.0": "5"
+  
