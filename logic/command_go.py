@@ -89,6 +89,13 @@ GLOB_TABLE_DATA = 'data/table_data/*.yaml'
 GLOB_ICONS = 'data/icons/*/*/*.svg'
 
 
+def Space_Content_Register(config):
+  """Register content"""
+  # Start with the pass through and mutate
+  result = config.input['existing']
+   
+  return result
+
 
 def Site_Content_Admin(config):
   """This is the data for ALL the content, and it edits data fields, or adds/removes, whatever.  Label management as well, since `limit` must be upheld

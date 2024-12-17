@@ -47,8 +47,9 @@ def ProcessCommands(config):
   elif config.command == 'space_widget_spec': ExecuteCommand(config, command_go.Space_Widget_Spec)
   elif config.command == 'space_style': ExecuteCommand(config, command_go.Space_Style)
   elif config.command == 'space_style_select_data': ExecuteCommand(config, command_go.Space_Style_Select_Data)
-  # elif config.command == 'space_edit_widget': ExecuteCommand(config, command_go.Space_Edit_Widget)
   elif config.command == 'space_content_data': ExecuteCommand(config, command_go.Space_Content_Data)
+  elif config.command == 'site_content_register': ExecuteCommand(config, command_go.Space_Content_Register)
+  
 
   # Content
   elif config.command == 'upload_refresh': ExecuteCommand(config, command_go.Upload_Refresh)
