@@ -93,6 +93,9 @@ def Space_Content_Register(config):
   """Register content"""
   # Start with the pass through and mutate
   result = config.input['existing']
+
+  request = config.input['request']
+  LOG.info(f'''Type: {request['type']}  File: {request['filename']}''')
    
   return result
 
@@ -105,7 +108,7 @@ def Site_Content_Admin(config):
   """
   # Start with the pass through and mutate
   result = config.input['existing']
-   
+  
   return result
 
 
