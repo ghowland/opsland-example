@@ -97,24 +97,43 @@ def Space_Content_Register(config):
   result = config.input.get('existing', {})
   if not result: result = {}
 
+  # Content upload just happened
   request = config.input['request']
-  LOG.info(f'''Type: {request['type']}  File: {request['filename']}''')
+  if 'type' in request and 'filename' in request:
+    LOG.info(f'''Type: {request['type']}  File: {request['filename']}''')
 
-  # Check if this file already exists?  No, it's a new upload, who cares?
-  pass
+    # Ensure a new unique UUID
+    uuid = None
+    while uuid == None or uuid in result:
+      uuid = utility.GetUUID()
 
-  # Ensure a new unique UUID
-  uuid = None
-  while uuid == None or uuid in result:
-    uuid = utility.GetUUID()
+    # Check if this file already exists?  No, it's a new upload, who cares?
+    pass
 
-  # Content
-  content = CreateContentObject(uuid, request)
-  if content:
-    # Add the content item
-    result[uuid] = content
+    content = CreateContentObject(uuid, request)
+    if content:
+      # Add the content item
+      result[uuid] = content
   
+  # Update Values
+  UpdateValues(result, request)
+
   return result
+
+
+def UpdateValues(all_content, request):
+  """Update content from our request"""
+  for key, value in request.items():
+    # Set a value
+    if key.startswith('__set.'):
+      parts = key.split('.')
+      uuid = parts[1]
+      field = parts[2]
+
+      if uuid in all_content:
+        all_content[uuid][field] = value
+      else:
+        LOG.error(f'Missing content UUID, cant update: {uuid}   Request: {key} == {value}')
 
 
 def CreateContentObject(uuid, request):
