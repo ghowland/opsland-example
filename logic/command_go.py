@@ -75,6 +75,8 @@ STYLES = ['default', 'alternate', 'headline', 'section_head', 'title', 'big', 's
 # Upload Path
 UPLOAD_PATH = '/mnt/d/_OpsLand/uploads/'
 UPLOAD_THUMBNAIL_PATH = '/mnt/d/_OpsLand/uploads/thumbnail/'
+# Content path for files, after we move them
+CONTENT_PATH = '/mnt/d/_OpsLand/content/'
 
 # Upload Thumbnail size
 DEFAULT_THUMB_SIZE = [320, 240]
@@ -92,12 +94,86 @@ GLOB_ICONS = 'data/icons/*/*/*.svg'
 def Space_Content_Register(config):
   """Register content"""
   # Start with the pass through and mutate
-  result = config.input['existing']
+  result = config.input.get('existing', {})
+  if not result: result = {}
 
   request = config.input['request']
   LOG.info(f'''Type: {request['type']}  File: {request['filename']}''')
-   
+
+  # Check if this file already exists?  No, it's a new upload, who cares?
+  pass
+
+  # Ensure a new unique UUID
+  uuid = None
+  while uuid == None or uuid in result:
+    uuid = utility.GetUUID()
+
+  # Content
+  content = CreateContentObject(uuid, request)
+  if content:
+    # Add the content item
+    result[uuid] = content
+  
   return result
+
+
+def CreateContentObject(uuid, request):
+  """Create the content object from the request"""
+  # Content
+  content = {'uuid': uuid,
+             'labels': [], 'tags': [], 'thumbnail_uuid': None, 
+             'priority': 0, 'cost': 0, 'cost_type': 'usd', 
+             'duration': None, 'size': 0, 'size_type': 'none', 'rating': 0, 'rating_count': 0,
+             # If this is data, then we reference if through the cache
+             'cache_key': None, 'cache_unique_key': None, 'cache_unique_key_index': None,
+             # `path` is where the file content is, and `filename` is the original name
+             'path': None, 'filename': None,
+            }
+
+  # Save the filename, if we had one.  Should normally be the case, always?
+  if 'filename' in request:
+    content['filename'] = request['filename']
+
+  # Image
+  if request['type'] == 'image':
+    # Set the generated label for Image
+    content['labels'].append('gen:Image')
+
+    # Image/PNG
+    if request['filename'].lower().endswith('.png'):
+      content['labels'].append('gen:Image/PNG')
+      content['path'] = f'{uuid}.png'
+
+    # Image/JPG
+    elif request['filename'].lower().endswith('.jpg') or request['filename'].lower().endswith('.jpeg'):
+      content['labels'].append('gen:Image/JPG')
+      content['path'] = f'{uuid}.jpg'
+
+    # Image/GIF
+    elif request['filename'].lower().endswith('.gif'):
+      content['labels'].append('gen:Image/GIF')
+      content['path'] = f'{uuid}.gif'
+
+    # Image/BMP
+    elif request['filename'].lower().endswith('.bmp'):
+      content['labels'].append('gen:Image/BMP')
+      content['path'] = f'{uuid}.bmp'
+  
+  # Move the file into its content location and UUID name
+  up_path = UPLOAD_PATH + request['filename']
+  content_path = CONTENT_PATH + content['path']
+
+  # Make sure we have the source path, then move it
+  if os.path.exists(up_path):
+    LOG.info(f'Upload: {up_path}  Content: {content_path}')
+    os.rename(up_path, content_path)
+
+    return content
+
+  # Else, failed, dont try to do anything
+  else:
+    LOG.error(f'Failed to find upload file, shouldnt happen: {up_path}')
+    return None
 
 
 def Site_Content_Admin(config):
