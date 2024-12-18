@@ -124,14 +124,42 @@ def Space_Content_Register(config):
 def UpdateValues(all_content, request):
   """Update content from our request"""
   for key, value in request.items():
+    # Skip empty updates
+    #TODO: This isnt going to work in all our cases.  Need a null instead...
+    if value == '': continue
+
+    parts = key.split('.')
+
+    # Skip if this is not a `__command.UUID.field` format
+    if len(parts) < 3: continue
+
+    uuid = parts[1]
+    field = parts[2]
+    prefix = ''
+
+    # Fix the fieldname if we have collisions
+    if field == 'label_site':
+      field = 'labels'
+      prefix = 'site:'
+    elif field == 'label_custom':
+      field = 'labels'
+      prefix = 'custom:'
+
     # Set a value
     if key.startswith('__set.'):
-      parts = key.split('.')
-      uuid = parts[1]
-      field = parts[2]
-
       if uuid in all_content:
         all_content[uuid][field] = value
+      else:
+        LOG.error(f'Missing content UUID, cant update: {uuid}   Request: {key} == {value}')
+
+    # Add a value to a list
+    elif key.startswith('__add.'):
+      if uuid in all_content:
+        # Ensure we have a list to our our value
+        if field not in all_content[uuid]:
+          all_content[uuid][field] = []
+
+        all_content[uuid][field].append(f'{prefix}{value}')
       else:
         LOG.error(f'Missing content UUID, cant update: {uuid}   Request: {key} == {value}')
 
