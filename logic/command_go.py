@@ -184,26 +184,26 @@ def CreateContentObject(uuid, request):
   # Image
   if request['type'] == 'image':
     # Set the generated label for Image
-    content['labels'].append('gen:Image')
+    content['labels'].append('gen:image')
 
     # Image/PNG
     if request['filename'].lower().endswith('.png'):
-      content['labels'].append('gen:Image/PNG')
+      content['labels'].append('gen:image/png')
       content['path'] = f'{uuid}.png'
 
     # Image/JPG
     elif request['filename'].lower().endswith('.jpg') or request['filename'].lower().endswith('.jpeg'):
-      content['labels'].append('gen:Image/JPG')
+      content['labels'].append('gen:image/jpg')
       content['path'] = f'{uuid}.jpg'
 
     # Image/GIF
     elif request['filename'].lower().endswith('.gif'):
-      content['labels'].append('gen:Image/GIF')
+      content['labels'].append('gen:image/gif')
       content['path'] = f'{uuid}.gif'
 
     # Image/BMP
     elif request['filename'].lower().endswith('.bmp'):
-      content['labels'].append('gen:Image/BMP')
+      content['labels'].append('gen:image/bmp')
       content['path'] = f'{uuid}.bmp'
   
   # Move the file into its content location and UUID name
