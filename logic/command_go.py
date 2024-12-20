@@ -162,6 +162,26 @@ def UpdateValues(all_content, request):
         all_content[uuid][field].append(f'{prefix}{value}')
       else:
         LOG.error(f'Missing content UUID, cant update: {uuid}   Request: {key} == {value}')
+    
+    # Add or update a custom tag
+    elif key.startswith('__custom_tag.'):
+      try:
+        index = int(field)
+        # If this is a new item, append it
+        if index == -1:
+          all_content[uuid]['tags'].append(value)
+        
+        # Else, update the value
+        elif index < len(all_content[uuid]['tags']):
+          all_content[uuid]['tags'][index] = value
+        
+        # Else, failed
+        else:
+          LOG.error(f'''Index is outside the list length, cant set __custom_tag: {field}  Index: {index}  Len: {len(all_content[uuid]['tags'])}  Error: {e}''')
+
+      except Exception as e:
+        LOG.error(f'Index is not integer, cant set __custom_tag: {field}  Error: {e}')
+
 
 
 def CreateContentObject(uuid, request):
