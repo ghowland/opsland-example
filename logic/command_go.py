@@ -126,18 +126,22 @@ def UpdateValues(all_content, request):
   for key, value in request.items():
     # Skip empty updates
     #TODO: This isnt going to work in all our cases.  Need a null instead...
-    if value == '': continue
+    if value == '' or '.' not in key: continue
 
     parts = key.split('.')
 
     # Skip if this is not a `__command.UUID.field` format
-    if len(parts) < 3: continue
 
     uuid = parts[1]
-    field = parts[2]
-    prefix = ''
+
+    # We dont always have a field
+    if len(parts) >= 3:
+      field = parts[2]
+    else:
+      field = None
 
     # Fix the fieldname if we have collisions
+    prefix = ''
     if field == 'label_site':
       field = 'labels'
       prefix = 'site:'
@@ -146,25 +150,27 @@ def UpdateValues(all_content, request):
       prefix = 'custom:'
 
     # Set a value
-    if key.startswith('__set.'):
+    if key.startswith('__set.') and request['__command'] == 'set':
       if uuid in all_content:
         all_content[uuid][field] = value
       else:
         LOG.error(f'Missing content UUID, cant update: {uuid}   Request: {key} == {value}')
 
     # Add a value to a list
-    elif key.startswith('__add.'):
+    elif key.startswith('__add.') and request['__command'] == 'set':
       if uuid in all_content:
         # Ensure we have a list to our our value
         if field not in all_content[uuid]:
           all_content[uuid][field] = []
 
-        all_content[uuid][field].append(f'{prefix}{value}')
+        # If we dont already have it, then add it
+        if f'{prefix}{value}' not in all_content[uuid][field]:
+          all_content[uuid][field].append(f'{prefix}{value}')
       else:
         LOG.error(f'Missing content UUID, cant update: {uuid}   Request: {key} == {value}')
     
     # Add or update a custom tag
-    elif key.startswith('__custom_tag.'):
+    elif key.startswith('__custom_tag.') and request['__command'] == 'set':
       try:
         index = int(field)
         # If this is a new item, append it
@@ -181,6 +187,14 @@ def UpdateValues(all_content, request):
 
       except Exception as e:
         LOG.error(f'Index is not integer, cant set __custom_tag: {field}  Error: {e}')
+
+    # Delete Tag
+    elif key.startswith('__delete_tag.') and request['__command'] == 'delete':
+      all_content[uuid]['tags'].remove(value)
+
+    # Delete Label
+    elif key.startswith('__delete_label.') and request['__command'] == 'delete':
+      all_content[uuid]['labels'].remove(value)
 
 
 
