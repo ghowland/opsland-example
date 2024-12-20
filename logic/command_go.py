@@ -196,6 +196,17 @@ def UpdateValues(all_content, request):
     elif key.startswith('__delete_label.') and request['__command'] == 'delete':
       all_content[uuid]['labels'].remove(value)
 
+    # Delete Content
+    elif key.startswith('__delete_content.') and request['__command'] == 'delete':
+      # Delete the primary path
+      #TODO...
+
+      # Delele all the child paths (cropped images, all `derive==parent_uuid`)
+      #TODO...
+
+      # Delete the content from our records
+      del all_content[uuid]
+
 
 
 def CreateContentObject(uuid, request):
