@@ -49,6 +49,7 @@ def ProcessCommands(config):
   elif config.command == 'space_style_select_data': ExecuteCommand(config, command_go.Space_Style_Select_Data)
   elif config.command == 'space_content_data': ExecuteCommand(config, command_go.Space_Content_Data)
   elif config.command == 'site_content_register': ExecuteCommand(config, command_go.Space_Content_Register)
+  elif config.command == 'site_content_derived': ExecuteCommand(config, command_go.Space_Content_Derived)
   
 
   # Content

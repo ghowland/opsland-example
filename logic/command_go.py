@@ -91,6 +91,15 @@ GLOB_TABLE_DATA = 'data/table_data/*.yaml'
 GLOB_ICONS = 'data/icons/*/*/*.svg'
 
 
+def Space_Content_Derived(config):
+  """Register content"""
+  # Start with the pass through and mutate
+  result = config.input.get('existing', {})
+  if not result: result = {}
+
+  return result
+
+
 def Space_Content_Register(config):
   """Register content"""
   # Start with the pass through and mutate
