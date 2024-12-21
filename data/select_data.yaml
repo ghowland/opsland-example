@@ -935,4 +935,15 @@ rating_score:
   - "4.0": "4"
   - "4.5": "4.5"
   - "5.0": "5"
+
+# Content Types for search filtering
+content_type:
+  - all: All Types
+  - image: Image
+  - icon: Icon
+  - video: Video
+  - widget: Widget
+  - page: Page
+  - domain: Domain
+
   
