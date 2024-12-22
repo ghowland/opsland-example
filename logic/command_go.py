@@ -296,10 +296,8 @@ def DeleteContentDataAndFiles(all_content, uuid):
 
   LOG.info(f'Delete content: {content}')
 
-  if content['parent_uuid'] is None:
-    full_path = f'''{CONTENT_PATH}{content['path']}'''
-  else:
-    full_path = f'''{CONTENT_DERIVED_PATH}{content['path']}'''
+  full_path = GetContentFullPath(content)
+
 
   # Find any derived content from this one
   for test_uuid, test_content in list(all_content.items()):
@@ -369,6 +367,12 @@ def CreateContentObject(uuid, file_type, file_name, parent_uuid=None):
     content['labels'].append('gen:derived')
     content['path'] = file_name
 
+
+  # Get the content file information
+  full_path = GetContentFullPath(content)
+  if os.path.exists(full_path):
+    img = Image.open(full_path)
+    SetNewContentImageSizeLabels(content, img)
   
   # Move the file into its content location and UUID name
   if parent_uuid == None:
@@ -390,6 +394,52 @@ def CreateContentObject(uuid, file_type, file_name, parent_uuid=None):
   # Else, this is derived content, and doesnt need to be moved.  Always return it
   else:
     return content
+
+
+def SetNewContentImageSizeLabels(content, img):
+  """"""
+  x = img.size[0]
+  y = img.size[1]
+
+  ratio = x / y
+
+  content['labels'].append(f'''gen:size:{x}x{y}''')
+
+  ratios = [
+    {'square': 1.0 / 1.0},
+    {'16x9': 16.0 / 9.0},
+    {'3x2': 3.0 / 2.0},
+    {'4x3': 4.0 / 3.0},
+    {'3x4': 3.0 / 4.0},
+    {'5x4': 5.0 / 4.0},
+    {'16x10': 16.0 / 10.0},
+    {'21x9': 21.0 / 9.0},
+    {'185x100': 185.0 / 100.0},
+    {'235x100': 235.0 / 100.0},
+  ]
+
+  for test_item in ratios:
+    for key, test_ratio in test_item.items():
+      if CloseDifference(ratio, test_ratio):
+        content['labels'].append(f'''gen:image_format:{key}''')
+        break
+
+
+def CloseDifference(value, test_value, tolerance=0.015):
+  """"""
+  diff = value - test_value
+  
+  return abs(diff) < tolerance
+
+
+def GetContentFullPath(content):
+  """"""
+  if content['parent_uuid'] is None:
+    full_path = f'''{CONTENT_PATH}{content['path']}'''
+  else:
+    full_path = f'''{CONTENT_DERIVED_PATH}{content['path']}'''
+  
+  return full_path
 
 
 def Site_Content_Admin(config):
@@ -472,9 +522,9 @@ def Upload_Refresh(config):
 
     path_data = {'path': path, 'size': stat_data.st_size, 'created': stat_data.st_ctime}
 
-    # Create thumbnail
-    thumb_path = UPLOAD_THUMBNAIL_PATH+path
-    CreateThumbnail(full_path, thumb_path)
+    # # Create thumbnail
+    # thumb_path = UPLOAD_THUMBNAIL_PATH+path
+    # CreateThumbnail(full_path, thumb_path)
 
 
     result.append(path_data)
@@ -487,7 +537,10 @@ def CreateThumbnail(full_path, thumb_path):
   # If the thumb already exists, return
   if os.path.exists(thumb_path): return
 
-  img = Image.open(full_path)
+  try:
+    img = Image.open(full_path)
+  except FileNotFoundError as e:
+    return None
 
   # Ensure correct orientation for camera photos EXIF data
   if img._getexif():

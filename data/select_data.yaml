@@ -844,7 +844,6 @@ image_crop_sizing:
   - fixed-3x4: 3 x 4
   - fixed-5x4: 5 x 4
   - fixed-16x10: 16 x 10
-  - fixed-16x10: 16 x 10
   - fixed-21x9: 21 x 9
   - fixed-185x100: Film Cinema 1.85 x 1
   - fixed-235x100: Cinemascope 2.35 x 1
@@ -946,4 +945,3 @@ content_type:
   - page: Page
   - domain: Domain
 
-  
