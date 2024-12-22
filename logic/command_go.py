@@ -156,7 +156,8 @@ def Space_Content_Register(config):
     # Check if this file already exists?  No, it's a new upload, who cares?
     pass
 
-    content = CreateContentObject(uuid, request)
+    # Create the content
+    content = CreateContentObject(uuid, request['type'], request['filename'])
     if content:
       # Add the content item
       result[uuid] = content
@@ -164,7 +165,47 @@ def Space_Content_Register(config):
   # Update Values
   UpdateValues(result, request)
 
+  # Update Derived
+  UpdateDerived(result, config.input['derived'])
+
   return result
+
+
+def UpdateDerived(all_content, derived):
+  """Add derived"""
+  LOG.info(f'Derived: {derived}')
+
+  for item_uuid, item_data in all_content.items():
+    if item_uuid.startswith('_'): continue
+
+    # Ensure we have a derived list
+    if 'derived' not in item_data: item_data['derived'] = []
+    if 'parent_uuid' not in item_data: item_data['parent_uuid'] = None
+
+    # Look for any derived items
+    for derived_item in derived:
+      parts = derived_item['path'].split('__')
+      parent_uuid = parts[0]
+      derived_uuid = parts[1].split('.')[0]
+
+      # If this is the parent of this item, add it
+      if parent_uuid == item_uuid and derived_uuid not in item_data['derived']:
+        item_data['derived'].append(derived_uuid)
+
+  # Add derived content
+  for derived_item in derived:
+    # Get our parent and derived
+    parts = derived_item['path'].split('__')
+    parent_uuid = parts[0]
+    derived_uuid = parts[1].split('.')[0]
+
+    # Add this missing derived content
+    if derived_uuid not in all_content:
+      # Create the content
+      content = CreateContentObject(derived_uuid, 'derived_image', derived_item['path'], parent_uuid)
+      if content:
+        # Add the content item
+        all_content[derived_uuid] = content
 
 
 def UpdateValues(all_content, request):
@@ -245,73 +286,106 @@ def UpdateValues(all_content, request):
     # Delete Content
     elif key.startswith('__delete_content.') and request['__command'] == 'delete':
       # Delete the primary path
-      #TODO...
-
-      # Delele all the child paths (cropped images, all `derive==parent_uuid`)
-      #TODO...
-
-      # Delete the content from our records
-      del all_content[uuid]
+      DeleteContentDataAndFiles(all_content, uuid)
 
 
 
-def CreateContentObject(uuid, request):
+def DeleteContentDataAndFiles(all_content, uuid):
+  """Delete..."""
+  content = all_content.get(uuid, None)
+  if content is None: return
+
+  if content['parent_uuid'] is None:
+    full_path = f'''{CONTENT_PATH}/{content['path']}'''
+  else:
+    full_path = f'''{CONTENT_DERIVED_PATH}/{content['path']}'''
+
+  # Find any derived content from this one
+  for test_uuid, test_content in list(all_content.items()):
+    if not test_uuid.startswith('_') and test_content['parent_uuid'] == uuid:
+      DeleteContentDataAndFiles(all_content, test_uuid)
+
+  # If we have the file, remove it
+  if os.path.exists(full_path):
+    # Remove the file
+    os.remove(full_path)
+
+    # Delete the content from our records
+    del all_content[uuid]
+
+
+def CreateContentObject(uuid, file_type, file_name, parent_uuid=None):
   """Create the content object from the request"""
   # Content
   content = {'uuid': uuid,
-             'labels': [], 'tags': [], 'thumbnail_uuid': None, 
+             'labels': [], 'tags': [],
              'priority': 0, 'cost': 0, 'cost_type': 'usd', 
              'duration': None, 'size': 0, 'size_type': 'none', 'rating': 0, 'rating_count': 0,
              # If this is data, then we reference if through the cache
              'cache_key': None, 'cache_unique_key': None, 'cache_unique_key_index': None,
              # `path` is where the file content is, and `filename` is the original name
              'path': None, 'filename': None,
+             # If this has derived content, of this is derived content `parent_uuid`
+             'derived': [], 'parent_uuid': parent_uuid,
             }
 
   # Save the filename, if we had one.  Should normally be the case, always?
-  if 'filename' in request:
-    content['filename'] = request['filename']
+  content['filename'] = file_name
 
   # Image
-  if request['type'] == 'image':
+  if file_type == 'image':
     # Set the generated label for Image
     content['labels'].append('gen:image')
 
     # Image/PNG
-    if request['filename'].lower().endswith('.png'):
+    if file_name.lower().endswith('.png'):
       content['labels'].append('gen:image/png')
       content['path'] = f'{uuid}.png'
 
     # Image/JPG
-    elif request['filename'].lower().endswith('.jpg') or request['filename'].lower().endswith('.jpeg'):
+    elif file_name.lower().endswith('.jpg') or file_name.lower().endswith('.jpeg'):
       content['labels'].append('gen:image/jpg')
       content['path'] = f'{uuid}.jpg'
 
     # Image/GIF
-    elif request['filename'].lower().endswith('.gif'):
+    elif file_name.lower().endswith('.gif'):
       content['labels'].append('gen:image/gif')
       content['path'] = f'{uuid}.gif'
 
     # Image/BMP
-    elif request['filename'].lower().endswith('.bmp'):
+    elif file_name.lower().endswith('.bmp'):
       content['labels'].append('gen:image/bmp')
       content['path'] = f'{uuid}.bmp'
   
+  # Derived Image (Cropped)
+  elif file_type == 'derived_image':
+    # Set the generated label for Image
+    content['labels'].append('gen:image')
+    content['labels'].append('gen:image/png')
+    content['labels'].append('gen:derived')
+    content['path'] = file_name
+
+  
   # Move the file into its content location and UUID name
-  up_path = UPLOAD_PATH + request['filename']
-  content_path = CONTENT_PATH + content['path']
+  if parent_uuid == None:
+    up_path = UPLOAD_PATH + file_name
+    content_path = CONTENT_PATH + content['path']
 
-  # Make sure we have the source path, then move it
-  if os.path.exists(up_path):
-    LOG.info(f'Upload: {up_path}  Content: {content_path}')
-    os.rename(up_path, content_path)
+    # Make sure we have the source path, then move it
+    if os.path.exists(up_path):
+      LOG.info(f'Upload: {up_path}  Content: {content_path}')
+      os.rename(up_path, content_path)
 
-    return content
+      return content
 
-  # Else, failed, dont try to do anything
+    # Else, failed, dont try to do anything
+    else:
+      LOG.error(f'Failed to find upload file, shouldnt happen: {up_path}')
+      return None
+  
+  # Else, this is derived content, and doesnt need to be moved.  Always return it
   else:
-    LOG.error(f'Failed to find upload file, shouldnt happen: {up_path}')
-    return None
+    return content
 
 
 def Site_Content_Admin(config):
