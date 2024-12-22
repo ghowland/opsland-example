@@ -93,6 +93,8 @@ GLOB_ICONS = 'data/icons/*/*/*.svg'
 
 def Space_Content_Derived(config):
   """Register content"""
+  LOG.info(f'Input request: {pprint.pformat(config.input)}')
+
   # Start with the pass through and mutate
   result = config.input.get('existing', {})
   if not result: result = {}
