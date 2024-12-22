@@ -294,10 +294,12 @@ def DeleteContentDataAndFiles(all_content, uuid):
   content = all_content.get(uuid, None)
   if content is None: return
 
+  LOG.info(f'Delete content: {content}')
+
   if content['parent_uuid'] is None:
-    full_path = f'''{CONTENT_PATH}/{content['path']}'''
+    full_path = f'''{CONTENT_PATH}{content['path']}'''
   else:
-    full_path = f'''{CONTENT_DERIVED_PATH}/{content['path']}'''
+    full_path = f'''{CONTENT_DERIVED_PATH}{content['path']}'''
 
   # Find any derived content from this one
   for test_uuid, test_content in list(all_content.items()):
@@ -306,11 +308,14 @@ def DeleteContentDataAndFiles(all_content, uuid):
 
   # If we have the file, remove it
   if os.path.exists(full_path):
+    LOG.info(f'Removing path: {full_path}')
     # Remove the file
     os.remove(full_path)
+  else:
+    LOG.info(f'Path not found, cant delete: {full_path}')
 
-    # Delete the content from our records
-    del all_content[uuid]
+  # Delete the content from our records
+  del all_content[uuid]
 
 
 def CreateContentObject(uuid, file_type, file_name, parent_uuid=None):
