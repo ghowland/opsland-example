@@ -289,7 +289,6 @@ def UpdateValues(all_content, request):
       DeleteContentDataAndFiles(all_content, uuid)
 
 
-
 def DeleteContentDataAndFiles(all_content, uuid):
   """Delete..."""
   content = all_content.get(uuid, None)
