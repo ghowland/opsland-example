@@ -77,6 +77,7 @@ UPLOAD_PATH = '/mnt/d/_OpsLand/uploads/'
 UPLOAD_THUMBNAIL_PATH = '/mnt/d/_OpsLand/uploads/thumbnail/'
 # Content path for files, after we move them
 CONTENT_PATH = '/mnt/d/_OpsLand/content/'
+CONTENT_DERIVED_PATH = '/mnt/d/_OpsLand/derived/'
 
 # Upload Thumbnail size
 DEFAULT_THUMB_SIZE = [320, 240]
@@ -89,6 +90,35 @@ GLOB_TABLE_DATA = 'data/table_data/*.yaml'
 
 # Glob for all the icons
 GLOB_ICONS = 'data/icons/*/*/*.svg'
+
+
+def Space_Content_Derived_Refresh(config):
+  """Refresh derived"""
+  # Ensure we have a dictionary to start with
+  # result = config.input.get('existing', [])
+  # if not result: result = []
+
+  result = []
+
+  paths = os.listdir(CONTENT_DERIVED_PATH)
+  for path in paths:
+    full_path = CONTENT_DERIVED_PATH + path
+
+    # Skip directories or anything not a file
+    if not os.path.isfile(full_path): continue
+
+    stat_data = os.stat(full_path)
+    # LOG.info(f'Stat: {stat_data}')
+
+    path_data = {'path': path, 'size': stat_data.st_size, 'created': stat_data.st_ctime}
+
+    # # Create thumbnail
+    # thumb_path = UPLOAD_THUMBNAIL_PATH+path
+    # CreateThumbnail(full_path, thumb_path)
+
+    result.append(path_data)
+
+  return result
 
 
 def Space_Content_Derived(config):
