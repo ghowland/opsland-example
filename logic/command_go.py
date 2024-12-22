@@ -161,12 +161,12 @@ def Space_Content_Register(config):
     if content:
       # Add the content item
       result[uuid] = content
-  
-  # Update Values
-  UpdateValues(result, request)
 
   # Update Derived
   UpdateDerived(result, config.input['derived'])
+  
+  # Update Values
+  UpdateValues(result, request)
 
   return result
 
