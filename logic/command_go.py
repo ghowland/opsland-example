@@ -79,6 +79,9 @@ UPLOAD_THUMBNAIL_PATH = '/mnt/d/_OpsLand/uploads/thumbnail/'
 CONTENT_PATH = '/mnt/d/_OpsLand/content/'
 CONTENT_DERIVED_PATH = '/mnt/d/_OpsLand/derived/'
 
+# This is the base directory for `content/` and `derived/`
+PRE_CONTENT_PATH = '/mnt/d/_OpsLand/'
+
 # Upload Thumbnail size
 DEFAULT_THUMB_SIZE = [320, 240]
 
@@ -334,67 +337,70 @@ def CreateContentObject(uuid, file_type, file_name, parent_uuid=None):
   # Save the filename, if we had one.  Should normally be the case, always?
   content['filename'] = file_name
 
+  if parent_uuid == None:
+    directory_prefix = 'content'
+  else:
+    directory_prefix = 'derived'
+
   # Image
   if file_type == 'image':
     # Set the generated label for Image
-    content['labels'].append('gen:image')
+    content['labels'].append('gen:type=image')
 
     # Image/PNG
     if file_name.lower().endswith('.png'):
-      content['labels'].append('gen:image/png')
-      content['path'] = f'{uuid}.png'
+      content['labels'].append('gen:image=png')
+      content['path'] = f'{directory_prefix}/{uuid}.png'
 
     # Image/JPG
     elif file_name.lower().endswith('.jpg') or file_name.lower().endswith('.jpeg'):
-      content['labels'].append('gen:image/jpg')
-      content['path'] = f'{uuid}.jpg'
+      content['labels'].append('gen:image=jpg')
+      content['path'] = f'{directory_prefix}/{uuid}.jpg'
 
     # Image/GIF
     elif file_name.lower().endswith('.gif'):
-      content['labels'].append('gen:image/gif')
-      content['path'] = f'{uuid}.gif'
+      content['labels'].append('gen:image=gif')
+      content['path'] = f'{directory_prefix}/{uuid}.gif'
 
     # Image/BMP
     elif file_name.lower().endswith('.bmp'):
-      content['labels'].append('gen:image/bmp')
-      content['path'] = f'{uuid}.bmp'
+      content['labels'].append('gen:image=bmp')
+      content['path'] = f'{directory_prefix}/{uuid}.bmp'
   
   # Derived Image (Cropped)
   elif file_type == 'derived_image':
     # Set the generated label for Image
-    content['labels'].append('gen:image')
-    content['labels'].append('gen:image/png')
+    content['labels'].append('gen:type=image')
+    content['labels'].append('gen:image=png')
     content['labels'].append('gen:derived')
-    content['path'] = file_name
+    content['path'] = f'{directory_prefix}/{file_name}'
 
 
-  # Get the content file information
-  full_path = GetContentFullPath(content)
-  if os.path.exists(full_path):
-    img = Image.open(full_path)
-    SetNewContentImageSizeLabels(content, img)
-  
   # Move the file into its content location and UUID name
   if parent_uuid == None:
     up_path = UPLOAD_PATH + file_name
-    content_path = CONTENT_PATH + content['path']
+    content_path = CONTENT_PATH + os.path.basename(content['path'])
 
     # Make sure we have the source path, then move it
     if os.path.exists(up_path):
       LOG.info(f'Upload: {up_path}  Content: {content_path}')
       os.rename(up_path, content_path)
 
-      return content
-
     # Else, failed, dont try to do anything
     else:
       LOG.error(f'Failed to find upload file, shouldnt happen: {up_path}')
       return None
-  
-  # Else, this is derived content, and doesnt need to be moved.  Always return it
-  else:
-    return content
 
+  # Get the content file information
+  full_path = GetContentFullPath(content)
+  if os.path.exists(full_path):
+    img = Image.open(full_path)
+    SetNewContentImageSizeLabels(content, img)
+  else:
+    content['labels'].append(f'gen:file_not_found:{full_path}')
+
+  return content
+  
 
 def SetNewContentImageSizeLabels(content, img):
   """"""
@@ -403,7 +409,8 @@ def SetNewContentImageSizeLabels(content, img):
 
   ratio = x / y
 
-  content['labels'].append(f'''gen:size:{x}x{y}''')
+  content['labels'].append(f'''gen:w={x}''')
+  content['labels'].append(f'''gen:h={y}''')
 
   ratios = [
     {'square': 1.0 / 1.0},
@@ -418,14 +425,20 @@ def SetNewContentImageSizeLabels(content, img):
     {'235x100': 235.0 / 100.0},
   ]
 
+  found_ratio = False
   for test_item in ratios:
     for key, test_ratio in test_item.items():
       if CloseDifference(ratio, test_ratio):
-        content['labels'].append(f'''gen:image_format:{key}''')
+        content['labels'].append(f'''gen:image_format={key}''')
+        found_ratio = True
         break
 
+  # Always give an image_format ratio, if we didnt get any matched above, then we are `freestyle`
+  if not found_ratio:
+    content['labels'].append(f'''gen:image_format=freestyle''')
 
-def CloseDifference(value, test_value, tolerance=0.015):
+
+def CloseDifference(value, test_value, tolerance=0.04):
   """"""
   diff = value - test_value
   
@@ -434,10 +447,7 @@ def CloseDifference(value, test_value, tolerance=0.015):
 
 def GetContentFullPath(content):
   """"""
-  if content['parent_uuid'] is None:
-    full_path = f'''{CONTENT_PATH}{content['path']}'''
-  else:
-    full_path = f'''{CONTENT_DERIVED_PATH}{content['path']}'''
+  full_path = f'''{PRE_CONTENT_PATH}{content['path']}'''
   
   return full_path
 
