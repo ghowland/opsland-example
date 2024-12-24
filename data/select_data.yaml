@@ -848,6 +848,19 @@ image_crop_sizing:
   - fixed-185x100: Film Cinema 1.85 x 1
   - fixed-235x100: Cinemascope 2.35 x 1
 
+image_format:
+  - image_format=freestyle: Freestyle
+  - image_format=square: Square
+  - image_format=16x9: 16 x 9
+  - image_format=3x2: 3 x 2
+  - image_format=4x3: 4 x 3
+  - image_format=3x4: 3 x 4
+  - image_format=5x4: 5 x 4
+  - image_format=16x10: 16 x 10
+  - image_format=21x9: 21 x 9
+  - image_format=185x100: Film Cinema 1.85 x 1
+  - image_format=235x100: Cinemascope 2.35 x 1
+
 shadow:
   - parent: Use Parent
   - "": Not Specified
@@ -889,7 +902,7 @@ content_generate_tag:
 
 # Labels for all the site specific things
 label_site:
-  - "": "- Select a Site Label -"
+  - "": "- Site Label Not Selected -"
   # Labels for common Site Text
   - string_title: Site Title
   - string_subtitle: Site Subtitle
@@ -915,7 +928,7 @@ label_site:
 # Custom labels the user made up and can be applied
 #TODO: This must become data
 label_custom:
-  - "": "- Select a Custom Label -"
+  - "": "- Custom Label Not Selected -"
   - notice_important: "Notice: Important"
   - notice_urgent: "Notice: Urgent"
   - notice_critical: "Notice: Critical"
