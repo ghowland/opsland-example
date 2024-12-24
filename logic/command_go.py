@@ -95,6 +95,24 @@ GLOB_TABLE_DATA = 'data/table_data/*.yaml'
 GLOB_ICONS = 'data/icons/*/*/*.svg'
 
 
+def Space_Site_Domain(config):
+  """Register Domains"""
+  # Start with the pass through and mutate
+  result = config.input.get('existing', {})
+  if not result: result = {}
+
+  return result
+
+
+def Space_Site_Domain_Page(config):
+  """Register Domain Pages"""
+  # Start with the pass through and mutate
+  result = config.input.get('existing', {})
+  if not result: result = {}
+
+  return result
+
+
 def Space_Content_Derived_Refresh(config):
   """Refresh derived"""
   # Ensure we have a dictionary to start with
