@@ -154,7 +154,7 @@ def Space_Site_Domain(config):
 
 def CreateNewDomain(new_uuid, domain_name):
   """"""
-  data = {'uuid': new_uuid, 'name': domain_name, 'theme': 'default', 'paths': ['/']}
+  data = {'uuid': new_uuid, 'name': domain_name, 'theme': 'default', 'paths': ['/', '/404']}
 
   return data
 
