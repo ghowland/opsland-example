@@ -105,7 +105,8 @@ def Space_Site_Domain(config):
 
   request = config.input.get('request', {})
 
-  if '__add.new.domain_name' in request:
+  # If we have a new domain, and its non-empty and > 3 chars
+  if '__add.new.domain_name' in request and len(request['__add.new.domain_name'].strip()) > 3:
     new_domain = request['__add.new.domain_name']
 
     found_uuid = GetDomainByName(all_domains, new_domain)
@@ -116,13 +117,44 @@ def Space_Site_Domain(config):
 
       # Add the new domain
       all_domains[new_uuid] = new_data
+  
+  # Look for delete
+  for item_key, item_data in request.items():
+    # Add Page Path
+    if item_key.startswith('__add_new_page.') and item_data.strip():
+      target_uuid = item_key.split('.')[1]
+
+      # Create the page_uri.  Always have the /, because otherwise the root is empty.  Can fix to mount as required later
+      page_uri = item_data.strip()
+      while not page_uri.startswith('/'): page_uri = f'/{page_uri}'
+
+      if target_uuid in all_domains:
+        all_domains[target_uuid]['paths'].append(page_uri)
+
+    # Delete Domain
+    elif item_key.startswith('__delete_domain.'):
+      target_uuid = item_key.split('.')[1]
+
+      # If we have this, delete it
+      if target_uuid in all_domains:
+        del all_domains[target_uuid]    # Delete Domain
+
+    # Delete Domain Path
+    elif item_key.startswith('__delete_domain_path.'):
+      target_uuid = item_key.split('.')[1]
+      path = item_key.split('.')[2]
+
+      # If we have this, delete it
+      if target_uuid in all_domains:
+        if path in all_domains[target_uuid]['paths']:
+          all_domains[target_uuid]['paths'].remove(path)
 
   return all_domains
 
 
 def CreateNewDomain(new_uuid, domain_name):
   """"""
-  data = {'uuid': new_uuid, 'name': domain_name}
+  data = {'uuid': new_uuid, 'name': domain_name, 'theme': 'default', 'paths': ['/']}
 
   return data
 
