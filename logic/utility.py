@@ -114,9 +114,15 @@ def SaveText(path_raw, data, create_dirs=True):
     stream.write(data)
 
 
-def GetUUID():
+def GetUUID(test_data=None):
   """Generate a new UUID.  If return_hex==True, we get a string hex version.  Else, we get the int version"""
-  return uuid.uuid4().hex
+  new_uuid = uuid.uuid4().hex
+
+  if test_data:
+    while new_uuid in test_data:
+      new_uuid = uuid.uuid4().hex
+
+  return new_uuid
 
 
 def IsDataEqual(a, b):

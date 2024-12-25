@@ -98,10 +98,42 @@ GLOB_ICONS = 'data/icons/*/*/*.svg'
 def Space_Site_Domain(config):
   """Register Domains"""
   # Start with the pass through and mutate
-  result = config.input.get('existing', {})
-  if not result: result = {}
+  all_domains = config.input.get('existing', {})
+  if not all_domains: all_domains = {}
 
-  return result
+  if '__time' in all_domains: del all_domains['__time']
+
+  request = config.input.get('request', {})
+
+  if '__add.new.domain_name' in request:
+    new_domain = request['__add.new.domain_name']
+
+    found_uuid = GetDomainByName(all_domains, new_domain)
+    
+    if found_uuid == None:
+      new_uuid = utility.GetUUID(all_domains)
+      new_data = CreateNewDomain(new_uuid, new_domain)
+
+      # Add the new domain
+      all_domains[new_uuid] = new_data
+
+  return all_domains
+
+
+def CreateNewDomain(new_uuid, domain_name):
+  """"""
+  data = {'uuid': new_uuid, 'name': domain_name}
+
+  return data
+
+
+def GetDomainByName(all_domains, domain_name):
+  """"""
+  for domain_uuid, domain_data in all_domains.items():
+    if domain_data['name'] == domain_name:
+      return domain_uuid
+  
+  return None
 
 
 def Space_Site_Domain_Page(config):
