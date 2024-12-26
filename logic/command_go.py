@@ -795,7 +795,7 @@ def Space_Page_Data(config):
   result = config.input.get('site_page', None)
   if result == None:
     result = {'render': ['page_a'], 'widgets': 
-              { 
+              {
                 'page_a': {'widget': 'default_page', 'include': {'default': ['section_a']}, 'data': {'theme': 'default'} }, 
                 'section_a': {'widget': 'default_section', 'include': {'default': []}, 'data': {'theme': 'default'} } 
               },
@@ -807,6 +807,7 @@ def Space_Page_Data(config):
   # Update with the 'parents'
   UpdateWidgetsWithParents(result)
 
+  # Save the `uri`, which is actually the domain/domain_path, which will be used as the key to load this site
   result['uri'] = config.input['request']['site_page_uri']
 
   # Update over our original values
