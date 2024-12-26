@@ -792,7 +792,15 @@ def Space_Page_Data(config):
   # LOG.info(f'Input: {config.input}')
 
   # result = utility.LoadYaml(PATH_EXAMPLE_RENDER)
-  result = config.input['site_page']
+  result = config.input.get('site_page', None)
+  if result == None:
+    result = {'render': ['page_a'], 'widgets': 
+              { 
+                'page_a': {'widget': 'default_page', 'include': {'default': ['section_a']}, 'data': {'theme': 'default'} }, 
+                'section_a': {'widget': 'default_section', 'include': {'default': []}, 'data': {'theme': 'default'} } 
+              },
+      }
+
   result['map_widget_html'] = config.input['map_widget_html']
   result['widget_specs'] = config.input['widget_specs']
   
