@@ -17,6 +17,7 @@ from logic import command_product
 from logic import command_user
 from logic import command_purchase
 from logic import command_purchase_usage
+from logic import command_account
 
 from logic import utility
 
@@ -72,6 +73,9 @@ def ProcessCommands(config):
 
   # Purchase Usage
   elif config.command == 'space_purchase_usage': ExecuteCommand(config, command_purchase_usage.Space_Purchase_Usage)
+
+  # Account
+  elif config.command == 'space_account': ExecuteCommand(config, command_account.Space_Account)
 
 
   # Content
