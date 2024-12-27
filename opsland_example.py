@@ -13,6 +13,7 @@ import json
 import pprint
 
 from logic import command_go
+from logic import command_product
 
 from logic import utility
 
@@ -55,7 +56,9 @@ def ProcessCommands(config):
 
   # Site Domains and Pages
   elif config.command == 'site_domain': ExecuteCommand(config, command_go.Space_Site_Domain)
-  elif config.command == 'site_domain_page': ExecuteCommand(config, command_go.Space_Site_Domain_Page)
+
+  # Product
+  elif config.command == 'site_product': ExecuteCommand(config, command_product.Space_Product)
 
 
   # Content

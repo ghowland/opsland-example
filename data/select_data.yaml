@@ -958,3 +958,16 @@ content_type:
   - page: Page
   - domain: Domain
 
+# Product Category
+product_category:
+  # They will be mailed a physical product
+  - good_physical: Physical Product
+  # They can download something
+  - good_download: Digital Download
+  # They can also buy access to something, but its not a membership, but allows them to access.
+  - good_access: Digital Access
+  # Time based Membership.  Lifetime or 1 year or monthly.  They get access as a member to pages.
+  - service_membership: Membership
+  # This is like appointment (ex: massage session).  Can be a bundle of 5 sessions of 60 minutes or something.
+  - service_time: Time Service
+

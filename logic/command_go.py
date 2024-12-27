@@ -168,15 +168,6 @@ def GetDomainByName(all_domains, domain_name):
   return None
 
 
-def Space_Site_Domain_Page(config):
-  """Register Domain Pages"""
-  # Start with the pass through and mutate
-  result = config.input.get('existing', {})
-  if not result: result = {}
-
-  return result
-
-
 def Space_Content_Derived_Refresh(config):
   """Refresh derived"""
   # Ensure we have a dictionary to start with
