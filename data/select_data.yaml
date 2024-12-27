@@ -971,3 +971,10 @@ product_category:
   # This is like appointment (ex: massage session).  Can be a bundle of 5 sessions of 60 minutes or something.
   - service_time: Time Service
 
+# Differnces in how `pursage_usage` should operate.  What should it track?  What is it looking for?  Details will be different by type, with general commonalities
+purchase_usage_type:
+  - some: Thing
+
+# #TODO: This is data for all the commonalities between `purchase_usage_type` that should be shared...  or.   How should this be handled?  Conditional Imports from a list?
+# purchase_usage_common:
+#   - other: Thing
