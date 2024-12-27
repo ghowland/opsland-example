@@ -59,7 +59,7 @@ def Space_Product(config):
 
 def CreateNewProduct(new_uuid, product_name):
   """"""
-  data = {'uuid': new_uuid, 'name': product_name, 'theme': 'default', 'details': []}
+  data = {'uuid': new_uuid, 'name': product_name, 'theme': 'default', 'details': [], 'parent_uuid': None}
 
   return data
 

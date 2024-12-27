@@ -14,6 +14,9 @@ import pprint
 
 from logic import command_go
 from logic import command_product
+from logic import command_user
+from logic import command_purchase
+from logic import command_purchase_usage
 
 from logic import utility
 
@@ -57,8 +60,18 @@ def ProcessCommands(config):
   # Site Domains and Pages
   elif config.command == 'site_domain': ExecuteCommand(config, command_go.Space_Site_Domain)
 
+
   # Product
   elif config.command == 'site_product': ExecuteCommand(config, command_product.Space_Product)
+
+  # User
+  elif config.command == 'space_user': ExecuteCommand(config, command_user.Space_User)
+
+  # Purchase
+  elif config.command == 'space_purchase': ExecuteCommand(config, command_purchase.Space_Purchase)
+
+  # Purchase Usage
+  elif config.command == 'space_purchase_usage': ExecuteCommand(config, command_purchase_usage.Space_Purchase_Usage)
 
 
   # Content
