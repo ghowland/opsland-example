@@ -31,11 +31,10 @@ def Space_Product(config):
       target_uuid = item_key.split('.')[1]
 
       # Create the page_uri.  Always have the /, because otherwise the root is empty.  Can fix to mount as required later
-      page_uri = item_data.strip()
-      while not page_uri.startswith('/'): page_uri = f'/{page_uri}'
+      detail = item_data.strip()
 
       if target_uuid in all_products:
-        all_products[target_uuid]['paths'].append(page_uri)
+        all_products[target_uuid]['details'].append(detail)
 
     # Delete Domain
     elif item_key.startswith('__delete_product.'):
@@ -52,15 +51,15 @@ def Space_Product(config):
 
       # If we have this, delete it
       if target_uuid in all_products:
-        if path in all_products[target_uuid]['paths']:
-          all_products[target_uuid]['paths'].remove(path)
+        if path in all_products[target_uuid]['details']:
+          all_products[target_uuid]['details'].remove(path)
 
   return all_products
 
 
 def CreateNewProduct(new_uuid, product_name):
   """"""
-  data = {'uuid': new_uuid, 'name': product_name, 'theme': 'default'}
+  data = {'uuid': new_uuid, 'name': product_name, 'theme': 'default', 'details': []}
 
   return data
 
