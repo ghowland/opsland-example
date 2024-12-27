@@ -59,6 +59,7 @@ def Space_User(config):
 
 def CreateNewUser(new_uuid, user_name):
   """"""
+  #TODO: What if we used the parent_uuid for something interesting?  But can have a better name: referrer_user_uuid, ...
   data = {'uuid': new_uuid, 'name': user_name, 'theme': 'default', 'details': [], 'parent_uuid': None}
 
   return data
