@@ -978,3 +978,330 @@ purchase_usage_type:
 # #TODO: This is data for all the commonalities between `purchase_usage_type` that should be shared...  or.   How should this be handled?  Conditional Imports from a list?
 # purchase_usage_common:
 #   - other: Thing
+
+# Mapping the product_category to product_information, to limit the options we show users for creating product descriptions to things that make sense
+product_category_map:
+  good_physical:
+    - item_details
+    - material_care
+    - measurements
+    - style
+    - features_specs
+
+  good_download:
+    - item_details
+    - features_specs
+
+  good_access:
+    - item_details
+    - features_specs
+
+  service_membership:
+    - item_details
+    - features_specs
+
+  service_time:
+    - item_details
+    - features_specs
+
+
+# Categories for product information
+product_information_category:
+  - item_details: Item Details
+  - material_care: Materials and Care
+  - measurements: Measurements
+  - style: Style
+  - features_specs: Feature & Specs
+
+
+# Product Information.  Let users add any of these, if they 
+product_information:
+  # Item Details
+  item_details:
+    - gtin: Global Trade Identification Number
+    - import_designation: Import Designation
+      _options: [Imported, Domestic]
+    - country_origin: Country of Origin
+      _options: [China]
+    - upc: Universal Product Code
+    - model_name: Model Name
+    - model_number: Model Number
+    - series: Series Name
+    - age_range: Age Range Description
+      _options: [Adult, Child]
+    - asin: Amazon Standard Identification Number
+    - style_number: Style Number
+    - brand_name: Brand Name
+    - manufacturer: Manufacturer
+    - date_first_available: Date First Available
+
+  # Shipping
+  shipping:
+    - ships_from: Ships From
+    - packaging: Packaging
+
+  # Material and Product Care
+  material_care:
+    - material_type: Material Type
+      _options: [Polycotton, Polyester Blend]
+    - product_care: Product Care Instructions
+      _options: [Machine Wash, Hand Wash Only]
+    - fabric_type: Fabric Type
+      _options: ["100% Cotton", "81% Polyester, 19% Spandex"]
+    - recommended_use: Recommended Uses For Product
+      _options: [Camping, Hiking, Hunting, Construction, Climbing, Swinging, Sailing]
+    - operating_temperature_range: Operating Temperature Range
+      _options: ["14°F ~ 149°F"]
+    - shell_type: Shell Type
+      _options: [Soft Shell]
+    - lining_type: Lining Type
+      _options: [Nylon]
+
+  # Measurements
+  measurements:
+    - item_count: Number of Units
+      _options: 1
+    - unit_amount: Unit Count
+      _options: ['1 count', '100 foot']
+    - item_length: Item Length Description
+      _options: ["Standard Length"]
+    - item_weight: Item Weight
+      _options: ["9000 lbs"]
+    - item_thickness: Item Thinkness
+      _options: ["0.5 Inches"]
+    - tensile_strength: Tensile Strength
+      _options: ["9000 lbs"]
+    - tension_load_max: Maximum Tension Load
+      _options: ["9000 lbs"]    
+    - item_dimension_l_w_h: Item Dimensions LxWxH
+      _options: ["8.3 x 6 x 3.4 inches"]
+    - folded_item_dimension_l_w_h: Folded Item Dimensions LxWxH
+      _options: ["8.3 x 6 x 3.4 inches"]    
+    - inseam_length: Inseam Length
+      _options: [29 Inches]
+    - storage_volume: Storage Volume
+      _options: [52 Liters]
+
+    - wheel_count: Number of Wheels
+      options: 4
+    - section_count: Number of Sections
+      options: 1
+    - handle_count: Number of Handles
+      options: 3
+
+  # Style
+  style:
+    - color: Color
+      _options: [Black Script]
+    - fit_type: Fit Type
+      _options: [Straight]
+    - apparel_closure_type: Apparel Closure Type
+      _options: ["Pull On", Drawstring]
+    - seasons: Seasons
+      _options: ["Spring/Summer"]
+    - color: Sleeve Type
+      _options: [Short Sleeve]
+    - sleeve_type: Pattern
+      _options: [Straight, Sleeveless]
+    - pattern: Shirt Form Type
+      _options: [Solid, Tie-Dye]
+    - shirt_form: Shirt Form
+      _options: ["T-Shirt"]
+    - hemline_form: Hemline Form
+      _options: [Straight Hemline]
+    - back_style: Back Style
+      _options: [T Back]
+    - neck_style: Neck Style
+      _options: [Crew Neck]
+    - collar_type: Collar Type
+      _options: ["T-shirt"]
+    - character: Character
+      _options: [Sports, Women, Men]
+    - style_name: Style Name
+      _options: [T-shirt, Classic Graphic T-shirt, Soft and Comfortable T-shirts for Men, Script Logo]
+    - sport_type: Sport Type
+      _options: [Exercise and Fitness, Gym exercise]
+    - pocket_count: Number Of Pockets
+      _options: 2
+    - pocket_info: Pocket Description
+      _options: [Utility Pocket]
+    - front_pleat_style: Front Pleat Type
+      _options: [Flat Front]
+    - rise_style: Rise Style	High Rise
+      _options: [High Rise]
+    - pattern_style: Pattern Style
+      _options: [Solid]
+    - occassion_type: Occasion Type
+      _options: [Wedding]
+    - leg_style: Leg Style
+      _options: [Wide]
+    - style_name: Style Name
+      _options: [Palazzo]
+    - pants_form: Pants Form Type
+      _options: [Sweatpants]
+    - form_type: Form Type
+      _options: [Bottom Only]
+    - bottom_form_type: Form Type
+      _options: [Jammer]
+    - top_form_type: Form Type
+      _options: [Crop Top]
+    - league_name: League Name
+    - school_type: School Type
+      _options: [High School]
+    - item_shape: Item Shape
+      _options: [Square]
+    - strap_type: Strap Type
+      _options: [Shoulder Strap, Detachable, Stretchable, Adjustable]    
+    - theme: Theme
+      _options: [Durability]
+    - wheel_type: Wheel Type
+      _options: [Spinner]
+    - lock_type: Lock Type
+      _options: [Combination Lock, Key]
+    - handle_type: Handle Type
+      _options: [Telescopic Extendable Handle]
+
+  # Features and Specs
+  features_specs:
+    - embellishment: Embellishment Feature
+      _options: [Logo]
+    - water_resistence: Water Resistance Level
+      _options: [Water Resistant]
+    - is_autographed: Is Autographed
+      _options: false
+    - addition_features: Additional Features
+      _options: [Expandable, Telescopic Handle, Tie Down Straps, TSA Lock]
+
+  # Electronics
+  electronic:
+    - compatible_devices: Compatible Devices
+      _options: [Desktop PC]
+    - connector_type: Connector Type
+      _options: [ATX]
+    - output_wattage: Output Wattage
+      _options: 1500
+    - form_factor: Form Factor
+      _options: [ATX]
+    - cooling_method: Cooling Method
+      _options: [Air, Water]
+    - power_supply_design: Power Supply Design
+      _options: [Full Modular]
+    - charging_port_dc: DC Charging Port
+      _options: [18V/5.5A(max)]
+    - charging_port_usb: USB Charging
+      _options: [5V/5.5A(max)]
+  
+  # Books and other Published Content
+  - published_content:
+    - publisher: Publisher
+    - language: Language
+      _options: [English]
+    - binding_type: Binding Type
+      _options: [Paperback, Hardcover, ePub]
+    - pages_count: Page Count
+      _options: 272
+    - isbn_10: ISBN-10
+    - isbn_13: ISBN-13
+
+
+# Product Size
+product_size:
+  - 2x-small: 2X-Small
+  - x-small: X-Small
+  - small: Small
+  - medium: X-Small
+  - large: X-Small
+  - x-large: X-Large
+  - 2x-large: 2X-Large
+  - 3x-large: 3X-Large
+  - 4x-large: 4X-Large
+  - 5x-large: 5X-Large
+  - 6x-large: 6X-Large
+  - 7x-large: 7X-Large
+
+
+# Product Size Modifier
+product_size_modifier:
+  - normal: Normal
+  - petite: Petite
+  - tall: Tall
+  - plus: Plus
+
+
+# Product Review Tags
+product_review_tags:
+  - value_for_money: Value for Money
+  - roomy: Roomy
+  - carry_on_weight: Carry-On Weight
+  - looks: Looks
+  - durability: Durability
+  - rollability: Rollability
+  - wheel_quality: Wheel Quality
+
+
+# Combine the Color with an Integer.  So "black-2" is a specific type of black for this product.  That way, we dont need super specific names, they can just show their picture and we know
+product_color:
+  # Neutral
+  - black: Black
+  - white: White
+  - grep: Grey
+  - grey_dark: Dark Grey
+  - pewter: Pewter
+  - cream: Cream
+  - taupe: Taupe
+
+  # Brown
+  - brown: Brown
+  - beige: Beige
+  - coffee: Coffee
+  - khaki: Khaki
+  - brown_mocha: Mocha Brown
+  - brown_olive: Olive Brown
+  - rust: Rust
+  - brown_chocolate: Chocolate Brown
+
+  # Red
+  - red: Red
+  - burgundy: Burgundy
+  - merlot: Merlot
+  - marigold: Marigold
+
+  # Orange
+  - orange: Orange
+
+  # Yellow
+  - yellow: Yellow
+  - mustard: Mustard Yellow
+  - terracotta: Terracotta
+
+  # Green
+  - green: Green
+  - emerald: Emerald Green
+  - green_olive: Olive Green
+  - green_sage: Sage Green
+  - evergreen: Evergreen
+
+  # Blue
+  - blue: Blue
+  - blue_light: Light Blue
+  - blue_dark: Dark Blue
+  - blue_royal: Royal Blue
+  - navy: Navy
+  - teal: Teal
+  - cyan: Cyan
+
+  # Purple
+  - purple: Purple
+  - indigo: Indigo
+  - pink: Pink
+  - pink_hot: Hot Pink
+  - fuchsia: Fuchsia
+  - lavender: Lavender
+  - coral: Coral
+
+  # Metallics
+  - gold: Gold
+  - silver: Silver
+  - bronze: Bronze
+  - gold_rose: Rose Gold
+
