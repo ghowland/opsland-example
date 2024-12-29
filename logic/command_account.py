@@ -53,6 +53,9 @@ def Space_Account(config):
       if target_uuid in all_accounts:
         if path in all_accounts[target_uuid]['details']:
           all_accounts[target_uuid]['details'].remove(path)
+  
+  # Update Edits
+  UpdateEdits(all_accounts, request)
 
   return all_accounts
 
@@ -72,3 +75,15 @@ def GetAccountByName(all_accounts, account_name):
   
   return None
 
+
+
+def UpdateEdits(all_accounts, request):
+  """Process the `__edit` stuff"""
+  # Look for delete
+  for item_key, item_data in request.items():
+    if item_key.startswith('__edit.') and item_data.strip():
+      target_uuid = item_key.split('.')[1]
+      field = item_key.split('.')[2]
+
+      if target_uuid in all_accounts:
+        all_accounts[target_uuid][field] = item_data

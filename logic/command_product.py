@@ -53,6 +53,9 @@ def Space_Product(config):
       if target_uuid in all_products:
         if path in all_products[target_uuid]['details']:
           all_products[target_uuid]['details'].remove(path)
+  
+  # Update Edits
+  UpdateEdits(all_products, request)
 
   return all_products
 
@@ -72,3 +75,15 @@ def GetProductByName(all_products, product_name):
   
   return None
 
+
+
+def UpdateEdits(all_products, request):
+  """Process the `__edit` stuff"""
+  # Look for delete
+  for item_key, item_data in request.items():
+    if item_key.startswith('__edit.') and item_data.strip():
+      target_uuid = item_key.split('.')[1]
+      field = item_key.split('.')[2]
+
+      if target_uuid in all_products:
+        all_products[target_uuid][field] = item_data

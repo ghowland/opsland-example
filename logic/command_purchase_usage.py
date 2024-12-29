@@ -53,6 +53,9 @@ def Space_Purchase_Usage(config):
       if target_uuid in all_purchase_usages:
         if path in all_purchase_usages[target_uuid]['details']:
           all_purchase_usages[target_uuid]['details'].remove(path)
+  
+  # Update Edits
+  UpdateEdits(all_purchase_usages, request)
 
   return all_purchase_usages
 
@@ -72,3 +75,15 @@ def GetPurchaseUsageByName(all_purchase_usages, purchase_usage_name):
   
   return None
 
+
+
+def UpdateEdits(all_purchase_usages, request):
+  """Process the `__edit` stuff"""
+  # Look for delete
+  for item_key, item_data in request.items():
+    if item_key.startswith('__edit.') and item_data.strip():
+      target_uuid = item_key.split('.')[1]
+      field = item_key.split('.')[2]
+
+      if target_uuid in all_purchase_usages:
+        all_purchase_usages[target_uuid][field] = item_data

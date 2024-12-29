@@ -1305,3 +1305,546 @@ product_color:
   - bronze: Bronze
   - gold_rose: Rose Gold
 
+
+# Product Categories
+product_categories:
+  - appliances: Appliances
+  - arts_crafts_sewing: Arts, Crafts & Sewing
+  - automotive_parts_accessories: Automotive Parts & Accessories
+  - baby_products: Baby Products
+  - beauty_personal_care: Beauty & Personal Care
+  - books: Books
+  - business_industrial_supplies: Business & Industrial Supplies
+  - cameras_photo: Cameras & Photo
+  - cell_phones_accessories: Cell Phones & Accessories
+  - clothing_shoes_jewelry: Clothing, Shoes & Jewelry
+  - collectibles_fine_art: Collectibles & Fine Art
+  - computers_accessories: Computers & Accessories
+  - consumer_electronics: Consumer Electronics
+  - entertainment_collectibles: Entertainment Collectibles
+  - grocery_gourmet_food: Grocery & Gourmet Food
+  - handmade_products: Handmade Products
+  - health_household: Health & Household
+  - home_kitchen: Home & Kitchen
+  - industrial_scientific: Industrial & Scientific
+  - luggage_travel_gear: Luggage & Travel Gear
+  - movies_tv: Movies & TV
+  - musical_instruments: Musical Instruments
+  - office_products: Office Products
+  - patio_lawn_garden: Patio, Lawn & Garden
+  - pet_supplies: Pet Supplies
+  - software: Software
+  - sports_outdoors: Sports & Outdoors
+  - tools_home_improvement: Tools & Home Improvement
+  - toys_games: Toys & Games
+  - video_games: Video Games
+  - watches: Watches
+
+# Global Categories to put a product in
+product_global_category:
+  - food_and_beverage: Food & Beverages
+  - clothing_and_apparel: Clothing & Apparel
+  - electronics: Electronics
+  - home_and_furniture: Home & Furniture
+  - beauty_and_personal_care: Beauty & Personal Care
+  - automotive: Automotive
+  - health_and_wellness: Health & Wellness
+  - sports_and_fitness: Sports & Fitness
+  - toys_and_games: Toys & Games
+  - books_and_media: Books & Media
+  - tools_and_hardware: Tools & Hardware
+  - appliances: Appliances
+  - travel_and_luggage: Travel & Luggage
+  - office_supplies: Office Supplies
+  - arts_and_crafts: Arts & Crafts
+  - industrial_and_scientific: Industrial & Scientific
+  - gardening_and_outdoor: Gardening & Outdoors
+  - entertainment: Entertainment
+  - pets_and_supplies: Pets & Supplies
+  - collectibles_and_fine_art: Collectibles & Fine Art
+  - education_and_stationery: Education & Stationery
+  - software_and_services: Software & Services
+  - handmade_and_custom: Handmade & Custom Goods
+  - jewelry_and_accessorie: Jewelry & Accessories
+  - music_and_instrument: Music & Instruments
+  - medical_and_pharmaceutical: Medical & Pharmaceutical
+  - transportation_and_vehicle: Transportation & Vehicles
+  - real_estate: Real Estate
+  - financial_and_insurance: Financial & Insurance Services
+  - hospitality_and_travel_service: Hospitality & Travel Services
+  - entertainment_and_recreation: Entertainment & Recreation Services
+
+
+# If this is a service, these are the different Service types
+product_service:
+  personal_services:
+  - beauty_and_wellness:
+    - Haircuts
+    - Spa treatments
+    - Massages
+    - Facials
+  - health_and_medical:
+    - Doctor appointments
+    - Dental visits
+    - Therapy sessions
+  - fitness:
+    - Personal training
+    - Yoga classes
+    - Gym sessions
+  - education:
+    - Tutoring
+    - Online courses
+    - Workshops
+    - Music lessons
+  professional_services:
+  - consulting:
+    - Legal advice
+    - Financial planning
+    - Career counseling
+  - home_services:
+    - Plumbing
+    - Cleaning
+    - Landscaping
+    - Handyman work
+  - tech_support:
+    - Computer repair
+    - Software troubleshooting
+  - photography_videography:
+    - Event photography
+    - Portrait sessions
+  event_based_services:
+  - venue_rentals:
+    - Event spaces
+    - Coworking spaces
+  - entertainment:
+    - DJ booking
+    - Party planning
+    - Live performances
+  - catering_services:
+    - Meals for events
+    - Bartending
+  transportation_and_travel:
+  - car_rentals:
+    - Hourly rentals
+    - Daily rentals
+  - tours_and_experiences:
+    - Guided tours
+    - Adventure activities
+  - chauffeur_services:
+    - Limousine booking
+    - Ride-booking
+
+# Service Based Sales
+time_based_selling_methods:
+  fixed_time_slots:
+    - hourly_booking: Appointments sold by the hour (e.g., personal training)
+    - daily_full_day_booking: Services reserved for an entire day (e.g., venue rentals)
+    - recurring_slots: Weekly or monthly subscriptions for consistent service
+  flexible_time:
+    - on_demand_services: Book services available immediately (e.g., ride-hailing, food delivery)
+    - open_scheduling: Choose any available time within a range (e.g., consultations)
+  package_deals:
+    - service_bundles: Multiple sessions or a group of services at a discounted rate
+    - memberships_subscriptions: Unlimited or discounted service access for a set period
+    - gift_cards: Prepaid time or service credits
+  event_specific:
+    - single_events: Book one-off services for specific dates (e.g., wedding photography)
+    - multi_day_services: Book a service spanning multiple days (e.g., retreats, workshops)
+
+# Shopping Card Basics
+shopping_cart_functionality:
+  - dynamic_pricing: Pricing adjusts based on duration, demand, or customizations
+  - add_ons_extras: Include additional services (e.g., aromatherapy with a massage)
+  - group_booking: Reserve for multiple participants (e.g., fitness classes, guided tours)
+  - deposit_prepayment: Pay partially upfront to secure booking, with the rest due later
+  - cancellation_policies: Offer refunds or penalties based on cancellation timelines
+  - real_time_availability: Integrated calendars to display and select open slots
+  - recurring_billing: Automatically charge for ongoing services (e.g., subscriptions)
+
+# Shopping Cart Features
+shopping_cart_features:
+  sales_boosting_features:
+    cross_selling_and_upselling:
+      - related_products: Suggest complementary items based on the selected product (e.g., "Customers also bought...").
+      - upsell_suggestions: Offer a premium version of the product or service.
+      - bundled_discounts: Combine multiple products at a discounted price.
+    discount_and_promotion_handling:
+      - coupon_code_entry: Allow shoppers to apply promotional codes for discounts.
+      - dynamic_discounts: Automatically apply discounts based on cart total or item quantity.
+      - flash_sales_and_timers: Display countdowns for time-limited offers.
+    abandoned_cart_recovery:
+      - email_reminders: Send follow-ups to users who leave items in their cart.
+      - push_notifications: Notify users about their abandoned carts through apps or browsers.
+      - discount_incentives: Offer a small discount to encourage cart recovery.
+
+  ease_of_use_features:
+    flexible_payment_options:
+      - multiple_payment_methods: Support for credit/debit cards, PayPal, digital wallets (e.g., Apple Pay, Google Pay), buy-now-pay-later services (e.g., Klarna, Afterpay).
+      - currency_converter: Display prices in the shopper's preferred currency.
+      - installment_payments: Allow splitting payments over time.
+    guest_checkout:
+      - quick_checkout: Enable purchasing without requiring account creation.
+      - saved_cart_feature: Allow logged-in users to save carts for later.
+    shipping_options:
+      - real_time_shipping_rates: Display accurate costs based on location and delivery speed.
+      - pickup_options: Offer in-store or curbside pickup as an alternative to shipping.
+      - free_shipping_threshold: Highlight how much more a customer needs to spend to qualify for free shipping.
+    mobile_optimization:
+      - responsive_design: Ensure seamless shopping across devices.
+      - one_tap_checkout: Simplify the process for mobile users.
+
+  trust_building_features:
+    transparent_pricing:
+      - tax_and_fees_display: Show all costs upfront to avoid surprises.
+      - price_guarantee: Assure customers they’re getting the best deal.
+    security_features:
+      - ssl_encryption: Ensure all transactions are secure.
+      - trusted_payment_gateways: Use well-known, secure payment processors.
+      - trust_badges: Display security certifications (e.g., "Secure Checkout," "Verified by Visa").
+
+  customization_and_personalization:
+    personalized_recommendations:
+      - behavior_based_suggestions: Use browsing or purchase history to recommend items.
+      - wishlist_integration: Remind customers of items they’ve saved to buy later.
+    configurable_products:
+      - customization_options: Let shoppers select colors, sizes, or other preferences directly in the cart.
+
+  enhanced_user_experience:
+    progress_indicators:
+      - checkout_progress_bar: Show steps remaining to complete a purchase.
+    easy_cart_editing:
+      - quantity_adjustments: Enable easy changes to item quantities.
+      - remove_items: Allow quick removal of unwanted products.
+    support_integration:
+      - live_chat_support: Provide real-time assistance if shoppers have questions.
+      - faqs_and_help_links: Offer accessible answers to common queries.
+
+  analytics_and_feedback:
+    post_purchase_surveys: Gather insights about the shopping experience.
+    cart_insights_for_sellers: Analyze abandoned carts to improve conversions.
+
+
+# Reasons to have Websites
+website_reasons:
+  personal_reasons:
+    - online_presence: Establish a digital footprint for personal branding, hobbies, or interests.
+    - portfolio_showcase: Display work such as art, writing, photography, or other creative projects.
+    - blogging: Share thoughts, ideas, experiences, or expertise on various topics.
+    - resume_cv: Host a personal resume or curriculum vitae for job hunting or networking.
+    - online_journal: Keep a personal online diary or record of thoughts.
+    - social_connections: Create a platform for connecting with friends, family, or like-minded individuals.
+    - hobby_sharing: Share personal passions or hobbies like cooking, sports, gaming, or travel.
+
+  business_and_professional_reasons:
+    - brand_awareness: Increase visibility and recognition of a business or brand.
+    - marketing_and_advertising: Use the website as a platform to market products, services, and promotions.
+    - customer_engagement: Provide a means for customers to contact, interact, and engage with the business.
+    - e_commerce: Sell products or services directly through an online store.
+    - lead_generation: Capture leads through forms, sign-ups, or newsletters to expand the business's customer base.
+    - online_portfolio: Showcase a professional portfolio for graphic designers, web developers, or photographers.
+    - job_opportunities: Advertise open positions or recruit talent for a company or business.
+    - networking: Build professional relationships and expand business connections.
+    - event_promotion: Advertise and manage events, conferences, workshops, and webinars.
+
+  educational_reasons:
+    - online_courses: Offer or take online courses, tutorials, and learning materials.
+    - research_and_learning: Share educational content, resources, or knowledge on a specific subject.
+    - e_learning_platform: Create a platform for students and educators to interact.
+    - nonprofit_awareness: Raise awareness for causes, share educational content, and gather support for nonprofits.
+    - community_building: Form online communities of learners or supporters to exchange information and resources.
+
+  social_and_community_building:
+    - social_media_integration: Link to social media profiles, content, and communities to create a unified online presence.
+    - forums_and_discussions: Build a space for people to interact, share, and discuss ideas or topics.
+    - membership_sites: Create exclusive content, membership areas, or subscription services for a community.
+    - support_groups: Facilitate support networks for specific groups, such as people with shared interests or goals.
+
+  informational_reasons:
+    - news_and_updates: Share up-to-date news, events, or updates on specific topics.
+    - resource_hub: Create a resource site with helpful information, guides, or tools.
+    - product_information: Offer in-depth information, FAQs, and specifications on products or services.
+    - knowledge_sharing: Host blogs, wikis, or informational pages for sharing knowledge, tips, and tutorials.
+
+  creativity_and_fun:
+    - creative_expression: Use a website as an outlet for creativity, including art, writing, music, and more.
+    - personal_projects: Showcase personal projects or experiments, from coding projects to photography.
+    - entertainment: Provide entertainment content like videos, games, or music.
+    - collaborative_projects: Host or participate in collaborative projects or online communities focused on creativity.
+
+  practical_reasons:
+    - booking_and_reservations: Provide a platform for booking services or appointments.
+    - online_services: Offer digital services like document signing, graphic design, or freelance work.
+    - feedback_and_surveys: Gather feedback from users, customers, or audience through surveys or polls.
+    - local_directories: Create a site to list local businesses, services, or events.
+    - personal_finance: Manage or track personal finances, budgeting, or investments.
+
+  legal_and_compliance_reasons:
+    - legal_requirements: Host necessary legal documents, terms of service, privacy policies, and disclaimers.
+    - licensing_and_accreditation: Display licenses, certifications, and accreditations for business legitimacy.
+    - compliance_with_regulations: Comply with industry regulations by providing public information.
+
+  entertainment_and_media:
+    - media_sharing: Share music, videos, podcasts, or other multimedia content.
+    - event_livestreaming: Stream live events, webinars, conferences, or personal broadcasts.
+    - content_creation_and_monetization: Generate income through ads, affiliate marketing, or paid services.
+
+  financial_reasons:
+    - revenue_generation: Monetize content or products via ads, affiliate marketing, or paid services.
+    - crowdfunding: Raise funds for personal projects, startups, or charity causes.
+    - online_donations: Collect donations for causes or nonprofits directly through the site.
+
+
+
+# Humans make money like this
+ways_to_make_money:
+  goods:
+    - selling_physical_products: Create, manufacture, or source physical goods to sell.
+    - reselling: Buy products at a lower cost and resell them at a higher price.
+    - digital_products: Sell digital goods like eBooks, software, templates, music, or video content.
+  
+  services:
+    - freelancing: Offer specialized services like graphic design, writing, web development, or marketing.
+    - consulting: Provide expert advice in specific fields like business, finance, or technology.
+    - skilled_labor: Offer services that require technical skills like plumbing, electrical work, or carpentry.
+    - health_and_wellness: Provide services like fitness training, massage therapy, or life coaching.
+
+  knowledge_and_expertise:
+    - education: Teach or tutor others in subjects you are knowledgeable about.
+    - content_creation: Make money by producing content on platforms like YouTube, blogs, or podcasts.
+    - writing_and_publishing: Sell books, articles, or content, and monetize through ads or affiliate marketing.
+
+  intellectual_property:
+    - licensing: License ideas, inventions, art, music, or patents for royalties or fees.
+    - patents_and_trademarks: Earn money by creating and selling patented products or licensing trademarks.
+    - royalty_income: Earn royalties when original content like songs or books is used or sold.
+
+  investments:
+    - stock_market: Invest in stocks, bonds, or mutual funds and earn profits from dividends or capital gains.
+    - real_estate: Make money by buying properties that appreciate in value or by renting them out.
+    - cryptocurrency: Buy and trade digital currencies like Bitcoin or Ethereum for profit.
+    - business_ventures: Invest in businesses as an owner or shareholder and earn a share of the profits.
+
+  passive_income:
+    - affiliate_marketing: Promote products or services and earn commissions for each sale made through your referral.
+    - rental_income: Rent out real estate or other assets like vehicles or equipment for income.
+    - dividend_income: Earn money by owning shares in companies that pay dividends.
+
+  networking_and_relationships:
+    - sales_and_commissions: Earn commissions by selling products or services, including network marketing.
+    - business_partnerships: Form partnerships with other businesses or individuals to share profits and grow a brand.
+
+  entertainment_and_sports:
+    - performing_arts: Musicians, actors, dancers, and performers earn money from performances, concerts, and appearances.
+    - sports: Professional athletes make money from salaries, sponsorships, and endorsements.
+    - influencers: Social media influencers earn money by promoting products or services to their followers.
+
+  online_platforms_and_gig_economy:
+    - ride_sharing_and_delivery: Earn money by providing transportation or food delivery services.
+    - task_based_services: Perform one-time or ongoing tasks like dog walking, shopping, or home cleaning.
+    - crowdsourcing_and_microtasks: Complete small tasks or micro-jobs for platforms like Amazon Mechanical Turk.
+
+  donations_and_crowdfunding:
+    - donations: Receive money from others in the form of charitable donations or patronage.
+    - crowdfunding: Raise money for personal projects, causes, or businesses through crowdfunding platforms.
+
+  government_and_public_sector:
+    - government_jobs: Work for government entities and earn a salary for public services.
+    - grants_and_subsidies: Receive government funding for projects, research, or charitable initiatives.
+
+  selling_data:
+    - data_monetization: Sell anonymized data generated (e.g., app usage, web browsing) to companies for research or marketing.
+
+
+# Currency and current evalutation to USD as 1.0
+currencies:
+  - currency_code: USD
+    currency_name: US Dollar
+    symbol: $
+    exchange_rate_to_usd: 1.0000
+    vat_local: 0.00               # US does not have VAT, but local sales tax applies in some states
+    sales_tax_local: 0.07          # Average sales tax in the US (varies by state)
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: EUR
+    currency_name: Euro
+    symbol: €
+    exchange_rate_to_usd: 1.0427
+    vat_local: 0.21               # Common VAT rate in many EU countries
+    sales_tax_local: 0.00          # EU generally does not apply separate sales tax; it's included in VAT
+    vat_international: 0.00        # No VAT for international purchases outside the EU
+
+  - currency_code: GBP
+    currency_name: British Pound
+    symbol: £
+    exchange_rate_to_usd: 1.2572
+    vat_local: 0.20               # Standard VAT rate in the UK
+    sales_tax_local: 0.00          # No separate sales tax; VAT applies
+    vat_international: 0.00        # No VAT for international purchases outside the UK
+
+  - currency_code: INR
+    currency_name: Indian Rupee
+    symbol: ₹
+    exchange_rate_to_usd: 0.0117
+    vat_local: 0.18               # Standard VAT/GST rate in India
+    sales_tax_local: 0.00          # India has GST instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases outside India
+
+  - currency_code: AUD
+    currency_name: Australian Dollar
+    symbol: A$
+    exchange_rate_to_usd: 0.6215
+    vat_local: 0.10               # Goods and Services Tax (GST) in Australia
+    sales_tax_local: 0.00          # Australia uses GST instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases outside Australia
+
+  - currency_code: CAD
+    currency_name: Canadian Dollar
+    symbol: C$
+    exchange_rate_to_usd: 0.6939
+    vat_local: 0.13               # Standard VAT/GST rate in Canada (varies by province)
+    sales_tax_local: 0.00          # Canada has GST, not sales tax
+    vat_international: 0.00        # No VAT for international purchases outside Canada
+
+  - currency_code: SGD
+    currency_name: Singapore Dollar
+    symbol: S$
+    exchange_rate_to_usd: 0.7360
+    vat_local: 0.07               # Goods and Services Tax (GST) in Singapore
+    sales_tax_local: 0.00          # Singapore uses GST instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases outside Singapore
+
+  - currency_code: CHF
+    currency_name: Swiss Franc
+    symbol: CHF
+    exchange_rate_to_usd: 1.1088
+    vat_local: 0.077              # Standard VAT rate in Switzerland
+    sales_tax_local: 0.00          # Switzerland uses VAT, not separate sales tax
+    vat_international: 0.00        # No VAT for international purchases outside Switzerland
+
+  - currency_code: MYR
+    currency_name: Malaysian Ringgit
+    symbol: RM
+    exchange_rate_to_usd: 0.2236
+    vat_local: 0.06               # Goods and Services Tax (GST) in Malaysia
+    sales_tax_local: 0.00          # Malaysia uses GST instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases outside Malaysia
+
+  - currency_code: JPY
+    currency_name: Japanese Yen
+    symbol: ¥
+    exchange_rate_to_usd: 0.0063
+    vat_local: 0.10               # Consumption Tax (VAT) in Japan
+    sales_tax_local: 0.00          # Japan has consumption tax instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases outside Japan
+
+  - currency_code: CNY
+    currency_name: Chinese Yuan Renminbi
+    symbol: ¥
+    exchange_rate_to_usd: 0.1370
+    vat_local: 0.13               # VAT in China varies based on goods and services
+    sales_tax_local: 0.00          # China has VAT, not separate sales tax
+    vat_international: 0.00        # No VAT for international purchases outside China
+
+  - currency_code: HKD
+    currency_name: Hong Kong Dollar
+    symbol: HK$
+    exchange_rate_to_usd: 0.1286
+    vat_local: 0.00               # Hong Kong does not have VAT or sales tax
+    sales_tax_local: 0.00          # No sales tax in Hong Kong
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: TWD
+    currency_name: New Taiwan Dollar
+    symbol: NT$
+    exchange_rate_to_usd: 0.0324
+    vat_local: 0.05               # VAT in Taiwan
+    sales_tax_local: 0.00          # Taiwan has VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: THB
+    currency_name: Thai Baht
+    symbol: ฿
+    exchange_rate_to_usd: 0.0290
+    vat_local: 0.07               # VAT in Thailand
+    sales_tax_local: 0.00          # Thailand uses VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: KRW
+    currency_name: South Korean Won
+    symbol: ₩
+    exchange_rate_to_usd: 0.0008
+    vat_local: 0.10               # VAT in South Korea
+    sales_tax_local: 0.00          # South Korea uses VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: PHP
+    currency_name: Philippine Peso
+    symbol: ₱
+    exchange_rate_to_usd: 0.0180
+    vat_local: 0.12               # VAT in the Philippines
+    sales_tax_local: 0.00          # Philippines has VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: IDR
+    currency_name: Indonesian Rupiah
+    symbol: Rp
+    exchange_rate_to_usd: 0.000065
+    vat_local: 0.10               # VAT in Indonesia
+    sales_tax_local: 0.00          # Indonesia uses VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: VND
+    currency_name: Vietnamese Dong
+    symbol: ₫
+    exchange_rate_to_usd: 0.000042
+    vat_local: 0.10               # VAT in Vietnam
+    sales_tax_local: 0.00          # Vietnam uses VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: PKR
+    currency_name: Pakistani Rupee
+    symbol: ₨
+    exchange_rate_to_usd: 0.0057
+    vat_local: 0.17               # VAT in Pakistan
+    sales_tax_local: 0.00          # Pakistan uses VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: LKR
+    currency_name: Sri Lankan Rupee
+    symbol: රු
+    exchange_rate_to_usd: 0.0050
+    vat_local: 0.12               # VAT in Sri Lanka
+    sales_tax_local: 0.00          # Sri Lanka has VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: BDT
+    currency_name: Bangladeshi Taka
+    symbol: ৳
+    exchange_rate_to_usd: 0.0092
+    vat_local: 0.15               # VAT in Bangladesh
+    sales_tax_local: 0.00          # Bangladesh has VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: AED
+    currency_name: United Arab Emirates Dirham
+    symbol: د.إ
+    exchange_rate_to_usd: 0.2722
+    vat_local: 0.05               # VAT in the UAE
+    sales_tax_local: 0.00          # UAE has VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: KWD
+    currency_name: Kuwaiti Dinar
+    symbol: د.ك
+    exchange_rate_to_usd: 3.2925
+    vat_local: 0.00               # Kuwait does not have VAT or sales tax
+    sales_tax_local: 0.00          # No sales tax in Kuwait
+    vat_international: 0.00        # No VAT for international purchases
+
+  - currency_code: SAR
+    currency_name: Saudi Riyal
+    symbol: ر.س
+    exchange_rate_to_usd: 0.2667
+    vat_local: 0.15               # VAT in Saudi Arabia
+    sales_tax_local: 0.00          # Saudi Arabia uses VAT instead of sales tax
+    vat_international: 0.00        # No VAT for international purchases

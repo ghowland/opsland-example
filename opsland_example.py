@@ -18,6 +18,8 @@ from logic import command_user
 from logic import command_purchase
 from logic import command_purchase_usage
 from logic import command_account
+from logic import command_product_stock
+from logic import command_vendor
 
 from logic import utility
 
@@ -64,6 +66,12 @@ def ProcessCommands(config):
 
   # Product
   elif config.command == 'site_product': ExecuteCommand(config, command_product.Space_Product)
+
+  # Product Stock
+  elif config.command == 'space_product_stock': ExecuteCommand(config, command_product_stock.Space_ProductStock)
+
+  # Vendor
+  elif config.command == 'space_vendor': ExecuteCommand(config, command_vendor.Space_Vendor)
 
   # User
   elif config.command == 'space_user': ExecuteCommand(config, command_user.Space_User)

@@ -53,6 +53,9 @@ def Space_User(config):
       if target_uuid in all_users:
         if path in all_users[target_uuid]['details']:
           all_users[target_uuid]['details'].remove(path)
+  
+  # Update Edits
+  UpdateEdits(all_users, request)
 
   return all_users
 
@@ -73,3 +76,15 @@ def GetUserByName(all_users, user_name):
   
   return None
 
+
+
+def UpdateEdits(all_users, request):
+  """Process the `__edit` stuff"""
+  # Look for delete
+  for item_key, item_data in request.items():
+    if item_key.startswith('__edit.') and item_data.strip():
+      target_uuid = item_key.split('.')[1]
+      field = item_key.split('.')[2]
+
+      if target_uuid in all_users:
+        all_users[target_uuid][field] = item_data
